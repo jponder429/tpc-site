@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Present Company. — AI Ethics Infrastructure</title>
+  <meta name="description" content="The Present Company builds AI ethics infrastructure for professionals in high-stakes industries. Certification, advisory, and governance tools that make AI accountable." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0c1d38;
+      --navy-mid:   #122548;
+      --navy-light: #1e3a5f;
+      --navy-faint: #263f60;
+      --gold:       #b8943f;
+      --gold-light: #d4ae6a;
+      --gold-dark:  #8a6c2a;
+      --gold-faint: #f5ead6;
+      --cream:      #f8f5ef;
+      --cream-alt:  #f0ebe0;
+      --white:      #ffffff;
+      --ink:        #0c1d38;
+      --ink-mid:    #2a3a50;
+      --ink-light:  #5a6e84;
+      --ink-faint:  #8a9db0;
+      --border:     #ddd8cc;
+      --border-navy:#1e3a5f;
+      --shadow:     0 2px 24px rgba(12,29,56,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy);
+      border-bottom: 1px solid var(--border-navy);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--ink-faint);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-cta {
+      padding: 9px 22px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 100px 48px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(184,148,63,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(42px, 6vw, 72px);
+      color: var(--cream);
+      line-height: 1.08;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(17px, 2vw, 21px);
+      color: var(--ink-faint);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 32px;
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      border-radius: 2px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); }
+
+    .btn-ghost {
+      padding: 14px 32px;
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid rgba(248,245,239,0.25);
+      border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: var(--cream); }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 48px; }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(28px, 3.5vw, 40px);
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-body {
+      font-size: 17px;
+      color: var(--ink-light);
+      line-height: 1.8;
+      max-width: 580px;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 48px;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--navy);
+      border-radius: 4px;
+      padding: 32px 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .product-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .product-card.gold-top { border-top-color: var(--gold); }
+
+    .product-card-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .product-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .product-card-title span { color: var(--gold); }
+
+    .product-card-title.pp-logo {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .product-card-title.pp-logo span { font-weight: 500; font-size: 22px; }
+
+    .product-card-body {
+      font-size: 15px;
+      color: var(--ink-light);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .product-card-link {
+      font-size: 13px;
+      color: var(--gold-dark);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--gold-faint);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .product-card-link:hover { border-color: var(--gold); }
+
+    /* ── MISSION BAND ── */
+    .mission-band {
+      background: var(--navy);
+      padding: 80px 48px;
+      text-align: center;
+    }
+
+    .mission-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(22px, 3vw, 34px);
+      color: var(--cream);
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    .mission-attr {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── VERTICALS ── */
+    .verticals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .vertical-chip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--ink-mid);
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .vertical-chip:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+    /* ── INVESTOR SECTION ── */
+    .investor-section {
+      background: var(--cream-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .investor-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .investor-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 30px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--ink-faint);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.4;
+    }
+
+    .investor-cta-block {
+      background: var(--navy);
+      border-radius: 6px;
+      padding: 40px 36px;
+    }
+
+    .investor-cta-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .investor-cta-h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: var(--cream);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .investor-cta-body {
+      font-size: 15px;
+      color: var(--ink-faint);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 0;
+    }
+
+    .founder-photo-block {
+      position: relative;
+    }
+
+    .founder-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      background: var(--navy-light);
+    }
+
+    .founder-photo-caption {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--ink-faint);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .founder-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .founder-title {
+      font-size: 14px;
+      color: var(--gold-dark);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .founder-bio {
+      font-size: 16px;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    .founder-bio p + p { margin-top: 16px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      border-top: 3px solid var(--gold);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--cream);
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-sub {
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--ink-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 64px 24px 72px; }
+      section { padding: 56px 24px; }
+      hr.divider { margin: 0 24px; }
+      .mission-band { padding: 60px 24px; }
+      .investor-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .founder-photo { aspect-ratio: 4/3; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-btns    { animation: fadeUp 0.6s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">The Present Company<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#advisory">Advisory</a></li>
+      <li><a href="#investors">Investors</a></li>
+    </ul>
+    <a href="mailto:jponder@thepresentco.com" class="nav-cta">Get in touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-eyebrow">AI Ethics Infrastructure</span>
+    <h1>Trust is<br/><em>the product.</em></h1>
+    <p class="hero-sub">The Present Company builds the infrastructure that makes AI accountable — for the professionals responsible for deploying it.</p>
+    <div class="hero-btns">
+      <a href="https://thisisponder.com" target="_blank" class="btn-primary">Explore Ponder.</a>
+      <a href="#investors" class="btn-ghost">Investor information</a>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="section-inner">
+      <span class="section-label">What we build</span>
+      <h2 class="section-h2">Two products. One mission.</h2>
+      <p class="section-body">We build practitioner certification and advisory services for the professionals responsible for AI in high-stakes industries — where the cost of getting it wrong is not abstract.</p>
+
+      <div class="products-grid">
+        <div class="product-card gold-top">
+          <span class="product-card-label">Certification Platform</span>
+          <div class="product-card-title">Ponder<span>.</span></div>
+          <p class="product-card-body">Tiered AI ethics credentials for working professionals. Scenario-based. Verifiable. Built for the people actually making decisions in law, healthcare, finance, education, and beyond.</p>
+          <a href="https://thisisponder.com" target="_blank" class="product-card-link">Visit thisisponder.com →</a>
+        </div>
+
+        <div class="product-card">
+          <span class="product-card-label">Advisory Services</span>
+          <div class="product-card-title pp-logo">Present Practical<span style="color:var(--gold)">.</span></div>
+          <p class="product-card-body">AI ethics assessment and advisory for organizations. Starting with an AI Readiness Assessment, then moving into ongoing governance support scaled to your organization's size and risk profile.</p>
+          <a href="#advisory" class="product-card-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- MISSION BAND -->
+  <div class="mission-band">
+    <p class="mission-quote">"We are not here to slow AI down. We are here to make sure it deserves to go fast."</p>
+    <span class="mission-attr">Ponder. Ethical Foundation · March 2026</span>
+  </div>
+
+  <!-- VERTICALS -->
+  <section>
+    <div class="section-inner">
+      <span class="section-label">Industries we serve</span>
+      <h2 class="section-h2">Built for high-stakes work.</h2>
+      <p class="section-body">Ponder certifications are designed for professionals where AI decisions carry real consequences. Nine verticals at launch, expanding continuously.</p>
+      <div class="verticals-grid">
+        <div class="vertical-chip">Law</div>
+        <div class="vertical-chip">Healthcare</div>
+        <div class="vertical-chip">Finance</div>
+        <div class="vertical-chip">K–12 Education</div>
+        <div class="vertical-chip">Higher Education</div>
+        <div class="vertical-chip">Technology</div>
+        <div class="vertical-chip">Creative</div>
+        <div class="vertical-chip">Science & Research</div>
+        <div class="vertical-chip">General</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ADVISORY -->
+  <section id="advisory">
+    <div class="section-inner">
+      <span class="section-label">Advisory</span>
+      <h2 class="section-h2" style="font-family:'DM Sans',sans-serif; font-weight:300; letter-spacing:0.12em; text-transform:uppercase; font-size:28px;">Present Practical<span style="color:var(--gold); font-weight:500;">.</span></h2>
+      <p class="section-body">Organizations deploying AI need more than a policy document. Present Practical is a structured advisory engagement that begins with an AI Readiness Assessment — a clear-eyed look at where your organization actually stands — and moves into ongoing governance support for those who need it.</p>
+      <p class="section-body" style="margin-top:16px;">Engagements are scoped by organization size and complexity. We work with legal teams, healthcare systems, financial institutions, and technology companies navigating real AI deployment decisions.</p>
+      <div style="margin-top:32px;">
+        <a href="mailto:jponder@thepresentco.com" class="btn-primary" style="display:inline-block;">Request an assessment</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- INVESTORS -->
+  <section id="investors" class="investor-section">
+    <div class="investor-inner">
+      <div>
+        <span class="section-label">For investors</span>
+        <h2 class="section-h2">A category nobody owns yet.</h2>
+        <p class="section-body">AI ethics certification is an emerging requirement across every regulated industry. Ponder is the first practitioner-first, scenario-based credential built specifically for this moment.</p>
+
+        <div class="investor-stats">
+          <div class="stat-card">
+            <div class="stat-value">9</div>
+            <div class="stat-label">Industry verticals at launch</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">120+</div>
+            <div class="stat-label">SKUs at launch</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">3</div>
+            <div class="stat-label">Credential tiers</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">15</div>
+            <div class="stat-label">Languages (Year 2)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="investor-cta-block">
+        <span class="investor-cta-label">Pre-seed · SAFE</span>
+        <h3 class="investor-cta-h3">We're raising our pre-seed round.</h3>
+        <p class="investor-cta-body">The Present Company is building the trust layer for AI adoption. We're looking for investors who understand what's at stake — and the scale of the opportunity.</p>
+        <a href="mailto:jponder@thepresentco.com?subject=Investor Inquiry — The Present Company" class="btn-primary" style="display:inline-block; width:100%; text-align:center;">Request investor materials</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <span class="section-label">Founder</span>
+      <div class="about-grid">
+        <div class="founder-photo-block">
+          <img
+            src="founder.jpg"
+            alt="Jeanette Ponder, Founder & CEO of The Present Company"
+            class="founder-photo"
+            onerror="this.style.background='var(--navy-light)';this.removeAttribute('src')"
+          />
+          <p class="founder-photo-caption">Jeanette Ponder<br/>Chicago, IL</p>
+        </div>
+        <div>
+          <h3 class="founder-name">Jeanette Ponder.</h3>
+          <p class="founder-title">Founder & CEO</p>
+          <div class="founder-bio">
+            <p>Jeanette Ponder is the founder and CEO of The Present Company, a Chicago-based AI ethics infrastructure company. Her name is not a coincidence — it is a commitment.</p>
+            <p>She brings four years of hands-on AI practitioner experience in prompt engineering, model training, and data tasking, paired with 23 years of production management background. She built Ponder because she has seen firsthand what happens when AI is deployed by people who are skilled but unprepared for the ethical weight of what they're doing.</p>
+            <p>Jeanette is a member of 1871 Chicago and a participant in the 1871 Build-to-Launch cohort. The Present Company is headquartered in Chicago.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">The Present Company<span>.</span></div>
+      <div class="footer-sub">Chicago, IL · thepresentco.com · jponder@thepresentco.com</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://thisisponder.com" target="_blank">Ponder.</a>
+      <a href="#investors">Investors</a>
+      <a href="https://linkedin.com/company/thepresentco" target="_blank">LinkedIn</a>
+      <a href="mailto:jponder@thepresentco.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
