@@ -61,11 +61,15 @@
       background: var(--navy);
       border-bottom: 1px solid var(--border-navy);
       padding: 0 48px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       height: 64px;
     }
+
+    .nav-logo { justify-self: start; }
+    .nav-links { justify-self: center; }
+    .nav-cta { justify-self: end; }
 
     .nav-logo {
       font-family: 'Playfair Display', Georgia, serif;
