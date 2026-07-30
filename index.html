@@ -43,6 +43,7 @@
       color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -247,6 +248,8 @@
       gap: 24px;
       margin-top: 48px;
     }
+
+    .product-card { min-width: 0; }
 
     .product-card {
       background: var(--white);
@@ -539,12 +542,16 @@
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-logo { font-size: 17px; }
       .hero { padding: 64px 24px 72px; }
       section { padding: 56px 24px; }
       hr.divider { margin: 0 24px; }
       .mission-band { padding: 60px 24px; }
       .investor-inner { grid-template-columns: 1fr; gap: 40px; }
       .about-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card { padding: 28px 20px; }
       .founder-photo { aspect-ratio: 4/3; }
       footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
     }
@@ -712,8 +719,8 @@
           <p class="founder-title">Founder & CEO</p>
           <div class="founder-bio">
             <p>Jeanette Ponder is the founder and CEO of The Present Company, a Chicago-based AI ethics infrastructure company. Her name is not a coincidence — it is a commitment.</p>
-            <p>She brings four years of hands-on AI practitioner experience in prompt engineering, model training, and data tasking, paired with 23 years of production management background. She built Ponder because she has seen firsthand what happens when AI is deployed by people who are skilled but unprepared for the ethical weight of what they're doing.</p>
-            <p>Jeanette is a member of 1871 Chicago and a participant in the 1871 Build-to-Launch cohort. The Present Company is headquartered in Chicago.</p>
+            <p>She brings five years of hands-on AI practitioner experience in prompt engineering, model training, and data tasking, paired with 23 years of production management background. She built Ponder because she has seen firsthand what happens when AI is deployed by people who are skilled but unprepared for the ethical weight of what they're doing.</p>
+            <p>Jeanette is a member of 1871 Chicago and a participant in the 1871 Launch cohort. The Present Company is headquartered in Chicago.</p>
           </div>
         </div>
       </div>
