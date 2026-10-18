@@ -15,11 +15,16 @@ module.exports = async (req, res) => {
   b = b || {};
   if (b.website) return res.status(200).json({ ok: true }); // honeypot: pretend success
 
-  const name = String(b.name || '').trim().slice(0, 120);
+  const quick = b.quick === true; // email-only signup from /ponder/join (consent shown as a notice on that page)
   const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
+  const name = String(b.name || '').trim().slice(0, 120) || (quick ? email : '');
   const industry = INDUSTRIES.includes(b.industry) ? b.industry : null;
-  const source = b.source === 'Ponder demo' ? 'Ponder demo' : 'Ponder page';
-  if (!name || !EMAIL_RE.test(email) || b.consent !== true) return res.status(400).json({ ok: false, error: 'invalid' });
+  let source = b.source === 'Ponder demo' ? 'Ponder demo' : 'Ponder page';
+  if (quick) {
+    const tag = String(b.src || '').toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40);
+    source = 'Ponder quick add' + (tag ? ' - ' + tag : '');
+  }
+  if (!name || !EMAIL_RE.test(email) || (!quick && b.consent !== true)) return res.status(400).json({ ok: false, error: 'invalid' });
 
   const properties = {
     'Name': { title: [{ text: { content: name } }] },

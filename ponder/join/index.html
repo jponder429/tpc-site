@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Join the Ponder waitlist</title>
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0c1d38" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0c1d38;--navy-light:#1e3a5f;--gold:#b8943f;--gold-light:#d4ae6a;--cream:#f8f5ef;--ink-faint:#8a9db0;--ok:#8fd1ae;--err:#f0b3aa}
+html,body{height:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:460px;width:100%;margin:0 auto;padding:32px 24px}
+.mark{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:34px;letter-spacing:-.01em}
+.mark span{color:var(--gold)}
+.by{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:4px 0 36px}
+h1{font-family:'Playfair Display',Georgia,serif;font-weight:800;font-size:clamp(30px,8.5vw,40px);line-height:1.12;letter-spacing:-.015em;margin-bottom:12px}
+h1 em{font-style:italic;color:var(--gold-light)}
+.sub{font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;line-height:1.45;color:var(--ink-faint);margin-bottom:28px}
+label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+input[type=email]{width:100%;font:inherit;font-size:19px;padding:17px 16px;border:2px solid transparent;border-radius:3px;background:#fff;color:var(--navy);margin-bottom:12px}
+input[type=email]:focus{outline:none;border-color:var(--gold)}
+button.go{width:100%;font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:19px;padding:17px;border:0;border-radius:3px;background:var(--gold);color:var(--navy);cursor:pointer}
+button.go:active{background:var(--gold-light)}
+button.go[disabled]{opacity:.55}
+.fine{font-size:12.5px;line-height:1.5;color:var(--ink-faint);margin-top:14px}
+.msg{min-height:22px;margin-top:12px;font-size:15px}
+.msg.err{color:var(--err)}
+.done{display:none;text-align:center}
+.tick{width:84px;height:84px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;margin:0 auto 22px;font-size:40px;color:var(--gold-light)}
+.done h2{font-family:'Playfair Display',serif;font-size:32px;margin-bottom:8px}
+.done p{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--ink-faint);margin-bottom:24px}
+.link{background:none;border:1px solid var(--navy-light);color:var(--cream);font:inherit;font-size:15px;padding:12px 20px;border-radius:3px;cursor:pointer}
+.foot{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;font-size:12px;color:var(--ink-faint);max-width:460px;width:100%;margin:0 auto;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.foot button{background:none;border:0;color:var(--ink-faint);font:inherit;text-decoration:underline;cursor:pointer;padding:6px 0}
+.qr{display:none;text-align:center;margin-top:28px}
+.qr img{width:210px;height:210px;background:#fff;padding:8px;border-radius:4px}
+.qr p{font-size:13px;color:var(--ink-faint);margin-top:8px}
+body.show-done form,body.show-done .intro{display:none}
+body.show-done .done{display:block}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="mark">Ponder<span>.</span></div>
+  <div class="by">by The Present Company</div>
+
+  <div class="intro">
+    <h1>Learn to ask the one question that <em>keeps AI honest.</em></h1>
+    <p class="sub">Free AI ethics course in plain language. Join the waitlist and we will email you when new units open.</p>
+  </div>
+
+  <form id="f" novalidate>
+    <label for="e">Email address</label>
+    <input id="e" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="you@email.com" required />
+    <button class="go" id="b" type="submit">Join the waitlist</button>
+    <div class="msg" id="m" role="status" aria-live="polite"></div>
+    <p class="fine">By joining, you agree to get emails about Ponder and The Present Company. Unsubscribe any time.</p>
+  </form>
+
+  <div class="done" id="d" aria-live="polite">
+    <div class="tick" aria-hidden="true">&#10003;</div>
+    <h2 id="dt">You're on the list.</h2>
+    <p id="dp">Thank you. We will be in touch.</p>
+    <button class="link" id="again" type="button">Add another person</button>
+  </div>
+
+  <div class="qr" id="qr">
+    <img src="qr.png" alt="QR code to join the Ponder waitlist" />
+    <p>Scan to join on your own phone</p>
+  </div>
+</main>
+<div class="foot"><span id="q"></span><button type="button" id="qrb">Show QR code</button></div>
+
+<script>
+(function(){
+'use strict';
+var KEY='ponder_join_queue_v1';
+var params=new URLSearchParams(location.search);
+var SRC=(params.get('src')||'').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,40);
+var RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+var f=document.getElementById('f'),e=document.getElementById('e'),b=document.getElementById('b'),m=document.getElementById('m'),qEl=document.getElementById('q');
+var timer=null,syncing=false;
+
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')||[];}catch(x){return[];}}
+function save(a){try{localStorage.setItem(KEY,JSON.stringify(a));}catch(x){}}
+function badge(){var n=load().length;qEl.textContent=n?n+' saved, waiting to sync':'';}
+
+function post(email,src){
+  return fetch('/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,quick:true,src:src})})
+    .then(function(r){return r.json().then(function(j){return{ok:r.ok&&j&&j.ok,status:r.status};}).catch(function(){return{ok:false,status:r.status};});});
+}
+function sync(){
+  if(syncing)return;var q=load();if(!q.length){badge();return;}
+  syncing=true;
+  (function next(i,keep){
+    if(i>=q.length){save(keep);syncing=false;badge();return;}
+    post(q[i].email,q[i].src).then(function(r){
+      if(!r.ok&&r.status!==400)keep.push(q[i]); // keep for retry unless the server rejected it as invalid
+      next(i+1,keep);
+    }).catch(function(){keep.push(q[i]);next(i+1,keep);});
+  })(0,[]);
+}
+function showDone(queued){
+  document.getElementById('dt').textContent=queued?'Saved.':"You're on the list.";
+  document.getElementById('dp').textContent=queued?'No signal right now. It will send as soon as this phone is back online.':'Thank you. We will be in touch.';
+  document.body.classList.add('show-done');
+  clearTimeout(timer);timer=setTimeout(reset,5000);
+}
+function reset(){
+  clearTimeout(timer);document.body.classList.remove('show-done');
+  e.value='';m.textContent='';m.className='msg';b.disabled=false;b.textContent='Join the waitlist';
+}
+document.getElementById('again').addEventListener('click',function(){reset();e.focus();});
+
+f.addEventListener('submit',function(ev){
+  ev.preventDefault();
+  var email=e.value.trim().toLowerCase();
+  m.className='msg';m.textContent='';
+  if(!RE.test(email)){m.className='msg err';m.textContent='Please check that email address.';e.focus();return;}
+  b.disabled=true;b.textContent='Sending...';
+  post(email,SRC).then(function(r){
+    if(r.ok){showDone(false);sync();}
+    else if(r.status===400){b.disabled=false;b.textContent='Join the waitlist';m.className='msg err';m.textContent='Please check that email address.';}
+    else{var q=load();q.push({email:email,src:SRC,t:Date.now()});save(q);badge();showDone(true);}
+  }).catch(function(){var q=load();q.push({email:email,src:SRC,t:Date.now()});save(q);badge();showDone(true);});
+});
+
+var qrb=document.getElementById('qrb'),qr=document.getElementById('qr');
+qrb.addEventListener('click',function(){var on=qr.style.display!=='block';qr.style.display=on?'block':'none';qrb.textContent=on?'Hide QR code':'Show QR code';});
+window.addEventListener('online',sync);
+badge();sync();
+})();
+</script>
+</body>
+</html>
