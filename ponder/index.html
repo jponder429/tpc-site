@@ -192,11 +192,13 @@ label.f{display:block;font-size:13px;font-weight:500;color:var(--ink-mid);margin
 .dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;font-size:12px;color:var(--ink-faint)}
 .dot.ok{background:var(--ok);border-color:var(--ok);color:#fff}
 .dot.cur{border-color:var(--gold);color:var(--gold-dark)}
-.cert{border:2px dashed var(--border);padding:22px 24px;text-align:center;background:var(--cream)}
-.cert.earned{border:2px solid var(--gold);background:var(--gold-faint)}
-.cert b{display:block;font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:6px 0}
-.cert span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light)}
-.cert p{font-size:13px;color:var(--ink-light);margin:6px auto 0;max-width:340px}
+.cert{position:relative;overflow:hidden;border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:-8px;padding:30px 26px 26px;text-align:center;background:var(--cream)}
+.cert .org{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark)}
+.cert .ttl{display:block;font-family:'Playfair Display',serif;font-weight:800;font-size:24px;color:var(--navy);margin:8px 0 4px;line-height:1.15}
+.cert .nm{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:26px;color:var(--ink-mid);margin:10px 0 4px;border-bottom:1px solid var(--border);display:inline-block;padding:0 22px 2px}
+.cert .sm{font-size:12.5px;color:var(--ink-light);margin:8px auto 0;max-width:330px}
+.cert .wm{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-family:'Playfair Display',serif;font-weight:800;font-size:68px;letter-spacing:.12em;color:rgba(154,59,50,.16);transform:rotate(-18deg)}
+.cert-note{font-size:13px;color:var(--ink-light);margin-top:12px}
 /* waitlist */
 .wl{background:var(--navy);color:var(--cream);padding:34px 36px;margin-top:36px;border-bottom:3px solid var(--gold);max-width:760px}
 .wl h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);margin-bottom:8px}
@@ -486,7 +488,7 @@ function trackerHTML(){
   rows+='<li><span class="dot">\u2605</span><span style="color:var(--ink-light)">Final exam</span><span class="tag">After Unit 5</span></li>';
   var done=u1==='ok'?1:0;
   return '<div class="dash" style="grid-template-columns:1fr 1fr"><div class="panel"><h3>Your credential path</h3><ul class="track-list">'+rows+'</ul><p class="sample" style="margin-top:12px">'+done+' of 6 steps complete. Units 2 to 5 and the final exam are still being built.</p></div>'
-   +'<div class="panel"><h3>Your credential</h3><div class="cert"><span>Ponder AI Ethics Fundamentals</span><b>Certificate</b><p>Earned by passing all five unit quizzes at 80% or higher and the final exam. Not yet earned. Unit 1 is the first of six steps.</p></div></div></div>';
+   +'<div class="panel"><h3>Your credential</h3><div class="cert" role="img" aria-label="Sample certificate, not a real credential"><span class="org">The Present Company</span><span class="ttl">Ponder AI Ethics Fundamentals</span><span class="org">Certificate of completion</span><div class="nm">Your Name Here</div><p class="sm">Awarded for passing all five unit quizzes at 80% or higher and the final exam.</p><div class="wm" aria-hidden="true">SAMPLE</div></div><p class="cert-note"><strong>Sample only.</strong> Not yet earned. The real certificate is issued after Unit 5 and the final exam.</p></div></div>';
 }
 function viewResults(isDash){
   if(!S.attempts.length){
