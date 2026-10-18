@@ -36,7 +36,7 @@ button{font-family:inherit;cursor:pointer}
 .brand b span,.gp{color:var(--gold)}
 .brand small{font-size:11px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase}
 .top-r{display:flex;align-items:center;gap:18px;font-size:13px}
-.top-r a{color:var(--ink-faint);text-decoration:none}.top-r a:hover{color:var(--cream)}
+.top-r a{color:var(--ink-faint);text-decoration:none}.top-r a:hover{color:var(--cream)}.top-r a.dl{color:var(--cream);border-bottom:1px solid var(--gold)}
 .pill{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);padding:4px 10px;border-radius:2px;white-space:nowrap}
 .meter{height:3px;background:var(--navy-light)}
 .meter i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
@@ -185,6 +185,18 @@ label.f{display:block;font-size:13px;font-weight:500;color:var(--ink-mid);margin
 .record{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.5;color:var(--ink-mid);border-left:2px solid var(--gold);padding-left:16px;white-space:pre-wrap}
 .sample{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-light)}
 
+/* credential tracker */
+.track-list{list-style:none;display:grid;gap:0}
+.track-list li{display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--cream-alt);font-size:15px}
+.track-list li:last-child{border-bottom:0}
+.dot{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:grid;place-items:center;font-size:12px;color:var(--ink-faint)}
+.dot.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.dot.cur{border-color:var(--gold);color:var(--gold-dark)}
+.cert{border:2px dashed var(--border);padding:22px 24px;text-align:center;background:var(--cream)}
+.cert.earned{border:2px solid var(--gold);background:var(--gold-faint)}
+.cert b{display:block;font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin:6px 0}
+.cert span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light)}
+.cert p{font-size:13px;color:var(--ink-light);margin:6px auto 0;max-width:340px}
 /* waitlist */
 .wl{background:var(--navy);color:var(--cream);padding:34px 36px;margin-top:36px;border-bottom:3px solid var(--gold);max-width:760px}
 .wl h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);margin-bottom:8px}
@@ -208,7 +220,7 @@ footer a{color:var(--gold-light)}
   .two,.dash{grid-template-columns:1fr}
   .unit{grid-template-columns:44px 1fr;}.unit .tag,.unit .btn{grid-column:2}
   .wl .grid{grid-template-columns:1fr}
-  .brand small{display:none}.top-r a{display:none}
+  .brand small{display:none}.top-r a{display:none}.top-r a.dl{display:inline}
   .hero{margin-top:-20px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -218,7 +230,7 @@ footer a{color:var(--gold-light)}
 <header class="top">
   <div class="top-in">
     <a class="brand" href="#/" aria-label="Ponder home"><b>Ponder<span>.</span></b><small>by The Present Company</small></a>
-    <div class="top-r"><a href="https://thepresentco.com">thepresentco.com</a><span class="pill">Unit 1 Preview</span></div>
+    <div class="top-r"><a href="https://thepresentco.com">thepresentco.com</a><a class="dl" href="#/dashboard" data-go="#/dashboard">My dashboard</a><span class="pill">Unit 1 Preview</span></div>
   </div>
   <div class="meter" aria-hidden="true"><i id="meter"></i></div>
 </header>
@@ -327,6 +339,7 @@ function outline(cur){
     h+='<li class="'+(done?'done':'')+'"><button data-go="#/unit-1/'+s.id+'" '+(cur===s.id?'aria-current="step"':'')+'><span class="n">'+(done?'✓':String(i+1).padStart(2,'0'))+'</span><span>'+s.t+'</span></button></li>';
   });
   h+='<li><button data-go="#/unit-1/full"'+(cur==='full'?' aria-current="step"':'')+'><span class="n">+</span><span>Read the whole unit</span></button></li>';
+  h+='<li><button data-go="#/dashboard"'+(cur==='dashboard'?' aria-current="step"':'')+'><span class="n">\u25A3</span><span>My dashboard</span></button></li>';
   h+='</ol><a class="bk" href="#/" data-go="#/">← All units</a>';
   el.innerHTML=h;
 }
@@ -351,7 +364,7 @@ function viewHome(){
   var h='<section class="hero"><div class="hero-in"><span class="eyebrow">Ponder AI Ethics Fundamentals</span>'
    +'<h1>Most companies have an AI policy. <em>Few can show it works.</em></h1>'
    +'<p class="lede">A free course in plain language for anyone who uses AI at work. Try Unit 1 now: a short lesson, a real case, a five-question check, and a record of how you reasoned.</p>'
-   +'<button class="btn" data-go="#/unit-1/'+(tries?'results':'gap')+'">'+(tries?'See your results':'Start Unit 1')+'</button></div></section>';
+   +'<button class="btn" data-go="'+(tries?'#/dashboard':'#/unit-1/gap')+'">'+(tries?'Go to my dashboard':'Start Unit 1')+'</button></div></section>';
   h+='<div class="units">';
   UNITS.forEach(function(u){
     if(u.n===1){h+='<div class="unit open"><div class="num">1</div><div><h3>'+u.t+'</h3><p>'+u.d+'</p></div><div>'+tag+'</div></div>';}
@@ -466,14 +479,24 @@ function viewQuiz(){
   });
 }
 
-function viewResults(){
+function trackerHTML(){
+  var u1=passed()?'ok':(S.attempts.length?'cur':'');
+  var rows='<li><span class="dot '+u1+'">'+(u1==='ok'?'\u2713':'1')+'</span><span>Unit 1: The Dream of AI Governance vs. Reality</span><span class="tag'+(u1==='ok'?' ok':'')+'">'+(u1==='ok'?'Passed':(S.attempts.length?'In progress':'Not started'))+'</span></li>';
+  UNITS.slice(1).forEach(function(u){rows+='<li><span class="dot">'+u.n+'</span><span style="color:var(--ink-light)">Unit '+u.n+': '+u.t+'</span><span class="tag">Waitlist</span></li>';});
+  rows+='<li><span class="dot">\u2605</span><span style="color:var(--ink-light)">Final exam</span><span class="tag">After Unit 5</span></li>';
+  var done=u1==='ok'?1:0;
+  return '<div class="dash" style="grid-template-columns:1fr 1fr"><div class="panel"><h3>Your credential path</h3><ul class="track-list">'+rows+'</ul><p class="sample" style="margin-top:12px">'+done+' of 6 steps complete. Units 2 to 5 and the final exam are still being built.</p></div>'
+   +'<div class="panel"><h3>Your credential</h3><div class="cert"><span>Ponder AI Ethics Fundamentals</span><b>Certificate</b><p>Earned by passing all five unit quizzes at 80% or higher and the final exam. Not yet earned. Unit 1 is the first of six steps.</p></div></div></div>';
+}
+function viewResults(isDash){
   if(!S.attempts.length){
-    $('#main').innerHTML=mobileBar('results')+'<span class="eyebrow">Your results</span><h2 class="h">Nothing here yet.</h2><div class="prose"><p>Take the Unit 1 quiz and your results, and a record of how you reasoned, will show up here.</p></div><div class="row"><button class="btn" data-go="#/unit-1/quiz">Take the quiz</button></div>';
+    $('#main').innerHTML=mobileBar('results')+'<span class="eyebrow">'+(isDash?'My dashboard':'Your results')+'</span><h2 class="h">Nothing here yet.</h2><div class="prose"><p>Take the Unit 1 quiz and your results, your credential progress, and a record of how you reasoned will show up here.</p></div>'+trackerHTML()+'<div class="row"><button class="btn" data-go="#/unit-1/'+(isDash?'gap':'quiz')+'">'+(isDash?'Start Unit 1':'Take the quiz')+'</button></div>';
     return;
   }
   var last=S.attempts[S.attempts.length-1],pct=Math.round(last.score/QUIZ.length*100),ok=last.score>=Math.ceil(QUIZ.length*PASS);
-  var h=mobileBar('results')+'<span class="eyebrow">Unit 1 · Your results</span><h1>'+(ok?'Unit 1 <em>complete.</em>':'Close. <em>Review and try again.</em>')+'</h1>'
+  var h=mobileBar('results')+'<span class="eyebrow">'+(isDash?'My dashboard':'Unit 1 \u00B7 Your results')+'</span><h1>'+(isDash?'Your Ponder <em>dashboard.</em>':(ok?'Unit 1 <em>complete.</em>':'Close. <em>Review and try again.</em>'))+'</h1>'
   +'<p class="lede">'+(ok?'You cleared the 80% bar. Here is how you reasoned.':'The pass mark is 80% (4 of 5). Your record below shows where to look again.')+'</p>';
+  h+=trackerHTML();
   h+='<div class="dash"><div class="panel"><h3>Latest attempt</h3><div class="ring" style="--p:'+pct+';--c:'+(ok?'var(--ok)':'var(--bad)')+'"><div><span>'+last.score+'/'+QUIZ.length+'<small>'+pct+'%</small></span></div></div>'
   +'<p class="verdict '+(ok?'ok':'no')+'">'+(ok?'Passed':'Not yet passed')+'</p>'
   +'<dl class="kv" style="margin-top:16px"><dt>Attempts used</dt><dd>'+S.attempts.length+' of '+MAXTRIES+'</dd><dt>Best score</dt><dd>'+best()+'/'+QUIZ.length+'</dd><dt>Figure 1.1 explored</dt><dd>'+S.flipped.length+'/'+FIG.length+'</dd></dl></div>';
@@ -548,6 +571,7 @@ function bindWaitlist(){
 function route(){
   var h=location.hash||'#/',m;
   if(h==='#/waitlist'||h==='#waitlist'){h='#/';viewHome();var w=$('#waitlist');if(w)w.scrollIntoView({behavior:'smooth'});return;}
+  if(h==='#/dashboard'){setShell(false);outline('dashboard');setMeter('');viewResults(true);window.scrollTo(0,0);return;}
   m=h.match(/^#\/unit-1\/(\w+)/);
   if(!m){viewHome();window.scrollTo(0,0);return;}
   var id=m[1];setShell(false);
