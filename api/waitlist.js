@@ -6,9 +6,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ ok: false, error: 'method' }); }
   const token = process.env.NOTION_TOKEN;
-  if (!token) return res.status(503).json({ ok: false, error: 'not_configured' });
+  // Health check: open /api/waitlist in a browser. Reports only whether the token is present, never its value.
+  if (req.method === 'GET') return res.status(200).json({ configured: Boolean(token) });
+  if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return res.status(405).json({ ok: false, error: 'method' }); }
+  if (!token) { console.error('waitlist: NOTION_TOKEN is not set for this deployment'); return res.status(503).json({ ok: false, error: 'not_configured' }); }
 
   let b = req.body;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } }

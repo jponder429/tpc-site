@@ -563,9 +563,9 @@ function bindWaitlist(){
     .then(function(r){return r.json().then(function(j){return {ok:r.ok&&j.ok};}).catch(function(){return {ok:false};});})
     .then(function(r){
       if(r.ok){S.joined=true;save();$('#waitlist').outerHTML=waitlistHTML();}
-      else{b.disabled=false;b.textContent='Join the waitlist';m.className='msg err';m.innerHTML='We could not save that just now. Please try again, or email <a style="color:var(--gold-light)" href="mailto:jponder@thepresentco.com?subject=Ponder%20AIF%20waitlist">jponder@thepresentco.com</a> and we will add you.';}
+      else{b.disabled=false;b.textContent='Join the waitlist';m.className='msg err';m.innerHTML='Sign-up error, please try again or <a style="color:var(--gold-light)" href="mailto:jponder@thepresentco.com?subject=Ponder%20AIF%20waitlist">email admin</a> for assistance.';}
     })
-    .catch(function(){b.disabled=false;b.textContent='Join the waitlist';m.className='msg err';m.innerHTML='We could not reach the server. Please try again, or email <a style="color:var(--gold-light)" href="mailto:jponder@thepresentco.com?subject=Ponder%20AIF%20waitlist">jponder@thepresentco.com</a>.';});
+    .catch(function(){b.disabled=false;b.textContent='Join the waitlist';m.className='msg err';m.innerHTML='Sign-up error, please try again or <a style="color:var(--gold-light)" href="mailto:jponder@thepresentco.com?subject=Ponder%20AIF%20waitlist">email admin</a> for assistance.';});
   });
 }
 
