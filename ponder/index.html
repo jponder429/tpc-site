@@ -205,11 +205,12 @@ label.f{display:block;font-size:13px;font-weight:500;color:var(--ink-mid);margin
 .wl p{color:var(--ink-faint);font-size:15px;max-width:540px}
 .wl label.f{color:#cdd6e2}
 .wl .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.dash.d2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .wl .chk{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:13px;color:#cdd6e2}
 .wl .chk input{margin-top:4px;accent-color:var(--gold)}
 .wl .msg{margin-top:14px;font-size:14px}
 .wl .msg.err{color:#f0b3aa}.wl .msg.ok{color:#8fd1ae}
-.hp{position:absolute;left:-9999px}
+.hp{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;padding:0!important;border:0!important;opacity:0;pointer-events:none}
 
 footer{background:var(--navy);color:var(--ink-faint);font-size:13px;padding:28px 24px;text-align:center;border-top:3px solid var(--gold)}
 footer a{color:var(--gold-light)}
@@ -219,7 +220,7 @@ footer a{color:var(--gold-light)}
   .outline{display:none}
   .mobile-bar{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-light);gap:12px}
   .mobile-bar button{background:none;border:0;font:inherit;color:var(--gold-dark);text-decoration:underline;text-transform:none;letter-spacing:0}
-  .two,.dash{grid-template-columns:1fr}
+  .two,.dash,.dash.d2{grid-template-columns:minmax(0,1fr)}
   .unit{grid-template-columns:44px 1fr;}.unit .tag,.unit .btn{grid-column:2}
   .wl .grid{grid-template-columns:1fr}
   .brand small{display:none}.top-r a{display:none}.top-r a.dl{display:inline}
@@ -487,7 +488,7 @@ function trackerHTML(){
   UNITS.slice(1).forEach(function(u){rows+='<li><span class="dot">'+u.n+'</span><span style="color:var(--ink-light)">Unit '+u.n+': '+u.t+'</span><span class="tag">Join the waitlist</span></li>';});
   rows+='<li><span class="dot">\u2605</span><span style="color:var(--ink-light)">Final exam</span><span class="tag">After Unit 5</span></li>';
   var done=u1==='ok'?1:0;
-  return '<div class="dash" style="grid-template-columns:1fr 1fr"><div class="panel"><h3>Your credential path</h3><ul class="track-list">'+rows+'</ul><p class="sample" style="margin-top:12px">'+done+' of 6 steps complete. Units 2 to 5 and the final exam are still being built.</p></div>'
+  return '<div class="dash d2"><div class="panel"><h3>Your credential path</h3><ul class="track-list">'+rows+'</ul><p class="sample" style="margin-top:12px">'+done+' of 6 steps complete. Units 2 to 5 and the final exam are still being built.</p></div>'
    +'<div class="panel"><h3>Your credential</h3><div class="cert" role="img" aria-label="Sample certificate, not a real credential"><span class="org">The Present Company</span><span class="ttl">Ponder AI Ethics Fundamentals</span><span class="org">Certificate of completion</span><div class="nm">Your Name Here</div><p class="sm">Awarded for passing all five unit quizzes at 80% or higher and the final exam.</p><div class="wm" aria-hidden="true">SAMPLE</div></div><p class="cert-note"><strong>Sample only.</strong> Not yet earned. The real certificate is issued after Unit 5 and the final exam.</p></div></div>';
 }
 function viewResults(isDash){
@@ -507,7 +508,7 @@ function viewResults(isDash){
   h+='<div class="panel"><h3>How you reasoned</h3>';
   Object.keys(DIMS).forEach(function(k){var d=dims[k];if(!d)return;h+='<div class="dim"><div class="h"><span>'+DIMS[k].n+'</span><span class="sample" style="font-family:DM Mono,monospace">'+d.r+' of '+d.t+'</span></div><div class="t"><i style="width:'+Math.round(d.r/d.t*100)+'%"></i></div><p>'+DIMS[k].d+'</p></div>';});
   h+='</div></div>';
-  h+='<div class="dash" style="grid-template-columns:1fr 1fr"><div class="panel"><h3>Question review</h3><ul class="review">';
+  h+='<div class="dash d2"><div class="panel"><h3>Question review</h3><ul class="review">';
   QUIZ.forEach(function(q,i){var c=last.ans[i]===q.a;h+='<li><span class="m '+(c?'c':'w')+'">'+(c?'✓':'✗')+'</span><span>'+esc(q.q.length>110?q.q.slice(0,107)+'…':q.q)+'</span><span class="sample">Q'+(i+1)+'</span></li>';});
   h+='</ul></div><div class="panel"><h3>Your reflection on the case</h3>'
   +(S.reflect&&S.reflect.trim()?'<div class="record" id="rec"></div><p class="sample" style="margin-top:12px">Written by you. Stored only in this browser.</p>':'<p class="muted">You did not write a reflection. Add one in the case study and it will appear here.</p><div class="row" style="margin-top:12px"><button class="btn ghost" data-go="#/unit-1/case">Go to the case study</button></div>')
