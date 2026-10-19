@@ -370,7 +370,7 @@ function viewHome(){
   h+='<div class="units">';
   UNITS.forEach(function(u){
     if(u.n===1){h+='<div class="unit open"><div class="num">1</div><div><h3>'+u.t+'</h3><p>'+u.d+'</p></div><div>'+tag+'</div></div>';}
-    else{h+='<div class="unit locked"><div class="num">'+u.n+'</div><div><h3>'+u.t+'</h3><p>'+u.d+'</p></div><a class="tag" href="#waitlist" data-go="#/waitlist">On the waitlist</a></div>';}
+    else{h+='<div class="unit locked"><div class="num">'+u.n+'</div><div><h3>'+u.t+'</h3><p>'+u.d+'</p></div><a class="tag" href="#waitlist" data-go="#/waitlist">Join the waitlist</a></div>';}
   });
   h+='</div>';
   h+='<div class="two"><div class="about-box"><h3>How it works</h3><p class="muted" style="font-size:15px">Each unit has core learning material, a case study, journal-ready questions, and a short quiz. Pass each quiz with at least 80% to move on; you get up to three tries. Finish all five units and the final exam to earn the Ponder AI Ethics Fundamentals certificate.</p></div>'
@@ -484,7 +484,7 @@ function viewQuiz(){
 function trackerHTML(){
   var u1=passed()?'ok':(S.attempts.length?'cur':'');
   var rows='<li><span class="dot '+u1+'">'+(u1==='ok'?'\u2713':'1')+'</span><span>Unit 1: The Dream of AI Governance vs. Reality</span><span class="tag'+(u1==='ok'?' ok':'')+'">'+(u1==='ok'?'Passed':(S.attempts.length?'In progress':'Not started'))+'</span></li>';
-  UNITS.slice(1).forEach(function(u){rows+='<li><span class="dot">'+u.n+'</span><span style="color:var(--ink-light)">Unit '+u.n+': '+u.t+'</span><span class="tag">Waitlist</span></li>';});
+  UNITS.slice(1).forEach(function(u){rows+='<li><span class="dot">'+u.n+'</span><span style="color:var(--ink-light)">Unit '+u.n+': '+u.t+'</span><span class="tag">Join the waitlist</span></li>';});
   rows+='<li><span class="dot">\u2605</span><span style="color:var(--ink-light)">Final exam</span><span class="tag">After Unit 5</span></li>';
   var done=u1==='ok'?1:0;
   return '<div class="dash" style="grid-template-columns:1fr 1fr"><div class="panel"><h3>Your credential path</h3><ul class="track-list">'+rows+'</ul><p class="sample" style="margin-top:12px">'+done+' of 6 steps complete. Units 2 to 5 and the final exam are still being built.</p></div>'
