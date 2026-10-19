@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --navy:#0c1d38;--navy-mid:#122548;--navy-light:#1e3a5f;--navy-faint:#263f60;
@@ -119,7 +120,7 @@ h3{font-size:20px;font-weight:700;margin-bottom:8px}
 .bar.a .fill{background:var(--navy-light)}.bar.b .fill{background:var(--gold-dark)}
 
 /* flip cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:8px 0 12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr));gap:16px;margin:8px 0 12px}
 .card{perspective:1200px;background:none;border:0;padding:0;text-align:left;min-height:330px;position:relative;color:inherit}
 .card .in{position:absolute;inset:0;transition:transform .55s;transform-style:preserve-3d}
 .card.flip .in{transform:rotateY(180deg)}
@@ -228,15 +229,30 @@ footer{background:var(--navy);color:var(--ink-faint);font-size:13px;padding:28px
 footer a{color:var(--gold-light)}
 
 @media(max-width:900px){
-  .shell{grid-template-columns:1fr;gap:20px;padding-top:20px}
+  .shell{grid-template-columns:minmax(0,1fr);gap:20px;padding-top:20px}
   .outline{display:none}
   .mobile-bar{display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-light);gap:12px}
   .mobile-bar button{background:none;border:0;font:inherit;color:var(--gold-dark);text-decoration:underline;text-transform:none;letter-spacing:0}
   .two,.dash,.dash.d2{grid-template-columns:minmax(0,1fr)}
-  .unit{grid-template-columns:44px 1fr;}.unit .tag,.unit .btn{grid-column:2}
+  .unit{grid-template-columns:44px minmax(0,1fr);}.unit .tag,.unit .btn{grid-column:2;justify-self:start;max-width:100%;white-space:normal;text-align:center}
+  .track-list li{grid-template-columns:28px minmax(0,1fr)}.track-list li .tag{grid-column:2;justify-self:start}
+  .review li{grid-template-columns:24px minmax(0,1fr)}.review li>:nth-child(3){grid-column:2}
   .wl .grid{grid-template-columns:1fr}
   .brand small{display:none}.top-r a{display:none}.top-r .pill{display:none}.burger{display:flex}
   .hero{margin-top:-20px}
+}
+@media(max-width:480px){
+  .top-in{padding:0 16px;gap:8px}
+  .shell{padding:20px 16px 56px}
+  .unit{padding:16px 14px;gap:12px}
+  .wl{padding:26px 18px}
+  .case,.core{padding:20px 18px}
+  .panel{padding:18px 16px}
+  h1,h2,h3,p,li,.btn{overflow-wrap:anywhere}
+  .tag{overflow-wrap:normal;word-break:normal;white-space:normal}
+  .btn{max-width:100%;white-space:normal;text-align:center}
+  .row{gap:10px}
+  .hero{margin:-20px -16px 32px;padding:44px 16px 40px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
