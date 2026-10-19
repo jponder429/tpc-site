@@ -54,6 +54,18 @@ button{font-family:inherit;cursor:pointer}
 .outline .done .n{color:var(--ok)}
 .outline .bk{display:inline-block;margin-top:22px;font-size:13px;color:var(--ink-light)}
 .mobile-bar{display:none}
+.burger{display:none;width:44px;height:44px;margin-right:-10px;background:none;border:0;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.burger span{display:block;width:22px;height:2px;background:var(--cream);transition:transform .2s,opacity .2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.menu{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);border-bottom:3px solid var(--gold);padding:6px 24px 22px;max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;box-shadow:0 18px 30px rgba(12,29,56,.35)}
+.menu.open{display:block}
+.menu h2{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:18px 0 6px}
+.menu a,.menu button.mi{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--navy-light);padding:13px 0;color:var(--cream);font-size:16px;line-height:1.35;text-decoration:none}
+.menu .n{font-family:'DM Mono',monospace;font-size:12px;padding-top:3px;color:var(--ink-faint);min-width:22px}
+.menu .done .n{color:#8fd1ae}
+.menu [aria-current="step"]{color:var(--gold-light);font-weight:600}
 
 /* typography */
 .eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:14px;display:block}
@@ -223,7 +235,7 @@ footer a{color:var(--gold-light)}
   .two,.dash,.dash.d2{grid-template-columns:minmax(0,1fr)}
   .unit{grid-template-columns:44px 1fr;}.unit .tag,.unit .btn{grid-column:2}
   .wl .grid{grid-template-columns:1fr}
-  .brand small{display:none}.top-r a{display:none}.top-r a.dl{display:inline}
+  .brand small{display:none}.top-r a{display:none}.top-r .pill{display:none}.burger{display:flex}
   .hero{margin-top:-20px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -233,9 +245,10 @@ footer a{color:var(--gold-light)}
 <header class="top">
   <div class="top-in">
     <a class="brand" href="#/" aria-label="Ponder home"><b>Ponder<span>.</span></b><small>by The Present Company</small></a>
-    <div class="top-r"><a href="https://thepresentco.com">thepresentco.com</a><a class="dl" href="#/dashboard" data-go="#/dashboard">My dashboard</a><span class="pill">Unit 1 Preview</span></div>
+    <div class="top-r"><a href="https://thepresentco.com">thepresentco.com</a><a class="dl" href="#/dashboard" data-go="#/dashboard">My dashboard</a><span class="pill">Unit 1 Preview</span><button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
   </div>
   <div class="meter" aria-hidden="true"><i id="meter"></i></div>
+  <nav class="menu" id="menu" aria-label="Menu"></nav>
 </header>
 
 <div class="shell" id="shell">
@@ -345,6 +358,20 @@ function outline(cur){
   h+='<li><button data-go="#/dashboard"'+(cur==='dashboard'?' aria-current="step"':'')+'><span class="n">\u25A3</span><span>My dashboard</span></button></li>';
   h+='</ol><a class="bk" href="#/" data-go="#/">← All units</a>';
   el.innerHTML=h;
+}
+function menuClose(){var m=$('#menu'),b=$('#burger');if(m)m.classList.remove('open');if(b){b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open menu');}}
+function buildMenu(cur){
+  var h='<h2>Course</h2><a href="#/" data-go="#/"'+(cur==='home'?' aria-current="step"':'')+'><span class="n">\u2302</span><span>All units</span></a>';
+  h+='<h2>Unit 1</h2>';
+  STEPS.forEach(function(st,i){
+    var done=S.visited[st.id]||(st.id==='quiz'&&S.attempts.length)||(st.id==='results'&&S.attempts.length);
+    h+='<a class="'+(done?'done':'')+'" href="#/unit-1/'+st.id+'" data-go="#/unit-1/'+st.id+'"'+(cur===st.id?' aria-current="step"':'')+'><span class="n">'+(done?'\u2713':String(i+1).padStart(2,'0'))+'</span><span>'+st.t+'</span></a>';
+  });
+  h+='<a href="#/unit-1/full" data-go="#/unit-1/full"'+(cur==='full'?' aria-current="step"':'')+'><span class="n">+</span><span>Read the whole unit</span></a>';
+  h+='<h2>You</h2><a href="#/dashboard" data-go="#/dashboard"'+(cur==='dashboard'?' aria-current="step"':'')+'><span class="n">\u25A3</span><span>My dashboard</span></a>';
+  h+='<a href="#/waitlist" data-go="#/waitlist"><span class="n">\u2192</span><span>Join the waitlist</span></a>';
+  h+='<a href="https://thepresentco.com"><span class="n">\u2197</span><span>thepresentco.com</span></a>';
+  $('#menu').innerHTML=h;
 }
 function setMeter(cur){
   var i=STEPS.findIndex(function(s){return s.id===cur});
@@ -573,6 +600,7 @@ function bindWaitlist(){
 /* ---------- router ---------- */
 function route(){
   var h=location.hash||'#/',m;
+  menuClose();buildMenu(h==='#/dashboard'?'dashboard':((h.match(/^#\/unit-1\/(\w+)/)||[])[1]||'home'));
   if(h==='#/waitlist'||h==='#waitlist'){h='#/';viewHome();var w=$('#waitlist');if(w)w.scrollIntoView({behavior:'smooth'});return;}
   if(h==='#/dashboard'){setShell(false);outline('dashboard');setMeter('');viewResults(true);window.scrollTo(0,0);return;}
   m=h.match(/^#\/unit-1\/(\w+)/);
@@ -589,6 +617,9 @@ document.addEventListener('click',function(e){
   e.preventDefault();var g=t.getAttribute('data-go');
   if(location.hash===g)route();else go(g);
 });
+$('#burger').addEventListener('click',function(){var m=$('#menu'),o=!m.classList.contains('open');m.classList.toggle('open',o);this.setAttribute('aria-expanded',o?'true':'false');this.setAttribute('aria-label',o?'Close menu':'Open menu');});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')menuClose();});
+window.addEventListener('resize',function(){if(window.innerWidth>900)menuClose();});
 window.addEventListener('hashchange',route);
 route();
 })();
