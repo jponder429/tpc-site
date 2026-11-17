@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Powered by Ponder | Exam Builder Demo</title>
+<meta name="description" content="See how Powered by Ponder partners build a branded AI ethics exam: pick a field and level, review each question, and preview the learner view." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0c1d38;--navy2:#122548;--line:#2a3b5c;--gold:#c9a657;--gold-d:#7f6120;--sun:#f5c542;--cream:#f8f5ef;--cream2:#efe9de;--ink2:#4b5873;--mute:#a9b3c6;--ok:#2f6b4f;--okbg:#e6f1ea;--bad:#9a3b32;--badbg:#f6e6e3}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--cream);color:var(--navy);line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mono{font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+header{background:var(--navy);color:var(--cream);border-bottom:3px solid var(--sun)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.brand{font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.04em;color:var(--cream);text-decoration:none}
+.brand span{color:var(--sun)}
+header a.back{color:var(--mute);font-size:14px;text-decoration:none}
+header a.back:hover{color:var(--cream)}
+.banner{background:var(--cream2);border-bottom:1px solid #ddd8cc}
+.banner .wrap{padding-top:10px;padding-bottom:10px;font-size:14px;color:var(--ink2)}
+.hero{padding:56px 0 32px}
+.hero h1{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;font-size:clamp(38px,5.4vw,64px);line-height:1;letter-spacing:-.02em;margin:14px 0 18px;max-width:16ch}
+.hero p{max-width:60ch;color:var(--ink2);font-size:18px}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;padding-bottom:72px;align-items:start}
+.panel{background:#fff;border:1px solid #ddd8cc;padding:28px}
+.panel h2{font-family:'Schibsted Grotesk',sans-serif;font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
+.step{margin-top:22px}
+.step>label,.step>.lab{display:block;margin-bottom:10px;color:var(--gold-d)}
+.field{width:100%;min-height:48px;padding:0 14px;border:1px solid #b9b2a3;background:var(--cream);color:var(--navy);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 18px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-weight:600;font-size:15px}
+.chip[aria-pressed="true"]{background:var(--navy);color:var(--cream)}
+.btn{min-height:52px;padding:0 26px;border:0;background:var(--navy);color:var(--cream);font-weight:600;font-size:16px}
+.btn:hover{background:var(--navy2)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.gold{background:var(--sun);color:var(--navy)}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px}
+.card{margin-top:24px;background:var(--navy);color:var(--cream);padding:24px}
+.card .meta{display:flex;flex-wrap:wrap;gap:8px 16px;color:var(--gold);margin-bottom:14px}
+.card .stem{font-size:18px;line-height:1.5;min-height:3em}
+.card .stem[contenteditable="true"]{outline:1px dashed var(--gold);outline-offset:6px}
+.card ol{list-style:none;margin-top:16px;display:grid;gap:8px}
+.card li{border:1px solid var(--line);padding:10px 12px;font-size:15px;display:flex;gap:10px}
+.card li b{font-family:'DM Mono',monospace;color:var(--gold);font-weight:500}
+.card li.key{border-color:var(--gold)}
+.card .why{margin-top:14px;color:var(--mute);font-size:14px}
+.cursor{display:inline-block;width:.55em;height:1.05em;background:var(--sun);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.status{margin-top:12px;font-size:14px;color:var(--ink2);min-height:1.4em}
+.tray .exam-head{background:var(--navy);color:var(--cream);padding:18px 20px;border-bottom:3px solid var(--sun)}
+.tray .exam-head strong{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:20px;letter-spacing:-.02em}
+.tray .exam-head small{color:var(--mute);font-size:13px}
+.tray ul{list-style:none;margin-top:16px;display:grid;gap:10px}
+.tray li{border:1px solid #ddd8cc;padding:12px 14px;font-size:14px;background:var(--cream)}
+.tray li .mono{font-size:11px;color:var(--gold-d);display:block;margin-bottom:4px}
+.empty{color:var(--ink2);font-size:14px;margin-top:16px}
+.note{margin-top:18px;font-size:13px;color:var(--ink2)}
+dialog{border:0;padding:0;max-height:calc(100dvh - 32px);overflow:auto;max-width:720px;width:calc(100% - 32px);background:var(--cream);color:var(--navy);box-shadow:0 30px 80px rgba(12,29,56,.45)}
+dialog::backdrop{background:rgba(12,29,56,.6)}
+.dl-head{background:var(--navy);color:var(--cream);padding:20px 24px;border-bottom:3px solid var(--sun);display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.dl-head strong{font-family:'Schibsted Grotesk',sans-serif;font-size:22px;letter-spacing:-.02em;display:block}
+.dl-head small{color:var(--mute)}
+.dl-close{background:none;border:0;color:var(--cream);font-size:28px;line-height:1;min-width:44px;min-height:44px}
+.dl-body{padding:24px}
+.opt{display:flex;gap:12px;width:100%;text-align:left;border:1px solid #b9b2a3;background:#fff;padding:12px 14px;margin-top:8px;font-size:15px;color:var(--navy)}
+.opt[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.opt.right{background:var(--okbg);border-color:var(--ok)}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.fb{margin-top:14px;font-size:15px}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+footer{background:var(--navy);color:var(--mute);font-size:14px;padding:28px 0}
+footer a{color:var(--cream)}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.hero{padding:40px 0 24px}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="/#powered-by-ponder">Powered by Ponder<span>.</span></a><a class="back" href="/#powered-by-ponder">← Back to The Present Company</a></div></header>
+<div class="banner"><div class="wrap">Demo: these are pre-written sample questions. The live exam builder is in development, with partner pilots beginning in early 2027.</div></div>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="mono" style="color:var(--gold-d)">Exam builder · Demo</span>
+    <h1>Build an AI ethics exam under your own name.</h1>
+    <p>Pick a field and a level, and the builder drafts a scenario question grounded in the Ponder 5Q framework. You review every question before it goes into your exam.</p>
+  </section>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="b-h">
+      <h2 id="b-h">Draft a question</h2>
+      <div class="step">
+        <label class="mono" for="org">1 · Your organization</label>
+        <input class="field" id="org" type="text" maxlength="40" placeholder="Your Company" autocomplete="organization" />
+      </div>
+      <div class="step">
+        <span class="lab mono" id="f-l">2 · Field</span>
+        <div class="chips" role="group" aria-labelledby="f-l" id="fields"></div>
+      </div>
+      <div class="step">
+        <span class="lab mono" id="l-l">3 · Level</span>
+        <div class="chips" role="group" aria-labelledby="l-l" id="levels"></div>
+      </div>
+      <div class="row"><button class="btn gold" id="gen" disabled>Draft a question</button></div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <div id="out"></div>
+    </section>
+
+    <aside class="panel tray" aria-labelledby="t-h">
+      <h2 id="t-h" style="position:absolute;left:-9999px">Your exam</h2>
+      <div class="exam-head"><strong id="t-name">Your Company AI Ethics Exam</strong><small id="t-sub">powered by Ponder · 0 questions approved</small></div>
+      <ul id="tray"></ul>
+      <p class="empty" id="empty">Approved questions appear here.</p>
+      <div class="row"><button class="btn" id="preview" disabled>Preview as a learner</button></div>
+      <p class="note">Partner certificates are separate from the full Ponder AI Ethics credential, which only The Present Company issues.</p>
+    </aside>
+  </div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dl-title">
+  <div class="dl-head"><div><strong id="dl-title">Exam</strong><small>powered by Ponder</small></div><button class="dl-close" id="dl-x" aria-label="Close preview">×</button></div>
+  <div class="dl-body" id="dl-body"></div>
+</dialog>
+
+<footer><div class="wrap">Powered by Ponder is a product of The Present Company. Interested in becoming a launch partner? <a href="mailto:info@thepresentco.com?subject=Powered%20by%20Ponder%20launch%20partner">Email us</a>.</div></footer>
+
+<script>
+(function(){
+var FIVEQ=['01 · Who does this help?','02 · Who does this hurt?','03 · How has it already caused harm?','04 · How can we reasonably mitigate that harm?','05 · How do we prevent it from happening again?'];
+var FIELDS=['Biotech','Law','Healthcare'];
+var LEVELS=['Associate','Professional','Master'];
+var BANK={
+ 'Biotech|Associate':{q:2,stem:'A lab technician pastes unpublished assay results into a free public AI chatbot to get a quick summary before a team meeting. What is the first risk to flag?',opts:['The summary might be too long to read before the meeting.','Confidential research data has gone into a tool outside the company’s control.','The chatbot may not format the data as a table.','The meeting could start late while the summary loads.'],a:1,why:'Data entered into a public tool may be stored or used outside the company’s control. That can expose trade secrets and breach data-handling agreements.'},
+ 'Biotech|Professional':{q:4,stem:'Your team uses an AI model to decide which patient-derived samples get sequenced first. Validation shows it consistently ranks samples from one ancestry group lower. What should happen before the next run?',opts:['Proceed, because the ranking is statistically optimized.','Pause, document the disparity, check whether that group is underrepresented in the training data, and agree on a fix with the study lead.','Delete the ancestry field from the inputs and continue.','Mention the issue in the limitations section of the final paper.'],a:1,why:'Removing a field rarely removes bias, because other variables can act as proxies. The fix starts with pausing, documenting and investigating the data.'},
+ 'Biotech|Master':{q:5,stem:'An AI tool rated a compound as low-toxicity, and early animal data now contradicts it. Leadership asks how to keep this from happening again across every program. Which plan is strongest?',opts:['Retrain the model on the new animal data.','Ban AI tools from toxicology work.','Require documented expert sign-off on AI toxicity calls, log the model version and inputs for each decision, and review contradictions on a set schedule.','Switch to a different AI vendor.'],a:2,why:'Prevention means a repeatable process: human accountability, traceable decisions and regular review. Retraining or switching vendors fixes one model, not the process.'},
+ 'Law|Associate':{q:3,stem:'An associate asks an AI tool for case law supporting a motion, and it returns three on-point cases. What is required before those cases go in the filing?',opts:['Cite them as given, since the tool is built for legal research.','Confirm in a primary legal database that each case exists and says what the AI claims.','Ask the AI tool to confirm the cases are real.','Add a footnote saying AI was used for research.'],a:1,why:'Lawyers have been sanctioned for filing AI-invented cases, as in Mata v. Avianca (S.D.N.Y. 2023). Asking the same tool to check itself does not count as verification.'},
+ 'Law|Professional':{q:1,stem:'A client asks whether AI was used to review their contract. Your firm used an AI tool for the first pass, and a lawyer did the final review. How should you answer?',opts:['Say no, because a lawyer did the final review.','Explain honestly how AI was used and how its output was checked, in line with firm policy and ABA Formal Opinion 512.','Decline to discuss internal processes.','Say yes and offer a discount.'],a:1,why:'ABA Formal Opinion 512 (2024) addresses communicating with clients about generative AI use. Honest disclosure protects the client relationship and the lawyer’s duty of candor.'},
+ 'Law|Master':{q:2,stem:'Your firm wants to upload client files to a new AI vendor’s platform. What must be settled before any client data goes in?',opts:['The price per seat.','Whether the vendor keeps or trains on the data, what the confidentiality terms are, and whether client consent is needed.','How many lawyers will get access.','Whether the interface is easy to use.'],a:1,why:'Client confidentiality comes first. If a vendor retains or trains on client data, the firm may breach its duties to the people who trusted it with that data.'},
+ 'Healthcare|Associate':{q:3,stem:'An AI scribe drafted a visit note saying the patient denied chest pain. The patient actually reported mild chest pressure. What should the clinician do?',opts:['Sign it, since the difference is minor.','Correct the note before signing, because the clinician is responsible for its accuracy.','Sign it and report the error to IT later.','Delete the note and skip documentation.'],a:1,why:'A wrong note can change future care decisions. The signer owns the record, no matter who or what drafted it.'},
+ 'Healthcare|Professional':{q:4,stem:'A sepsis-alert AI fires so often that staff have started ignoring it. What is the best next step?',opts:['Turn the alert off.','Quietly raise the alert threshold.','Bring the alert-fatigue data to clinical governance, review thresholds with clinicians and the vendor, and track missed cases after any change.','Tell staff to respond to every alert.'],a:2,why:'Alert fatigue is a patient-safety risk on both sides. Changes need clinical oversight and monitoring, not a quiet fix or a blanket order.'},
+ 'Healthcare|Master':{q:5,stem:'A hospital system plans to roll out an AI triage tool across all its emergency departments. Which plan does the most to prevent repeat harm?',opts:['Rely on the vendor’s validation report.','Validate the tool on your own patient population, monitor performance by subgroup, set a clear escalation path and schedule regular audits.','Train staff once at launch.','Launch in one department and expand if there are no complaints.'],a:1,why:'A tool validated elsewhere can perform differently on your patients. Local validation, subgroup monitoring and audits catch problems before they repeat.'}
+};
+var $=function(s){return document.querySelector(s)};
+var state={field:null,level:null,current:null,approved:[]};
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function org(){return ($('#org').value||'').trim()||'Your Company'}
+function chips(el,list,key){
+  el.innerHTML=list.map(function(v){return '<button type="button" class="chip" aria-pressed="false" data-v="'+v+'">'+v+'</button>'}).join('');
+  el.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
+    el.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false')});
+    state[key]=b.getAttribute('data-v');$('#gen').disabled=!(state.field&&state.level)});
+}
+chips($('#fields'),FIELDS,'field');chips($('#levels'),LEVELS,'level');
+function tray(){
+  $('#t-name').textContent=org()+' AI Ethics Exam';
+  $('#t-sub').textContent='powered by Ponder · '+state.approved.length+' question'+(state.approved.length===1?'':'s')+' approved';
+  $('#tray').innerHTML=state.approved.map(function(it,i){return '<li><span class="mono">'+(i+1)+' · '+esc(it.field)+' · '+esc(it.level)+'</span>'+esc(it.stem)+'</li>'}).join('');
+  $('#empty').style.display=state.approved.length?'none':'';
+  $('#preview').disabled=!state.approved.length;
+}
+$('#org').addEventListener('input',tray);
+function render(it,typed,done){
+  var h='<div class="card"><div class="meta mono"><span>'+esc(it.field)+' · '+esc(it.level)+'</span><span>5Q '+esc(FIVEQ[it.q-1])+'</span></div>'
+   +'<p class="stem" id="stem">'+esc(typed)+(done?'':'<span class="cursor" aria-hidden="true"></span>')+'</p>';
+  if(done){
+    h+='<ol>'+it.opts.map(function(o,i){return '<li'+(i===it.a?' class="key"':'')+'><b>'+'ABCD'[i]+'</b><span>'+esc(o)+(i===it.a?' <span class="mono" style="color:var(--gold);font-size:10px">• key</span>':'')+'</span></li>'}).join('')+'</ol>'
+     +'<p class="why"><strong style="color:var(--cream)">Rationale:</strong> '+esc(it.why)+'</p>';
+  }
+  h+='</div>';
+  if(done){
+    h+='<div class="row"><button class="btn gold" id="approve">Approve</button><button class="btn ghost" id="edit">Edit wording</button></div>';
+  }
+  $('#out').innerHTML=h;
+  if(done){
+    $('#approve').addEventListener('click',approve);
+    $('#edit').addEventListener('click',function(){var s=$('#stem');var on=s.getAttribute('contenteditable')==='true';
+      if(on){s.setAttribute('contenteditable','false');it.stem=s.textContent.trim();this.textContent='Edit wording';$('#status').textContent='Edit saved. Approve when it reads right.'}
+      else{s.setAttribute('contenteditable','true');s.focus();this.textContent='Save edit';$('#status').textContent='Edit the question, then save.'}});
+  }
+}
+function approve(){
+  var it=state.current;if(!it)return;
+  var s=$('#stem');if(s&&s.getAttribute('contenteditable')==='true'){it.stem=s.textContent.trim()}
+  if(state.approved.some(function(x){return x.key===it.key})){$('#status').textContent='That question is already in your exam.';return}
+  state.approved.push(it);state.current=null;$('#out').innerHTML='';
+  $('#status').textContent='Approved and added to your exam. Pick another field or level to keep building.';tray();
+}
+$('#gen').addEventListener('click',function(){
+  var key=state.field+'|'+state.level,src=BANK[key];if(!src)return;
+  var it={key:key,field:state.field,level:state.level,q:src.q,stem:src.stem,opts:src.opts.slice(),a:src.a,why:src.why};
+  state.current=it;var btn=this;btn.disabled=true;
+  $('#status').textContent='Drafting a '+state.level+' question for '+state.field+'…';
+  if(reduce){render(it,it.stem,true);btn.disabled=false;$('#status').textContent='Draft ready. Review it, edit if needed, then approve.';return}
+  var i=0;(function tick(){i=Math.min(it.stem.length,i+3);render(it,it.stem.slice(0,i),false);
+    if(i<it.stem.length){setTimeout(tick,22)}else{render(it,it.stem,true);btn.disabled=false;$('#status').textContent='Draft ready. Review it, edit if needed, then approve.'}})();
+});
+var dlg=$('#dlg'),qi=0,score=0;
+function showQ(){
+  var it=state.approved[qi];
+  if(!it){$('#dl-body').innerHTML='<p class="mono" style="color:var(--gold-d)">Done</p><h3 style="font-family:Schibsted Grotesk,sans-serif;font-size:26px;margin:8px 0">You answered '+score+' of '+state.approved.length+' correctly.</h3><p style="color:var(--ink2)">In the live product, learners who pass receive a '+esc(org())+' certificate, powered by Ponder.</p><div class="row"><button class="btn" id="again">Close</button></div>';
+    $('#again').addEventListener('click',function(){dlg.close()});return}
+  var h='<p class="mono" style="color:var(--gold-d)">Question '+(qi+1)+' of '+state.approved.length+'</p><p style="font-size:18px;margin:10px 0 6px">'+esc(it.stem)+'</p>';
+  h+=it.opts.map(function(o,i){return '<button type="button" class="opt" data-i="'+i+'" aria-pressed="false"><b class="mono">'+'ABCD'[i]+'</b><span>'+esc(o)+'</span></button>'}).join('');
+  h+='<p class="fb" id="fb" role="status" aria-live="polite"></p><div class="row"><button class="btn" id="chk" disabled>Check answer</button></div>';
+  $('#dl-body').innerHTML=h;var sel=null;
+  $('#dl-body').querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){if($('#chk').dataset.done)return;sel=+b.dataset.i;
+    $('#dl-body').querySelectorAll('.opt').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});$('#chk').disabled=false})});
+  $('#chk').addEventListener('click',function(){
+    if(this.dataset.done){qi++;showQ();return}
+    var opts=$('#dl-body').querySelectorAll('.opt');opts[it.a].classList.add('right');
+    if(sel===it.a){score++;$('#fb').className='fb ok';$('#fb').textContent='Correct. '+it.why}
+    else{opts[sel].classList.add('wrong');$('#fb').className='fb no';$('#fb').textContent='Not quite. '+it.why}
+    this.dataset.done='1';this.textContent=qi===state.approved.length-1?'See result':'Next question'});
+}
+$('#preview').addEventListener('click',function(){qi=0;score=0;$('#dl-title').textContent=org()+' AI Ethics Exam';showQ();dlg.showModal()});
+$('#dl-x').addEventListener('click',function(){dlg.close()});
+tray();
+})();
+</script>
+</body>
+</html>
