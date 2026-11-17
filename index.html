@@ -1,770 +1,735 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Present Company. — AI Ethics Infrastructure</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-  <meta name="description" content="The Present Company builds AI ethics infrastructure for professionals in high-stakes industries. Certification, advisory, and governance tools that make AI accountable." />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="The Present Company" />
-  <meta property="og:title" content="The Present Company. AI ethics anyone can use." />
-  <meta property="og:description" content="A plain-language, common-sense AI ethics framework for professionals in high-stakes industries. Certification, advisory, and governance tools that make AI accountable." />
-  <meta property="og:url" content="https://thepresentco.com/" />
-  <meta property="og:image" content="https://thepresentco.com/og-2.png" />
-  <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="The Present Company. AI ethics anyone can use." />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Present Company. AI ethics anyone can use." />
-  <meta name="twitter:description" content="A plain-language, common-sense AI ethics framework for professionals in high-stakes industries." />
-  <meta name="twitter:image" content="https://thepresentco.com/og-2.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy:       #0c1d38;
-      --navy-mid:   #122548;
-      --navy-light: #1e3a5f;
-      --navy-faint: #263f60;
-      --gold:       #b8943f;
-      --gold-light: #d4ae6a;
-      --gold-dark:  #8a6c2a;
-      --gold-faint: #f5ead6;
-      --cream:      #f8f5ef;
-      --cream-alt:  #f0ebe0;
-      --white:      #ffffff;
-      --ink:        #0c1d38;
-      --ink-mid:    #2a3a50;
-      --ink-light:  #5a6e84;
-      --ink-faint:  #8a9db0;
-      --border:     #ddd8cc;
-      --border-navy:#1e3a5f;
-      --shadow:     0 2px 24px rgba(12,29,56,0.10);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--navy);
-      border-bottom: 1px solid var(--border-navy);
-      padding: 0 48px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      height: 64px;
-    }
-
-    .nav-logo { justify-self: start; }
-    .nav-links { justify-self: center; }
-    .nav-cta { justify-self: end; }
-
-    .nav-logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: var(--cream);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-
-    .nav-logo span { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 13px;
-      color: var(--ink-faint);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--cream); }
-
-    .nav-cta {
-      padding: 9px 22px;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-
-    .nav-cta:hover { background: var(--gold); color: var(--navy); }
-
-    /* ── HERO ── */
-    .hero {
-      background: var(--navy);
-      padding: 100px 48px 96px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 3px solid var(--gold);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(184,148,63,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      margin-bottom: 24px;
-      display: block;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: clamp(42px, 6vw, 72px);
-      color: var(--cream);
-      line-height: 1.08;
-      margin-bottom: 28px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
-
-    .hero-sub {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(17px, 2vw, 21px);
-      color: var(--ink-faint);
-      max-width: 540px;
-      margin: 0 auto 48px;
-      line-height: 1.75;
-      font-style: italic;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      padding: 14px 32px;
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      border-radius: 2px;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-      display: inline-block;
-    }
-
-    .btn-primary:hover { background: var(--gold-light); }
-
-    .btn-ghost {
-      padding: 14px 32px;
-      background: transparent;
-      color: var(--cream);
-      border: 1px solid rgba(248,245,239,0.25);
-      border-radius: 2px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-      display: inline-block;
-    }
-
-    .btn-ghost:hover { border-color: var(--cream); }
-
-    /* ── SECTIONS ── */
-    section { padding: 80px 48px; }
-
-    .section-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .section-h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: clamp(28px, 3.5vw, 40px);
-      color: var(--navy);
-      line-height: 1.15;
-      margin-bottom: 18px;
-      letter-spacing: -0.01em;
-    }
-
-    .section-body {
-      font-size: 17px;
-      color: var(--ink-light);
-      line-height: 1.8;
-      max-width: 580px;
-    }
-
-    hr.divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 48px;
-    }
-
-    /* ── PRODUCTS ── */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .product-card { min-width: 0; }
-
-    .product-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-top: 4px solid var(--navy);
-      border-radius: 4px;
-      padding: 32px 28px;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
-    .product-card:hover {
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-
-    .product-card.gold-top { border-top-color: var(--gold); }
-
-    .product-card-label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .product-card-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 24px;
-      color: var(--navy);
-      margin-bottom: 12px;
-    }
-
-    .product-card-title span { color: var(--gold); }
-
-    .product-card-title.pp-logo {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      font-size: 18px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .product-card-title.pp-logo span { font-weight: 500; font-size: 22px; }
-
-    .product-card-body {
-      font-size: 15px;
-      color: var(--ink-light);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-
-    .product-card-link {
-      font-size: 13px;
-      color: var(--gold-dark);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      border-bottom: 1px solid var(--gold-faint);
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
-    }
-
-    .product-card-link:hover { border-color: var(--gold); }
-
-    /* ── MISSION BAND ── */
-    .mission-band {
-      background: var(--navy);
-      padding: 80px 48px;
-      text-align: center;
-    }
-
-    .mission-quote {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 700;
-      font-style: italic;
-      font-size: clamp(22px, 3vw, 34px);
-      color: var(--cream);
-      line-height: 1.5;
-      max-width: 680px;
-      margin: 0 auto 20px;
-    }
-
-    .mission-attr {
-      font-size: 12px;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ── VERTICALS ── */
-    .verticals-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      margin-top: 40px;
-    }
-
-    .vertical-chip {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 14px 16px;
-      font-size: 13px;
-      color: var(--ink-mid);
-      font-family: 'DM Sans', sans-serif;
-      text-align: center;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .vertical-chip:hover { border-color: var(--gold); color: var(--gold-dark); }
-
-    /* ── INVESTOR SECTION ── */
-    .investor-section {
-      background: var(--cream-alt);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .investor-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .investor-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 20px;
-    }
-
-    .stat-value {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 30px;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--ink-faint);
-      font-family: 'DM Sans', sans-serif;
-      line-height: 1.4;
-    }
-
-    .investor-cta-block {
-      background: var(--navy);
-      border-radius: 6px;
-      padding: 40px 36px;
-    }
-
-    .investor-cta-label {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .investor-cta-h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 26px;
-      color: var(--cream);
-      margin-bottom: 14px;
-      line-height: 1.2;
-    }
-
-    .investor-cta-body {
-      font-size: 15px;
-      color: var(--ink-faint);
-      line-height: 1.75;
-      margin-bottom: 28px;
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 60px;
-      align-items: start;
-      margin-top: 0;
-    }
-
-    .founder-photo-block {
-      position: relative;
-    }
-
-    .founder-photo {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 4px;
-      display: block;
-      background: var(--navy-light);
-    }
-
-    .founder-photo-caption {
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--ink-faint);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .founder-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 32px;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .founder-title {
-      font-size: 14px;
-      color: var(--gold-dark);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .founder-bio {
-      font-size: 16px;
-      color: var(--ink-light);
-      line-height: 1.85;
-    }
-
-    .founder-bio p + p { margin-top: 16px; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy);
-      border-top: 3px solid var(--gold);
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 800;
-      font-size: 18px;
-      color: var(--cream);
-    }
-
-    .footer-logo span { color: var(--gold); }
-
-    .footer-sub {
-      font-size: 12px;
-      color: var(--ink-faint);
-      margin-top: 4px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      font-size: 13px;
-      color: var(--ink-faint);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--cream); }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .nav-cta { display: none; }
-      .nav-logo { font-size: 17px; }
-      .hero { padding: 64px 24px 72px; }
-      section { padding: 56px 24px; }
-      hr.divider { margin: 0 24px; }
-      .mission-band { padding: 60px 24px; }
-      .investor-inner { grid-template-columns: 1fr; gap: 40px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: 1fr; }
-      .product-card { padding: 28px 20px; }
-      .founder-photo { aspect-ratio: 4/3; }
-      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-    .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
-    .hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
-    .hero-btns    { animation: fadeUp 0.6s 0.3s ease both; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Present Company | The human layer of AI risk mitigation</title>
+<meta name="description" content="When diligence is due. The Present Company closes the gap between AI policy and practice with assessments, verifiable credentials and a record you can show.">
+<link rel="canonical" href="https://thepresentco.com/">
+<link rel="alternate" hreflang="en" href="https://thepresentco.com/">
+<link rel="alternate" hreflang="es" href="https://thepresentco.com/es">
+<link rel="alternate" hreflang="x-default" href="https://thepresentco.com/">
+<meta property="og:title" content="The Present Company | The human layer of AI risk mitigation">
+<meta property="og:description" content="When diligence is due. The Present Company closes the gap between AI policy and practice with assessments, verifiable credentials and a record you can show.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://thepresentco.com/og-2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://thepresentco.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Libre+Caslon+Display&amp;family=Libre+Caslon+Text:ital@0;1&amp;family=Schibsted+Grotesk:wght@600;700&amp;display=swap">
+<style>
+body{margin:0;background:#0C1D38}
+a{color:#F8F5EF}a:hover{color:#D4B26A}
+.tpc-on-cream a{color:#0C1D38}.tpc-on-cream a:hover{color:#7F6120}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #C9A657;outline-offset:3px}
+.tpc-btn-cream:hover{background:#FFFFFF !important;color:#0C1D38 !important}
+.tpc-btn-navy:hover{background:#13264A !important;color:#F8F5EF !important}
+.tpc-navbtn{background:none;border:0;color:#F8F5EF;font:inherit;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0}
+.tpc-navbtn:hover{color:#D4B26A}
+.tpc-navbtn svg{transition:transform .25s}
+.tpc-navbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.tpc-burger{display:none}
+.tpc-panel{position:absolute;left:0;right:0;top:100%;z-index:30}
+.tpc-menu-link{display:flex;flex-direction:column;gap:2px;padding:10px 0;text-decoration:none;color:#0C1D38}
+.tpc-menu-link:hover .tpc-menu-name{text-decoration:underline;text-underline-offset:4px}
+@keyframes tpcUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes tpcIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@keyframes tpcSpin{to{transform:rotate(360deg)}}
+@keyframes tpcMarq{to{transform:translateX(-50%)}}
+@keyframes tpcDrift{from{transform:translateX(0)}to{transform:translateX(96px)}}
+@keyframes tpcDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes tpcRise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes tpcSunrise{0%{opacity:0;transform:translateY(2.2px)}35%{opacity:1}100%{opacity:1;transform:translateY(0)}}
+.tpc-sunrise{animation:tpcSunrise 2.4s cubic-bezier(.2,.7,.2,1) .2s both}
+.tpc-up{animation:tpcUp .9s cubic-bezier(.2,.7,.2,1) both}
+.tpc-wedge{transform-box:fill-box;transform-origin:center;animation:tpcIn .7s cubic-bezier(.2,.7,.2,1) both}
+.tpc-spin{transform-box:fill-box;transform-origin:center;animation:tpcSpin 60s linear infinite}
+.tpc-track{display:flex;width:max-content;animation:tpcMarq 48s linear infinite}
+.tpc-marquee:hover .tpc-track{animation-play-state:paused}
+.tpc-drift{animation:tpcDrift 14s ease-in-out infinite alternate}
+@keyframes tpcAnnA{0%,45%{opacity:1;visibility:visible}50%,95%{opacity:0;visibility:hidden}100%{opacity:1;visibility:visible}}
+@keyframes tpcAnnB{0%,45%{opacity:0;visibility:hidden}50%,95%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+.tpc-ann-a{animation:tpcAnnA 14s ease-in-out infinite}
+.tpc-ann-b{animation:tpcAnnB 14s ease-in-out infinite}
+.tpc-ann:hover .tpc-ann-a,.tpc-ann:hover .tpc-ann-b,.tpc-ann:focus-within .tpc-ann-a,.tpc-ann:focus-within .tpc-ann-b{animation-play-state:paused}
+.tpc-ann a,.tpc-ann a:hover{color:#0C1D38}
+.tpc-ann a:hover{text-decoration-thickness:2px}
+.tpc-ann-a,.tpc-ann-b{justify-content:center;text-align:center}
+.tpc-sun{transform-box:fill-box;transform-origin:center;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tpc-tile{text-decoration:none;color:#0C1D38}
+.tpc-tile:hover .tpc-sun{transform:rotate(90deg) scale(1.35)}
+.tpc-tile:hover .tpc-tile-name{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px}
+.tpc-tile .tpc-art{transition:outline-color .3s;outline:1px solid transparent;outline-offset:6px}
+.tpc-tile:hover .tpc-art{outline-color:#0C1D38}
+.tpc-draw{stroke-dasharray:1}
+@supports (animation-timeline: view()){
+.tpc-draw{stroke-dashoffset:1;animation:tpcDraw linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+.tpc-reveal{animation:tpcRise linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+}
+.tpc-field{width:100%;box-sizing:border-box;min-height:52px;padding:0 16px;font:inherit;font-size:17px;border:1px solid #4B5873;background:transparent;color:inherit;border-radius:0}
+.tpc-field::placeholder{color:#7C8AA5}
+@media (max-width:980px){
+.tpc-links{display:none !important}
+.tpc-links.is-open{display:flex !important;flex-direction:column;align-items:stretch !important;width:100%;gap:4px !important;padding-top:8px}
+.tpc-burger{display:inline-flex}
+.tpc-panel{position:static}
+}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none !important;transition:none !important}
+.tpc-ann-b{display:none !important}
+.tpc-draw{stroke-dashoffset:0 !important}
+}
+</style>
 </head>
 <body>
+<div id="top" style="background:#0C1D38;color:#F8F5EF;font-family:'Instrument Sans',sans-serif;font-size:18px;line-height:1.55;">
 
-  <!-- NAV -->
-  <nav>
-    <a href="/" class="nav-logo">The Present Company<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#products">Products</a></li>
-      <li><a href="#advisory">Advisory</a></li>
-      <li><a href="#investors">Investors</a></li>
-    </ul>
-    <a href="mailto:jponder@thepresentco.com" class="nav-cta">Get in touch</a>
-  </nav>
+<a href="#main" style="position:absolute;left:-9999px;top:0;">Skip to content</a>
 
-  <!-- HERO -->
-  <div class="hero">
-    <span class="hero-eyebrow">AI Ethics Infrastructure</span>
-    <h1>AI ethics<br/><em>anyone can use.</em></h1>
-    <p class="hero-sub">A plain-language, common-sense framework for professionals in high-stakes industries.</p>
-    <div class="hero-btns">
-      <a href="https://thisisponder.com" target="_blank" class="btn-primary">Explore Ponder.</a>
-      <a href="#investors" class="btn-ghost">Investor information</a>
-    </div>
-  </div>
+<!-- ANNOUNCEMENT BAND -->
+<div class="tpc-ann" role="region" aria-label="Announcements" style="display:grid;background:#7FAE92;color:#0C1D38;font-size:15px;font-weight:500;line-height:1.4;">
+<div class="tpc-ann-a" style="grid-area:1 / 1;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;min-height:48px;padding:10px clamp(20px,5vw,64px);box-sizing:border-box;"><span>Interested in pilot programs?</span><a href="/present-practical#pilot" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;">Apply to the Founding Cohort here →</a></div>
+<div class="tpc-ann-b" style="grid-area:1 / 1;display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;min-height:48px;padding:10px clamp(20px,5vw,64px);box-sizing:border-box;"><span>Stay in the know about our FREE Ponder AI Fundamentals course.</span><a href="#try" style="font-weight:700;text-decoration:underline;text-underline-offset:3px;">Join the waitlist →</a></div>
+</div>
 
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div class="section-inner">
-      <span class="section-label">What we build</span>
-      <h2 class="section-h2">Two products. One mission.</h2>
-      <p class="section-body">We build practitioner certification and advisory services for the professionals responsible for AI in high-stakes industries — where the cost of getting it wrong is not abstract.</p>
+<!-- PLAID STRIP (decor) -->
+<div aria-hidden="true" style="position:relative;display:flex;height:72px;overflow:hidden;">
+<div style="flex:3 1 0;background:#13264A;"></div>
+<div style="flex:1 1 0;background:#091629;"></div>
+<div style="flex:2 1 0;background:#0C1D38;"></div>
+<div style="flex:1 1 0;background:#5A8EC4;"></div>
+<div style="flex:3 1 0;background:#13264A;"></div>
+<div style="flex:1 1 0;background:#091629;"></div>
+<div style="flex:2 1 0;background:#2E4D3C;"></div>
+<div style="flex:3 1 0;background:#0C1D38;"></div>
+<div style="flex:1 1 0;background:#8A5A86;"></div>
+<div style="flex:2 1 0;background:#13264A;"></div>
+<div style="flex:1 1 0;background:#091629;"></div>
+<div style="flex:3 1 0;background:#0C1D38;"></div>
+<div style="position:absolute;left:0;right:0;top:24px;height:1px;background:#C9A657;"></div>
+<div style="position:absolute;left:0;right:0;top:48px;height:1px;background:#C9A657;"></div>
+<div class="tpc-drift" style="position:absolute;top:0;bottom:0;left:28%;width:1px;background:#C9A657;"></div>
+<div class="tpc-drift" style="position:absolute;top:0;bottom:0;left:64%;width:1px;background:#C9A657;animation-delay:-7s;"></div>
+</div>
 
-      <div class="products-grid">
-        <div class="product-card gold-top">
-          <span class="product-card-label">Certification Platform</span>
-          <div class="product-card-title">Ponder<span>.</span></div>
-          <p class="product-card-body">Tiered AI ethics credentials for working professionals. Scenario-based. Verifiable. Built for the people actually making decisions in law, healthcare, finance, education, and beyond.</p>
-          <a href="https://thisisponder.com" target="_blank" class="product-card-link">Visit thisisponder.com →</a>
-        </div>
+<!-- HEADER + NAV -->
+<header data-on-mouseleave="closeMenus" style="position:relative;z-index:20;background:#0C1D38;border-bottom:1px solid #2A3B5C;">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:20px clamp(20px,5vw,64px);">
+<a href="#top" aria-label="The Present Company, home" style="font-family:'Libre Caslon Display',serif;font-size:26px;letter-spacing:-0.02em;color:#F8F5EF;text-decoration:none;line-height:1;white-space:nowrap;">The Present Company<svg viewBox="-.5 -.5 1 1" aria-hidden="true" style="display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible"><circle r=".24" fill="#C9A657"></circle><path fill="#C9A657" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"></path></svg></a>
 
-        <div class="product-card">
-          <span class="product-card-label">Advisory Services</span>
-          <div class="product-card-title pp-logo">Present Practical<span style="color:var(--gold)">.</span></div>
-          <p class="product-card-body">AI ethics assessment and advisory for organizations. Starting with an AI Readiness Assessment, then moving into ongoing governance support scaled to your organization's size and risk profile.</p>
-          <a href="#advisory" class="product-card-link">Learn more →</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<button type="button" class="tpc-burger tpc-navbtn" data-b-aria-expanded="mobileOpen" aria-controls="tpc-links" data-on-click="toggleMobile" style="border:1px solid #4B5873;padding:0 16px;">Menu</button>
 
-  <hr class="divider" />
+<nav id="tpc-links" aria-label="Main" data-b-class="linksClass" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;font-size:16px;font-weight:500;">
+<button type="button" class="tpc-navbtn" data-b-aria-expanded="nav.products" aria-controls="panel-products" data-on-click="toggleProducts">Products<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 L6 8.5 L10 4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="square"></path></svg></button>
+<a href="/team" style="color:#F8F5EF;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Team</a>
+<button type="button" class="tpc-navbtn" data-b-aria-expanded="nav.investors" aria-controls="panel-investors" data-on-click="toggleInvestors">Investors<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 L6 8.5 L10 4.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="square"></path></svg></button>
+<div role="group" aria-label="Language" style="display:inline-flex;border:1px solid #4B5873;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.1em;">
+<span aria-current="true" lang="en" style="min-height:40px;padding:0 12px;border:0;font:inherit;display:inline-flex;align-items:center;background:#F8F5EF;color:#0C1D38;text-decoration:none;">EN</span>
+<a href="/es" hreflang="es" lang="es" style="min-height:40px;padding:0 12px;border:0;font:inherit;display:inline-flex;align-items:center;background:transparent;color:#F8F5EF;text-decoration:none;">ES</a>
+</div>
+<a href="#try" style="display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid #F8F5EF;color:#F8F5EF;text-decoration:none;font-weight:600;">Try Ponder</a>
+<a href="#book" class="tpc-btn-cream" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 22px;background:#F8F5EF;color:#0C1D38;text-decoration:none;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><rect x="3" y="5" width="18" height="16"></rect><path d="M3 10 H21 M8 2 V7 M16 2 V7"></path></svg>Book a call</a>
+</nav>
+</div>
 
-  <!-- MISSION BAND -->
-  <div class="mission-band">
-    <p class="mission-quote">"We are not here to slow AI down. We are here to make sure it deserves to go fast."</p>
-    <span class="mission-attr">Ponder. Ethical Foundation · March 2026</span>
-  </div>
+<!-- PRODUCTS MEGA MENU -->
+<div data-if="open.products" style="display:none">
+<div id="panel-products" class="tpc-panel tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;border-bottom:2px solid #0C1D38;">
+<div style="padding:32px clamp(20px,5vw,64px) 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px 32px;">
 
-  <!-- VERTICALS -->
-  <section>
-    <div class="section-inner">
-      <span class="section-label">Industries we serve</span>
-      <h2 class="section-h2">Built for high-stakes work.</h2>
-      <p class="section-body">Ponder certifications are designed for professionals where AI decisions carry real consequences. Nine verticals at launch, expanding continuously.</p>
-      <div class="verticals-grid">
-        <div class="vertical-chip">Law</div>
-        <div class="vertical-chip">Healthcare</div>
-        <div class="vertical-chip">Finance</div>
-        <div class="vertical-chip">K–12 Education</div>
-        <div class="vertical-chip">Higher Education</div>
-        <div class="vertical-chip">Technology</div>
-        <div class="vertical-chip">Creative</div>
-        <div class="vertical-chip">Science & Research</div>
-        <div class="vertical-chip">General</div>
-      </div>
-    </div>
-  </section>
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Advisory</div>
 
-  <hr class="divider" />
+<a href="/present-practical" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#2E4D3C;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Present Practical</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">Assess the gap between your AI policy and daily practice</span>
+</a>
 
-  <!-- ADVISORY -->
-  <section id="advisory">
-    <div class="section-inner">
-      <span class="section-label">Advisory</span>
-      <h2 class="section-h2" style="font-family:'DM Sans',sans-serif; font-weight:300; letter-spacing:0.12em; text-transform:uppercase; font-size:28px;">Present Practical<span style="color:var(--gold); font-weight:500;">.</span></h2>
-      <p class="section-body">Organizations deploying AI need more than a policy document. Present Practical is a structured advisory engagement that begins with an AI Readiness Assessment — a clear-eyed look at where your organization actually stands — and moves into ongoing governance support for those who need it.</p>
-      <p class="section-body" style="margin-top:16px;">Engagements are scoped by organization size and complexity. We work with legal teams, healthcare systems, financial institutions, and technology companies navigating real AI deployment decisions.</p>
-      <div style="margin-top:32px;">
-        <a href="mailto:jponder@thepresentco.com" class="btn-primary" style="display:inline-block;">Request an assessment</a>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <hr class="divider" />
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Workforce credentials</div>
 
-  <!-- INVESTORS -->
-  <section id="investors" class="investor-section">
-    <div class="investor-inner">
-      <div>
-        <span class="section-label">For investors</span>
-        <h2 class="section-h2">A category nobody owns yet.</h2>
-        <p class="section-body">AI ethics certification is an emerging requirement across every regulated industry. Ponder is the first practitioner-first, scenario-based credential built specifically for this moment.</p>
+<a href="#try" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#0C1D38;box-shadow:inset 0 0 0 3px #0C1D38, inset 0 0 0 6px #C9A657;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">AI ethics credentials for people at work</span>
+</a>
 
-        <div class="investor-stats">
-          <div class="stat-card">
-            <div class="stat-value">9</div>
-            <div class="stat-label">Industry verticals at launch</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">120+</div>
-            <div class="stat-label">SKUs at launch</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Credential tiers</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">15</div>
-            <div class="stat-label">Languages (Year 2)</div>
-          </div>
-        </div>
-      </div>
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#8A5A86;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder Custom</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">A curriculum built on your own AI policy</span>
+</a>
 
-      <div class="investor-cta-block">
-        <span class="investor-cta-label">Pre-seed · SAFE</span>
-        <h3 class="investor-cta-h3">We're raising our pre-seed round.</h3>
-        <p class="investor-cta-body">The Present Company is building the trust layer for AI adoption. We're looking for investors who understand what's at stake — and the scale of the opportunity.</p>
-        <a href="mailto:jponder@thepresentco.com?subject=Investor Inquiry — The Present Company" class="btn-primary" style="display:inline-block; width:100%; text-align:center;">Request investor materials</a>
-      </div>
-    </div>
-  </section>
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#5A8EC4;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder Regulation</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">Jurisdiction addenda that keep credentials current</span>
+</a>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-inner">
-      <span class="section-label">Founder</span>
-      <div class="about-grid">
-        <div class="founder-photo-block">
-          <img
-            src="founder.jpg"
-            alt="Jeanette Ponder, Founder & CEO of The Present Company"
-            class="founder-photo"
-            onerror="this.style.background='var(--navy-light)';this.removeAttribute('src')"
-          />
-          <p class="founder-photo-caption">Jeanette Ponder<br/>Chicago, IL</p>
-        </div>
-        <div>
-          <h3 class="founder-name">Jeanette Ponder.</h3>
-          <p class="founder-title">Founder & CEO</p>
-          <div class="founder-bio">
-            <p>Jeanette Ponder is the founder and CEO of The Present Company, a Chicago-based AI ethics infrastructure company. Her name is not a coincidence — it is a commitment.</p>
-            <p>She brings five years of hands-on AI practitioner experience in prompt engineering, model training, and data tasking, paired with 23 years of production management background. She built Ponder because she has seen firsthand what happens when AI is deployed by people who are skilled but unprepared for the ethical weight of what they're doing.</p>
-            <p>Jeanette is a member of 1871 Chicago and a participant in the 1871 Launch cohort. The Present Company is headquartered in Chicago.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="footer-logo">The Present Company<span>.</span></div>
-      <div class="footer-sub">Chicago, IL · thepresentco.com · jponder@thepresentco.com</div>
-    </div>
-    <div class="footer-links">
-      <a href="https://thisisponder.com" target="_blank">Ponder.</a>
-      <a href="#investors">Investors</a>
-      <a href="https://linkedin.com/company/thepresentco" target="_blank">LinkedIn</a>
-      <a href="mailto:jponder@thepresentco.com">Contact</a>
-    </div>
-  </footer>
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Education</div>
 
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#4A9E8E;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder GenEthyx</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">AI ethics for students, schools and families</span>
+</a>
+
+</div>
+
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Licensing</div>
+
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#F5C542;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Powered by Ponder</span><span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #0C1D38;padding:1px 6px;">Soon</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">Details coming soon</span>
+</a>
+
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#B5603A;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder Trainer</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">Certify your trainers to deliver Ponder in-house</span>
+</a>
+
+</div>
+
+<div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Access</div>
+
+<a href="#products" class="tpc-menu-link" data-on-click="closeMenus">
+<span style="display:flex;align-items:center;gap:10px;"><span aria-hidden="true" style="display:inline-block;width:12px;height:12px;flex:0 0 12px;background:#C46E7A;"></span><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder Access</span></span>
+<span style="font-size:14px;line-height:1.4;color:#4B5873;padding-left:22px;">Free and discounted certification</span>
+</a>
+
+</div>
+
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding:16px clamp(20px,5vw,64px);border-top:1px solid #D9D3C6;font-size:15px;">
+<span style="font-family:'Libre Caslon Text',serif;font-style:italic;color:#4B5873;">Every product shares one credential record.</span>
+<a href="#try" data-on-click="closeMenus" style="font-weight:600;">Try Ponder free →</a>
+</div>
+</div>
+</div>
+
+<!-- SMALL MENUS -->
+<div data-if="open.why" style="display:none">
+<div id="panel-why" class="tpc-panel tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;border-bottom:2px solid #0C1D38;">
+<div style="padding:28px clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,320px));gap:8px 40px;">
+
+<a href="#exposure" class="tpc-menu-link" data-on-click="closeMenus" style="border-top:1px solid #0C1D38;"><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">The problem</span><span style="font-size:14px;color:#4B5873;">Policy says one thing. People do another.</span></a>
+
+<a href="#how" class="tpc-menu-link" data-on-click="closeMenus" style="border-top:1px solid #0C1D38;"><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">The solution</span><span style="font-size:14px;color:#4B5873;">Assess, certify, keep current.</span></a>
+
+<a href="#ponder-5q" class="tpc-menu-link" data-on-click="closeMenus" style="border-top:1px solid #0C1D38;"><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Ponder 5Q</span><span style="font-size:14px;color:#4B5873;">The five questions behind every credential.</span></a>
+
+</div>
+</div>
+</div>
+
+<div data-if="open.company" style="display:none">
+<div id="panel-company" class="tpc-panel tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;border-bottom:2px solid #0C1D38;">
+<div style="padding:28px clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px 40px;">
+
+<div style="display:flex;flex-direction:column;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">About</div>
+
+<a href="#story" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Our story</span></a>
+
+<a href="#team" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Team</span></a>
+
+<a href="#careers" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Careers</span></a>
+
+<a href="#faq" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">FAQ</span></a>
+
+</div>
+
+<div style="display:flex;flex-direction:column;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Community</div>
+
+<a href="#partners" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Partners</span></a>
+
+<a href="#events" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Events</span></a>
+
+</div>
+
+<div style="display:flex;flex-direction:column;border-top:1px solid #0C1D38;padding-top:14px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;margin-bottom:4px;">Press</div>
+
+<a href="#press" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Press room</span></a>
+
+<a href="#media-kit" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Media kit</span></a>
+
+<a href="#the-mark" class="tpc-menu-link" data-on-click="closeMenus" style="padding-left:18px;border-left:2px solid #C9A657;margin-left:2px;"><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">The mark and its stars</span></a>
+
+<a href="#book" class="tpc-menu-link" data-on-click="closeMenus" style=""><span class="tpc-menu-name" style="font-weight:600;font-size:16px;">Contact</span></a>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div data-if="open.investors" style="display:none">
+<div id="panel-investors" class="tpc-panel tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;border-bottom:2px solid #0C1D38;">
+<div style="padding:28px clamp(20px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,320px));gap:8px 40px;">
+<a href="/investors" class="tpc-menu-link" data-on-click="closeMenus" style="border-top:1px solid #0C1D38;"><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Investor overview</span><span style="font-size:14px;color:#4B5873;">Thesis, market, model and team</span></a>
+<a href="mailto:info@thepresentco.com?subject=Data%20room%20access" class="tpc-menu-link" data-on-click="closeMenus" style="border-top:1px solid #0C1D38;"><span class="tpc-menu-name" style="font-weight:600;font-size:17px;">Request data room access</span><span style="font-size:14px;color:#4B5873;">For investors in active diligence</span></a>
+</div>
+</div>
+</div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section style="padding:clamp(48px,8vw,112px) clamp(20px,5vw,64px) clamp(64px,8vw,112px);display:flex;flex-wrap:wrap;gap:48px 64px;align-items:center;">
+<div style="flex:1 1 560px;min-width:0;display:flex;flex-direction:column;gap:30px;">
+<h1 class="tpc-up" lang="en" style="margin:0;font-family:'Libre Caslon Display',serif;font-weight:400;font-size:clamp(52px,8.6vw,128px);line-height:.94;letter-spacing:-0.02em;animation-delay:.12s;">When diligence is due.</h1>
+<div class="tpc-up" style="font-weight:600;font-size:clamp(22px,2.4vw,32px);letter-spacing:-0.02em;line-height:1.2;animation-delay:.24s;">The human layer of AI risk mitigation.</div>
+<p class="tpc-up" style="margin:0;max-width:58ch;font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:#A9B3C6;animation-delay:.36s;">Your policy says one thing, but your people use AI another way. We close the gap with assessments, verifiable credentials, and a record you can show.</p>
+<div class="tpc-up" style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;animation-delay:.48s;">
+<a href="#book" class="tpc-btn-cream" style="display:inline-flex;align-items:center;min-height:52px;padding:0 30px;background:#F8F5EF;color:#0C1D38;text-decoration:none;font-weight:600;font-size:17px;">Book a call</a>
+<a href="#products" style="font-weight:600;font-size:17px;color:#F8F5EF;">See the products</a>
+</div>
+</div>
+<figure style="flex:0 1 440px;min-width:260px;width:100%;max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:12px;">
+<div style="border:1px solid #2A3B5C;">
+<svg viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="The Present Company mark: a star holding every product color" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect>
+<circle class="tpc-sunrise" cx="1.5" cy="1.5" r="1.32" fill="#F5C542"></circle>
+<path class="tpc-wedge" style="animation-delay:.3s" fill="#F8F5EF" d="M1 1 L1.5 1 L1 0Z"></path>
+<path class="tpc-wedge" style="animation-delay:.4s" fill="#F8F5EF" d="M1.5 1 L2 1 L2 0Z"></path>
+<path class="tpc-wedge" style="animation-delay:.5s" fill="#5A8EC4" d="M2 1 L2 1.5 L3 1Z"></path>
+<path class="tpc-wedge" style="animation-delay:.6s" fill="#8A5A86" d="M2 1.5 L2 2 L3 2Z"></path>
+<path class="tpc-wedge" style="animation-delay:.7s" fill="#C46E7A" d="M2 2 L1.5 2 L2 3Z"></path>
+<path class="tpc-wedge" style="animation-delay:.8s" fill="#4A9E8E" d="M1.5 2 L1 2 L1 3Z"></path>
+<path class="tpc-wedge" style="animation-delay:.9s" fill="#C9A657" d="M1 2 L1 1.5 L0 2Z"></path>
+<path class="tpc-wedge" style="animation-delay:1s" fill="#B5603A" d="M1 1.5 L1 1 L0 1Z"></path>
+<rect class="tpc-wedge" style="animation-delay:.15s" fill="#7FAE92" x="1" y="1" width="1" height="1"></rect>
+<g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.5" x2="3.2" y2="1.5"></line><line x1="1.5" y1="-.2" x2="1.5" y2="3.2"></line></g>
+<g transform="translate(1.5 1.5)"><g class="tpc-spin" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+</div>
+</figure>
+</section>
+
+<!-- 01 PONDER 5Q -->
+<section id="ponder-5q" class="tpc-on-cream" style="background:#EFE9DE;color:#0C1D38;padding:96px clamp(20px,5vw,64px);">
+<div style="border-top:2px solid #0C1D38;padding-top:40px;display:flex;flex-direction:column;gap:48px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:baseline;">
+<div style="flex:1 1 480px;display:flex;flex-direction:column;gap:16px;">
+<div style="font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,4.4vw,60px);letter-spacing:-0.055em;line-height:1;">Ponder<svg viewBox="-.5 -.5 1 1" aria-hidden="true" style="display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible"><circle r=".24" fill="#B8943F"></circle><path fill="#B8943F" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"></path></svg><span style="display:inline-block;width:1px;height:.8em;background:#0C1D38;margin:0 .28em;vertical-align:-.08em;"></span><span style="font-weight:600;font-size:.8em;letter-spacing:-0.035em;">5Q</span></div>
+<h2 style="margin:0;font-weight:600;font-size:clamp(28px,3.2vw,44px);line-height:1.08;letter-spacing:-0.03em;max-width:24ch;">One AI task, five questions, more clarity.</h2>
+<p style="margin:0;max-width:58ch;color:#4B5873;">It's habitual: the Ponder 5Q ethical framework cuts through the usual academia-speak with an intuitive, easy-to-implement process made to curb indecision and negative impact.</p>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:32px 64px;align-items:stretch;">
+<div role="tablist" aria-label="Ponder 5Q" style="flex:1 1 380px;display:flex;flex-direction:column;">
+<button type="button" role="tab" data-b-aria-selected="q0.sel" aria-controls="q5-panel" data-on-click="q0.pick" data-b-style="q0.style"><span style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;flex:0 0 36px;">01</span><span>Who does this help?</span></button>
+<button type="button" role="tab" data-b-aria-selected="q1.sel" aria-controls="q5-panel" data-on-click="q1.pick" data-b-style="q1.style"><span style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;flex:0 0 36px;">02</span><span>Who does this hurt?</span></button>
+<button type="button" role="tab" data-b-aria-selected="q2.sel" aria-controls="q5-panel" data-on-click="q2.pick" data-b-style="q2.style"><span style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;flex:0 0 36px;">03</span><span>How has it already caused harm?</span></button>
+<button type="button" role="tab" data-b-aria-selected="q3.sel" aria-controls="q5-panel" data-on-click="q3.pick" data-b-style="q3.style"><span style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;flex:0 0 36px;">04</span><span>How can we reasonably mitigate that harm?</span></button>
+<button type="button" role="tab" data-b-aria-selected="q4.sel" aria-controls="q5-panel" data-on-click="q4.pick" data-b-style="q4.style"><span style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;flex:0 0 36px;">05</span><span>How do we prevent it from happening again?</span></button>
+</div>
+<div id="q5-panel" role="tabpanel" aria-live="polite" style="flex:1 1 440px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;background:#0C1D38;color:#F8F5EF;padding:clamp(28px,4vw,48px);min-height:360px;">
+<div data-if="q0.on" style="display:contents">
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Question 01 / 05</div>
+<div class="tpc-up" style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;">Who does this help?</div>
+<div style="font-size:19px;color:#A9B3C6;max-width:40ch;">Identify the intended and unintended beneficiaries.</div>
+</div>
+</div>
+</div>
+<div data-if="q1.on" style="display:none">
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Question 02 / 05</div>
+<div class="tpc-up" style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;">Who does this hurt?</div>
+<div style="font-size:19px;color:#A9B3C6;max-width:40ch;">Name the people and communities absorbing the cost.</div>
+</div>
+</div>
+</div>
+<div data-if="q2.on" style="display:none">
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Question 03 / 05</div>
+<div class="tpc-up" style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;">How has it already caused harm?</div>
+<div style="font-size:19px;color:#A9B3C6;max-width:40ch;">Reckon with the record honestly.</div>
+</div>
+</div>
+</div>
+<div data-if="q3.on" style="display:none">
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Question 04 / 05</div>
+<div class="tpc-up" style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;">How can we reasonably mitigate that harm?</div>
+<div style="font-size:19px;color:#A9B3C6;max-width:40ch;">Build the intervention into the process, not the postmortem.</div>
+</div>
+</div>
+</div>
+<div data-if="q4.on" style="display:none">
+<div style="display:flex;flex-direction:column;gap:32px;">
+<div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Question 05 / 05</div>
+<div class="tpc-up" style="display:flex;flex-direction:column;gap:20px;">
+<div style="font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.03em;">How do we prevent it from happening again?</div>
+<div style="font-size:19px;color:#A9B3C6;max-width:40ch;">Close the loop. Document it. Train to it.</div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
+<span></span>
+<button type="button" data-on-click="q5Next" class="tpc-btn-cream" style="min-height:44px;padding:0 20px;border:0;background:#F8F5EF;color:#0C1D38;font:inherit;font-weight:600;font-size:15px;cursor:pointer;">Next question</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 02 EXPOSURE -->
+<section id="exposure" class="tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;padding:96px clamp(20px,5vw,64px);">
+<div style="border-top:2px solid #0C1D38;padding-top:40px;display:flex;flex-direction:column;gap:56px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:baseline;">
+<h2 style="flex:1 1 480px;margin:0;font-weight:600;font-size:clamp(32px,4vw,56px);line-height:1.06;letter-spacing:-0.03em;max-width:20ch;">Ungoverned AI has a price, and the invoice is already due.</h2>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:40px 48px;">
+
+<div class="tpc-reveal" style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px;border-top:1px solid #0C1D38;padding-top:24px;">
+<div style="font-size:clamp(52px,6vw,88px);font-weight:600;letter-spacing:-0.045em;line-height:1;">$4.99M</div>
+<div style="font-size:18px;max-width:30ch;">Global average cost of a data breach, the highest on record.</div>
+</div>
+
+<div class="tpc-reveal" style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px;border-top:1px solid #0C1D38;padding-top:24px;">
+<div style="font-size:clamp(52px,6vw,88px);font-weight:600;letter-spacing:-0.045em;line-height:1;">43%</div>
+<div style="font-size:18px;max-width:30ch;">Share of security incidents involving shadow AI, up from 20% in 2025.</div>
+</div>
+
+<div class="tpc-reveal" style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px;border-top:1px solid #0C1D38;padding-top:24px;">
+<div style="font-size:clamp(52px,6vw,88px);font-weight:600;letter-spacing:-0.045em;line-height:1;">92%</div>
+<div style="font-size:18px;max-width:30ch;">Organizations with an AI-related breach that lacked adequate AI access controls.</div>
+</div>
+
+</div>
+<div style="font-family:'Libre Caslon Text',serif;font-style:italic;font-size:15px;color:#4B5873;">Source: <a href="https://www.ibm.com/reports/data-breach" target="_blank" rel="noopener">IBM Cost of a Data Breach Report 2026</a>.</div>
+</div>
+</section>
+
+<!-- 03 HOW IT WORKS, WITH THE GAP DIAGRAM -->
+<section id="how" style="padding:112px clamp(20px,5vw,64px);">
+<div style="border-top:2px solid #F8F5EF;padding-top:40px;display:flex;flex-direction:column;gap:48px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:baseline;">
+<h2 style="flex:1 1 480px;margin:0;font-weight:600;font-size:clamp(32px,4vw,56px);line-height:1.06;letter-spacing:-0.03em;max-width:20ch;">From policy on paper to people who can apply it safely.</h2>
+</div>
+<figure style="margin:0;display:flex;flex-direction:column;gap:12px;">
+<svg viewBox="0 0 1200 250" role="img" aria-label="A straight line marked Policy and a wandering line marked Practice. The practice line converges on the policy line across three stages." style="display:block;width:100%;height:auto;">
+<g stroke="#2A3B5C" stroke-width="1"><line x1="400" y1="30" x2="400" y2="240"></line><line x1="780" y1="30" x2="780" y2="240"></line><line x1="1120" y1="30" x2="1120" y2="240"></line></g>
+<line x1="40" y1="76" x2="1160" y2="76" stroke="#C9A657" stroke-width="2"></line>
+<path class="tpc-draw" pathLength="1" d="M40 214 C140 236 220 150 320 196 S420 230 500 170 S660 120 780 128 S980 88 1120 80 L1160 78" stroke="#F8F5EF" stroke-width="3" fill="none"></path>
+<circle cx="400" cy="200" r="7" fill="#0C1D38" stroke="#F8F5EF" stroke-width="2"></circle>
+<circle cx="780" cy="128" r="7" fill="#0C1D38" stroke="#F8F5EF" stroke-width="2"></circle>
+<circle cx="1120" cy="80" r="9" fill="#C9A657"></circle>
+<text x="40" y="58" fill="#D4B26A" font-family="DM Mono, monospace" font-size="15" letter-spacing="2.4">POLICY</text>
+<text x="40" y="244" fill="#A9B3C6" font-family="DM Mono, monospace" font-size="15" letter-spacing="2.4">PRACTICE</text>
+<text x="412" y="46" fill="#A9B3C6" font-family="DM Mono, monospace" font-size="14" letter-spacing="2">01</text>
+<text x="792" y="46" fill="#A9B3C6" font-family="DM Mono, monospace" font-size="14" letter-spacing="2">02</text>
+<text x="1090" y="46" fill="#A9B3C6" font-family="DM Mono, monospace" font-size="14" letter-spacing="2">03</text>
+</svg>
+</figure>
+<div style="display:flex;flex-wrap:wrap;gap:40px;">
+
+<div class="tpc-reveal" style="flex:1 1 260px;border-top:1px solid #2A3B5C;padding-top:24px;display:flex;flex-direction:column;gap:12px;"><div style="font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.14em;color:#D4B26A;">01</div><div style="font-weight:600;font-size:28px;letter-spacing:-0.02em;">Assess</div><div style="color:#A9B3C6;font-size:17px;">Map where policy and practice diverge, department by department, to uncover the hidden misalignments that cause later pain.</div></div>
+
+<div class="tpc-reveal" style="flex:1 1 260px;border-top:1px solid #2A3B5C;padding-top:24px;display:flex;flex-direction:column;gap:12px;"><div style="font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.14em;color:#D4B26A;">02</div><div style="font-weight:600;font-size:28px;letter-spacing:-0.02em;">Certify</div><div style="color:#A9B3C6;font-size:17px;">Through scenario-based learning in plain language followed by an exam, people earn a Ponder AI Ethics credential and shareable Fact Sheet—tangible trust.</div></div>
+
+<div class="tpc-reveal" style="flex:1 1 260px;border-top:1px solid #2A3B5C;padding-top:24px;display:flex;flex-direction:column;gap:12px;"><div style="font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.14em;color:#D4B26A;">03</div><div style="font-weight:600;font-size:28px;letter-spacing:-0.02em;">Keep current</div><div style="color:#A9B3C6;font-size:17px;">Ponder credentials renew every two years. Want to stay current in the meantime? Take any of the additional Ponder Regulation addenda exams to prove up-to-date regional and international AI policy knowledge.</div></div>
+
+</div>
+</div>
+</section>
+
+<!-- 04 PRODUCTS LINEUP -->
+<section id="products" class="tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;padding:96px clamp(20px,5vw,64px) 112px;">
+<div style="border-top:2px solid #0C1D38;padding-top:40px;display:flex;flex-direction:column;gap:48px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:baseline;">
+<div style="flex:1 1 480px;display:flex;flex-direction:column;gap:16px;">
+<h2 style="margin:0;font-weight:600;font-size:clamp(32px,4vw,56px);line-height:1.06;letter-spacing:-0.03em;max-width:20ch;">The risk mitigation ecosystem for everything AI.</h2>
+<p style="margin:0;max-width:56ch;color:#4B5873;">Start with an assessment, credential a team, teach a classroom, or license the program. There's no AI governance conversation without The Present Company.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:48px 24px;">
+
+<a href="/present-practical" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Present Practical mark: the periodic-table block for mercury" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><rect x=".36" y=".36" width="2.28" height="2.28" fill="none" stroke="#7FAE92" stroke-width=".14"></rect><g fill="#7FAE92"><text x=".62" y=".95" font-family="DM Mono, monospace" font-weight="500" font-size=".36">80</text><text x=".58" y="1.86" font-family="Instrument Sans, sans-serif" font-weight="600" font-size=".92" letter-spacing="-.03">Hg</text><text x=".62" y="2.3" font-family="Instrument Sans, sans-serif" font-weight="500" font-size=".3">Mercury</text></g><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="2.659" x2="3.2" y2="2.659"></line><line x1="1.811" y1="-.2" x2="1.811" y2="3.2"></line></g><g transform="translate(1.811 2.659)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Advisory</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Present Practical</div>
+<div style="color:#4B5873;font-size:16px;">Our advisory service assesses the gap between policy and practice, complete with an earned org credential.</div>
+<div style="font-weight:600;font-size:15px;">Request an assessment →</div>
+</a>
+
+<a href="#try" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder mark: a lightbulb" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><mask id="h-ponder" maskUnits="userSpaceOnUse" x="0" y="0" width="3" height="3"><rect width="3" height="3" fill="#fff"></rect><path d="M1.3 2.05 V1.45 L1.5 1.15 L1.7 1.45 V2.05" stroke="#000" stroke-width=".09" fill="none"></path></mask><g mask="url(#h-ponder)" fill="#F8F5EF"><circle cx="1.5" cy="1.15" r="0.85"></circle><path d="M1.1 1.8 H1.9 V2.2 H1.1Z M1.15 2.3 H1.85 V2.45 H1.15Z M1.15 2.55 H1.85 V2.7 H1.15Z M1.35 2.8 H1.65 V2.92 H1.35Z"></path></g><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.5" x2="3.2" y2="1.5"></line><line x1="0.5" y1="-.2" x2="0.5" y2="3.2"></line></g><g transform="translate(0.5 1.5)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Workforce credentials</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder</div>
+<div style="color:#4B5873;font-size:16px;">A tri-level, plain-language AI ethics credentialing system for the global AI-facing workforce, custom-built for over a dozen industries.</div>
+<div style="font-weight:600;font-size:15px;">Join the waitlist →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Ponder%20Custom" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder Custom mark: the planet Venus" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><clipPath id="h-custom"><circle cx="1.5" cy="1.5" r="1.05"></circle></clipPath><circle cx="1.5" cy="1.5" r="1.05" fill="#B08AAD"></circle><circle cx="1.64" cy="1.62" r="1.05" fill="#8A5A86" clip-path="url(#h-custom)"></circle><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.924" x2="3.2" y2="1.924"></line><line x1="1.924" y1="-.2" x2="1.924" y2="3.2"></line></g><g transform="translate(1.924 1.924)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Workforce credentials</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder Custom</div>
+<div style="color:#4B5873;font-size:16px;">A full curriculum and exam built around a client's own AI governance policy, administered and managed by TPC.</div>
+<div style="font-weight:600;font-size:15px;">Ask us about it →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Ponder%20Regulation" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder Regulation mark: the Saturn glyph" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><g fill="none" stroke="#5A8EC4" stroke-width=".3" stroke-linecap="square"><path d="M1.05 .15 V2.45"></path><path d="M.6 .62 H1.5"></path><path stroke-linecap="butt" d="M1.05 1.35 C1.3 .98 2.12 .98 2.12 1.55 C2.12 2.05 1.58 2.12 1.62 2.52 C1.65 2.82 1.98 2.88 2.25 2.68"></path></g><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="0.244" x2="3.2" y2="0.244"></line><line x1="1.836" y1="-.2" x2="1.836" y2="3.2"></line></g><g transform="translate(1.836 0.244)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Add-on</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder Regulation</div>
+<div style="color:#4B5873;font-size:16px;">Jurisdiction-focused add-on products to keep a credential current with regional, federal, or international law.</div>
+<div style="font-weight:600;font-size:15px;">Ask us about it →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Ponder%20GenEthyx" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder GenEthyx mark: a fountain-pen nib" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><mask id="h-genethyx" maskUnits="userSpaceOnUse" x="0" y="0" width="3" height="3"><rect width="3" height="3" fill="#fff"></rect><path d="M.92 .62 H2.08 M1.5 1.55 V2.88" stroke="#000" stroke-width=".07" fill="none"></path><circle cx="1.5" cy="1.42" r=".13" fill="#000"></circle></mask><path mask="url(#h-genethyx)" fill="#4A9E8E" d="M.92 .3 H2.08 V.62 C2.08 1.0 2.34 1.3 2.3 1.68 C2.26 2.06 1.78 2.42 1.5 2.88 C1.22 2.42 .74 2.06 .7 1.68 C.66 1.3 .92 1.0 .92 .62Z"></path><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.681" x2="3.2" y2="1.681"></line><line x1="0.824" y1="-.2" x2="0.824" y2="3.2"></line></g><g transform="translate(0.824 1.681)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Education</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder GenEthyx</div>
+<div style="color:#4B5873;font-size:16px;">AI ethics for students, licensed to schools and universities, with home-based education bundles for families.</div>
+<div style="font-weight:600;font-size:15px;">Ask us about it →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Powered%20by%20Ponder" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Powered by Ponder mark: a battery" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><g fill="#F8F5EF"><rect x="1.24" y=".34" width=".52" height=".26"></rect><path fill-rule="evenodd" d="M.92 .6 H2.08 V2.86 H.92Z M1.06 .74 V2.72 H1.94 V.74Z"></path><rect x="1.16" y="2.25" width=".68" height=".37"></rect><rect x="1.16" y="1.78" width=".68" height=".37"></rect><rect x="1.16" y="1.31" width=".68" height=".37"></rect><rect x="1.16" y=".84" width=".68" height=".37"></rect></g><path d="M1.66 .86 L1.16 1.86 H1.47 L1.34 2.62 L1.86 1.56 H1.54 L1.74 .86Z" fill="#F5C542" stroke="#0C1D38" stroke-width=".07" stroke-linejoin="miter" paint-order="stroke"></path><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="0.79" x2="3.2" y2="0.79"></line><line x1="0.79" y1="-.2" x2="0.79" y2="3.2"></line></g><g transform="translate(0.79 0.79)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Licensing</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Powered by Ponder</div>
+<div style="color:#4B5873;font-size:16px;">White-label, commerce-ready credentialing built on Ponder, self-managed and pipeline-ready. Great as a sales prerequisite or retail product.&nbsp;</div>
+<div style="font-weight:600;font-size:15px;">Get notified →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Ponder%20Trainer" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder Trainer mark: a flame" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><mask id="h-trainer" maskUnits="userSpaceOnUse" x="0" y="0" width="3" height="3"><rect width="3" height="3" fill="#fff"></rect><path fill="#000" d="M1.5 1.55 C1.62 1.9 1.88 2.05 1.86 2.32 C1.84 2.58 1.68 2.66 1.5 2.66 C1.32 2.66 1.16 2.58 1.15 2.33 C1.14 2.08 1.38 1.9 1.5 1.55Z"></path></mask><path mask="url(#h-trainer)" fill="#B5603A" d="M1.5 .2 C1.78 .85 2.38 1.25 2.32 2.0 C2.27 2.55 1.92 2.82 1.5 2.82 C1.08 2.82 .73 2.55 .7 2.02 C.67 1.52 .98 1.2 1.15 .88 C1.22 1.28 1.32 1.45 1.44 1.42 C1.44 1.0 1.38 .62 1.5 .2Z"></path><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.319" x2="3.2" y2="1.319"></line><line x1="2.176" y1="-.2" x2="2.176" y2="3.2"></line></g><g transform="translate(2.176 1.319)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Licensing</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder Trainer</div>
+<div style="color:#4B5873;font-size:16px;">For trainers who want to teach and administer Ponder AI Ethics independently within an org, or as a service offering.</div>
+<div style="font-weight:600;font-size:15px;">Ask us about it →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Ponder%20Access" class="tpc-tile tpc-reveal" style="display:flex;flex-direction:column;gap:14px;">
+<svg class="tpc-art" viewBox="-.2 -.2 3.4 3.4" role="img" aria-label="Ponder Access mark: a crescent moon" style="display:block;width:100%;height:auto"><rect x="-.2" y="-.2" width="3.4" height="3.4" fill="#0C1D38"></rect><mask id="h-access" maskUnits="userSpaceOnUse" x="0" y="0" width="3" height="3"><rect width="3" height="3" fill="#fff"></rect><circle cx="1.5" cy=".95" r=".9" fill="#000"></circle></mask><circle cx="1.5" cy="1.35" r="1" fill="#C46E7A" mask="url(#h-access)"></circle><g stroke="#C9A657" stroke-width=".03" fill="none"><line x1="-.2" y1="1.889" x2="3.2" y2="1.889"></line><line x1="1.111" y1="-.2" x2="1.111" y2="3.2"></line></g><g transform="translate(1.111 1.889)"><g class="tpc-sun" fill="#C9A657"><circle r=".18"></circle><path d="M0.216 0.044 L0.388 0.161 L0.183 0.121Z M0.121 0.183 L0.161 0.388 L0.044 0.216Z M-0.044 0.216 L-0.161 0.388 L-0.121 0.183Z M-0.183 0.121 L-0.388 0.161 L-0.216 0.044Z M-0.216 -0.044 L-0.388 -0.161 L-0.183 -0.121Z M-0.121 -0.183 L-0.161 -0.388 L-0.044 -0.216Z M0.044 -0.216 L0.161 -0.388 L0.121 -0.183Z M0.183 -0.121 L0.388 -0.161 L0.216 -0.044Z"></path></g></g></svg>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#4B5873;">Access</div>
+<div class="tpc-tile-name" style="font-weight:600;font-size:23px;letter-spacing:-0.02em;line-height:1.1;">Ponder Access</div>
+<div style="color:#4B5873;font-size:16px;">Discounted and free certification for selected benefit program recipients, seniors, veterans, and approved nonprofits (verification required).</div>
+<div style="font-weight:600;font-size:15px;">Ask us about it →</div>
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- 04 TRY PONDER (WAITLIST) -->
+<section id="try" style="padding:112px clamp(20px,5vw,64px) 96px;">
+<div style="border-top:2px solid #F8F5EF;padding-top:40px;display:flex;flex-wrap:wrap;gap:48px 64px;">
+<div style="flex:1 1 440px;display:flex;flex-direction:column;gap:20px;">
+<div style="font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:clamp(48px,6vw,80px);letter-spacing:-0.055em;line-height:1;">Ponder<svg viewBox="-.5 -.5 1 1" aria-hidden="true" style="display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible"><circle r=".24" fill="#C9A657"></circle><path fill="#C9A657" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"></path></svg></div>
+<h2 style="margin:0;font-weight:600;font-size:clamp(28px,3vw,40px);line-height:1.1;letter-spacing:-0.03em;">Start with AI Fundamentals, the free entry-level credential.</h2>
+<p style="margin:0;max-width:52ch;color:#A9B3C6;">Plain-language AI ethics for working professionals. Join the waitlist to get notified of the launch.</p>
+</div>
+<div style="flex:1 1 400px;max-width:560px;">
+<div data-if="waitOpen" style="display:contents">
+<form data-form="waitlist" data-on-submit="submitWait" style="display:flex;flex-direction:column;gap:16px;"><input type="hidden" name="form" value="waitlist"><input type="hidden" name="lang" value="en"><div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:500;">Name<input class="tpc-field" type="text" name="name" autocomplete="name" required="required"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:500;">Work email<input class="tpc-field" type="email" name="email" autocomplete="email" required="required"></label>
+<label style="display:flex;flex-direction:column;gap:6px;font-size:15px;font-weight:500;">Your field (optional)<input class="tpc-field" type="text" name="field" placeholder="Law, health, finance, education…"></label>
+<button type="submit" class="tpc-btn-cream" style="min-height:56px;border:0;background:#F8F5EF;color:#0C1D38;font:inherit;font-weight:600;font-size:17px;cursor:pointer;">Join the waitlist</button>
+<div style="font-size:14px;color:#A9B3C6;">This is the product waitlist. Please continue scrolling for the mailing list.</div>
+</form>
+</div>
+<div data-if="waitSent" style="display:none">
+<div role="status" style="border:1px solid #C9A657;padding:32px;display:flex;flex-direction:column;gap:10px;"><div style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">Done</div><div style="font-size:22px;font-weight:600;letter-spacing:-0.02em;">You’re on the list. We’ll write when AI Fundamentals opens.</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 06 BOOK A CALL -->
+<section id="book" style="padding:112px clamp(20px,5vw,64px);">
+<div style="border-top:2px solid #C9A657;padding-top:40px;display:flex;flex-direction:column;gap:48px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px 48px;align-items:baseline;">
+<div style="flex:1 1 480px;display:flex;flex-direction:column;gap:16px;">
+<h2 style="margin:0;font-weight:600;font-size:clamp(36px,4.6vw,64px);line-height:1.02;letter-spacing:-0.035em;max-width:18ch;">30 mins to safer AI. It's possible. Book a call today.</h2>
+<p style="margin:0;max-width:56ch;color:#A9B3C6;">Choose the conversation that fits, and we'll reply with times that work.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+
+<a href="mailto:info@thepresentco.com?subject=Investor%20introduction" class="tpc-reveal" style="display:flex;flex-direction:column;gap:14px;padding:32px;border:1px solid #2A3B5C;text-decoration:none;color:#F8F5EF;min-height:220px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">For investors</div>
+<div style="font-weight:600;font-size:26px;letter-spacing:-0.02em;line-height:1.15;">Investor introduction</div>
+<div style="color:#A9B3C6;font-size:16px;flex:1 1 auto;">The thesis, the model and the round, with time for your questions.</div>
+<div style="display:inline-flex;align-items:center;gap:10px;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><rect x="3" y="5" width="18" height="16"></rect><path d="M3 10 H21 M8 2 V7 M16 2 V7"></path></svg>Request a time →</div>
+</a>
+
+<a href="/present-practical#pilot" class="tpc-reveal" style="display:flex;flex-direction:column;gap:14px;padding:32px;border:1px solid #2A3B5C;text-decoration:none;color:#F8F5EF;min-height:220px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">For organizations</div>
+<div style="font-weight:600;font-size:26px;letter-spacing:-0.02em;line-height:1.15;">Founding Cohort pilot</div>
+<div style="color:#A9B3C6;font-size:16px;flex:1 1 auto;">Apply for one of 10 paid pilot spots in law and healthcare. Applications close January 31, 2027.</div>
+<div style="display:inline-flex;align-items:center;gap:10px;font-weight:600;">Apply now →</div>
+</a>
+
+<a href="mailto:info@thepresentco.com?subject=Press%20and%20speaking" class="tpc-reveal" style="display:flex;flex-direction:column;gap:14px;padding:32px;border:1px solid #2A3B5C;text-decoration:none;color:#F8F5EF;min-height:220px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;">For press and events</div>
+<div style="font-weight:600;font-size:26px;letter-spacing:-0.02em;line-height:1.15;">Press and speaking</div>
+<div style="color:#A9B3C6;font-size:16px;flex:1 1 auto;">Interviews, panels and keynotes on the human side of AI risk.</div>
+<div style="display:inline-flex;align-items:center;gap:10px;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><rect x="3" y="5" width="18" height="16"></rect><path d="M3 10 H21 M8 2 V7 M16 2 V7"></path></svg>Request a time →</div>
+</a>
+
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;font-size:17px;color:#A9B3C6;">Prefer email? <a href="mailto:info@thepresentco.com" style="font-weight:600;font-size:20px;">info@thepresentco.com</a> <span>· Chicago, Illinois</span></div>
+</div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter" class="tpc-on-cream" style="background:#F8F5EF;color:#0C1D38;padding:96px clamp(20px,5vw,64px);">
+<div style="border-top:2px solid #0C1D38;padding-top:40px;display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-end;">
+<div style="flex:1 1 480px;display:flex;flex-direction:column;gap:18px;">
+<h2 style="margin:0;font-weight:600;font-size:clamp(32px,4vw,56px);line-height:1.06;letter-spacing:-0.03em;max-width:18ch;">AI governance, in plain language.</h2>
+<p style="margin:0;max-width:52ch;color:#4B5873;">New rules, real cases and practical notes for people who use AI at work.</p>
+</div>
+<div style="flex:1 1 420px;max-width:560px;">
+<div data-if="newsOpen" style="display:contents">
+<form data-form="newsletter" data-on-submit="submitNews" style="display:flex;flex-direction:column;gap:10px;"><input type="hidden" name="form" value="newsletter"><input type="hidden" name="lang" value="en"><div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+<label for="news-email" style="font-size:15px;font-weight:500;">Email</label>
+<div style="display:flex;flex-wrap:wrap;gap:12px;">
+<input id="news-email" class="tpc-field" type="email" name="email" autocomplete="email" required="required" style="flex:1 1 240px;width:auto;border-color:#0C1D38;">
+<button type="submit" class="tpc-btn-navy" style="flex:0 0 auto;min-height:52px;padding:0 28px;border:0;background:#0C1D38;color:#F8F5EF;font:inherit;font-weight:600;font-size:17px;cursor:pointer;">Subscribe</button>
+</div>
+<div style="font-size:14px;color:#4B5873;">Unsubscribe anytime. We never share your address.</div>
+</form>
+</div>
+<div data-if="newsSent" style="display:none">
+<div role="status" style="border:1px solid #0C1D38;padding:28px;font-size:20px;font-weight:600;">Thank you. Check your inbox to confirm.</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="padding:72px clamp(20px,5vw,64px) 32px;display:flex;flex-direction:column;gap:56px;">
+<div style="display:flex;flex-wrap:wrap;gap:48px 64px;">
+<div style="flex:1 1 320px;display:flex;flex-direction:column;gap:14px;">
+<div style="font-family:'Libre Caslon Display',serif;font-size:34px;letter-spacing:-0.02em;line-height:1;">The Present Company<svg viewBox="-.5 -.5 1 1" aria-hidden="true" style="display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible"><circle r=".24" fill="#C9A657"></circle><path fill="#C9A657" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"></path></svg></div>
+<div style="font-size:17px;color:#A9B3C6;">The human layer of AI risk mitigation.</div>
+<a href="#book" class="tpc-btn-cream" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:48px;padding:0 24px;background:#F8F5EF;color:#0C1D38;text-decoration:none;font-weight:600;margin-top:8px;">Book a call</a>
+</div>
+
+<nav aria-label="Products" style="flex:1 1 150px;display:flex;flex-direction:column;gap:10px;font-size:15px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;margin-bottom:4px;">Products</div>
+
+<a href="/present-practical" style="color:#F8F5EF;text-decoration:none;">Present Practical</a>
+
+<a href="#try" style="color:#F8F5EF;text-decoration:none;">Ponder</a>
+
+<a href="#products" style="color:#F8F5EF;text-decoration:none;">All products</a>
+
+</nav>
+
+<nav aria-label="Why TPC" style="flex:1 1 150px;display:flex;flex-direction:column;gap:10px;font-size:15px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;margin-bottom:4px;">Why TPC</div>
+
+<a href="#exposure" style="color:#F8F5EF;text-decoration:none;">The problem</a>
+
+<a href="#how" style="color:#F8F5EF;text-decoration:none;">The solution</a>
+
+<a href="#ponder-5q" style="color:#F8F5EF;text-decoration:none;">Ponder 5Q</a>
+
+</nav>
+
+<nav aria-label="Company" style="flex:1 1 150px;display:flex;flex-direction:column;gap:10px;font-size:15px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;margin-bottom:4px;">Company</div>
+
+<a href="/team" style="color:#F8F5EF;text-decoration:none;">Team</a>
+
+<a href="#newsletter" style="color:#F8F5EF;text-decoration:none;">Newsletter</a>
+
+<a href="mailto:info@thepresentco.com" style="color:#F8F5EF;text-decoration:none;">Contact</a>
+
+</nav>
+
+<nav aria-label="Investors" style="flex:1 1 150px;display:flex;flex-direction:column;gap:10px;font-size:15px;">
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#D4B26A;margin-bottom:4px;">Investors</div>
+
+<a href="/investors" style="color:#F8F5EF;text-decoration:none;">Investor overview</a>
+
+<a href="mailto:info@thepresentco.com?subject=Data%20room%20access" style="color:#F8F5EF;text-decoration:none;">Request data room access</a>
+
+</nav>
+
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center;border-top:1px solid #2A3B5C;padding-top:24px;">
+<div></div>
+<div role="group" aria-label="Language" style="display:inline-flex;border:1px solid #4B5873;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.1em;">
+<span aria-current="true" lang="en" style="min-height:40px;padding:0 12px;border:0;font:inherit;display:inline-flex;align-items:center;background:#F8F5EF;color:#0C1D38;text-decoration:none;">English</span>
+<a href="/es" hreflang="es" lang="es" style="min-height:40px;padding:0 12px;border:0;font:inherit;display:inline-flex;align-items:center;background:transparent;color:#F8F5EF;text-decoration:none;">Español</a>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;font-size:14px;color:#A9B3C6;">
+<div>© 2026 The Present Company. Ponder and Present Practical are TPC products.</div>
+<div lang="en" style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;">When diligence is due.</div>
+</div>
+</footer>
+
+</div>
+<script>window.TPC_FORM_URL = "https://script.google.com/macros/s/AKfycby8NzPj6XtKLlFYd1pMUtksJ8DPxKlQTSPFOOV4xH78yXcwhezH6-xnk4wfL7tKl4F1/exec";</script>
+<script src="/assets/dc.js"></script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: null, mobile: false, newsSent: false, waitSent: false, q: 0 };
+  }
+  renderVals() {
+    const open = this.state.open;
+    const toggle = (id) => () => this.setState({ open: open === id ? null : id });
+    const close = () => { if (this.state.open) this.setState({ open: null }); };
+    const qi = this.state.q;
+    const base = "display:flex;gap:16px;align-items:baseline;width:100%;text-align:left;min-height:64px;padding:16px 20px;border:0;border-top:1px solid #0C1D38;font:inherit;font-weight:600;font-size:clamp(18px,1.6vw,22px);letter-spacing:-0.01em;line-height:1.25;cursor:pointer;transition:background .25s,color .25s;";
+    const tab = (i) => ({
+      sel: i === qi ? "true" : "false",
+      on: i === qi,
+      style: base + (i === qi ? "background:#0C1D38;color:#F8F5EF;" : "background:transparent;color:#0C1D38;"),
+      pick: () => this.setState({ q: i })
+    });
+    return {
+      q0: tab(0), q1: tab(1), q2: tab(2), q3: tab(3), q4: tab(4),
+      q5Next: () => this.setState({ q: (qi + 1) % 5 }),
+      open: { products: open === "products", why: open === "why", company: open === "company", investors: open === "investors" },
+      nav: {
+        products: open === "products" ? "true" : "false",
+        why: open === "why" ? "true" : "false",
+        company: open === "company" ? "true" : "false",
+        investors: open === "investors" ? "true" : "false"
+      },
+      toggleProducts: toggle("products"),
+      toggleWhy: toggle("why"),
+      toggleCompany: toggle("company"),
+      toggleInvestors: toggle("investors"),
+      closeMenus: close,
+      mobileOpen: this.state.mobile ? "true" : "false",
+      toggleMobile: () => this.setState({ mobile: !this.state.mobile, open: null }),
+      linksClass: this.state.mobile ? "tpc-links is-open" : "tpc-links",
+      newsOpen: !this.state.newsSent,
+      newsSent: this.state.newsSent,
+      waitOpen: !this.state.waitSent,
+      waitSent: this.state.waitSent,
+      submitNews: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ newsSent: true }); },
+      submitWait: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ waitSent: true }); }
+    };
+  }
+}
+TPC.mount(Component);
+</script>
 </body>
 </html>
