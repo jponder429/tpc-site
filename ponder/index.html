@@ -307,6 +307,32 @@ h1,h2.h{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;letter-
 h1 em,h2.h em,h1 i,h2.h i{font-family:inherit;font-style:normal;font-weight:inherit;color:inherit;letter-spacing:inherit}
 .record,.cert .nm{font-style:normal}
 .hero h1 em{color:inherit}
+
+/* ===== Exam chat (Talk it through) ===== */
+.chat{max-width:720px;border:1px solid var(--border);background:var(--white);margin:8px 0 0}
+.chat-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-light)}
+.chat-head b{color:var(--navy);font-weight:500}
+.chat-log{padding:18px;display:grid;gap:14px;min-height:240px;max-height:min(60vh,560px);overflow-y:auto}
+.msg-x,.msg-u{max-width:88%;font-size:16px;line-height:1.55;white-space:pre-wrap}
+.msg-x{justify-self:start;border-left:3px solid var(--navy);padding:2px 0 2px 14px;color:var(--ink)}
+.msg-x .who{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:4px}
+.msg-x .qtag{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;border:1px solid var(--navy);padding:2px 8px;margin-bottom:8px}
+.msg-u{justify-self:end;background:var(--cream-alt);padding:10px 14px;color:var(--ink)}
+.typing{justify-self:start;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--ink-light);padding-left:17px}
+.chat-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0;border-top:1px solid var(--border)}
+.chat-form textarea{min-height:64px;border:0;border-right:1px solid var(--border);resize:none;padding:14px 16px}
+.chat-form .btn{min-height:64px;border-radius:0}
+.rubric{max-width:720px;margin-top:24px;border-top:2px solid var(--navy);padding-top:18px}
+.rubric h3{margin-bottom:12px}
+.rubric ol{list-style:none;display:grid;gap:0}
+.rubric li{display:grid;grid-template-columns:120px minmax(0,1fr) auto;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;align-items:start}
+.rubric li .k{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);padding-top:2px}
+.rubric li .v{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);white-space:nowrap}
+.rubric li .v.s{color:var(--ok);border-color:var(--ok);background:var(--ok-bg)}
+.rubric li .v.p{color:var(--gold-dark);border-color:var(--gold-dark)}
+.rubric li .v.m{color:var(--bad);border-color:var(--bad)}
+.demo-note{max-width:720px;margin-top:14px;font-size:13px;color:var(--ink-light)}
+@media(max-width:600px){.rubric li{grid-template-columns:minmax(0,1fr) auto}.rubric li .k{grid-column:1/-1}.chat-form{grid-template-columns:1fr}.chat-form textarea{border-right:0;border-bottom:1px solid var(--border)}.msg-x,.msg-u{max-width:100%}}
 </style>
 </head>
 <body>
@@ -391,7 +417,7 @@ var INDUSTRIES=['Law','Healthcare','Finance','Technology','K-12 Education','Coll
 
 /* ---------- state ---------- */
 var KEY='ponder_aif_u1_v1';
-var S={flipped:[],reflect:'',attempts:[],joined:false,visited:{}};
+var S={flipped:[],reflect:'',attempts:[],joined:false,visited:{},talk:null};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object')S=Object.assign(S,p);}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 var run=null; // in-progress quiz attempt (memory only)
@@ -409,6 +435,7 @@ var STEPS=[
  {id:'figure',t:'Thrive or Jive'},
  {id:'promise',t:'A promise, not proof'},
  {id:'case',t:'Case study'},
+ {id:'talk',t:'Talk it through'},
  {id:'quiz',t:'Unit 1 quiz'},
  {id:'results',t:'Your results'}
 ];
@@ -452,7 +479,7 @@ function mobileBar(cur){
 function navRow(cur){
   var i=STEPS.findIndex(function(s){return s.id===cur});
   var prev=i>0?STEPS[i-1]:null,next=i<STEPS.length-1?STEPS[i+1]:null;
-  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'On to the quiz':'Continue')+'</button>':'')+'</div>';
+  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'Talk it through':(cur==='talk'?'On to the quiz':'Continue'))+'</button>':'')+'</div>';
 }
 
 function viewHome(){
@@ -536,6 +563,109 @@ function viewCase(){
   $$('.q5 button').forEach(function(b){b.addEventListener('click',function(){var p=b.parentNode,o=p.classList.toggle('open');b.setAttribute('aria-expanded',o);});});
 }
 
+
+/* ---------- exam chat (scripted demo) ---------- */
+var TALK=[
+ {id:'q1',tag:'Q1 · Who does this help?',ask:'Let’s run the five questions on D.K.’s case. Answer in your own words; there’s no word count. First: who did the AI interview platform help?',
+  c:[{n:'The employer and its hiring team',re:/intuit|employer|compan|hr\b|human resources|recruit|hiring|manager|interviewer|business|organi[sz]ation|corporat/},
+     {n:'The vendor',re:/hirevue|vendor|platform (?:maker|company|provider)|seller|provider|developer|maker/},
+     {n:'Speed, scale or cost savings',re:/time|fast|speed|scale|cost|cheap|efficien|volume|money|labor|labour/}],
+  more:{0:'You haven’t named the employer yet. What did Intuit and its hiring team get out of using the platform?',1:'Good. Who else benefits every time the platform is used, besides the employer?',2:'What exactly did they gain? Think about time, cost and volume.'},
+  model:'The employer and its hiring team gained speed and scale, and the vendor gained a paying customer and usage. Naming the beneficiaries plainly shows whose interests drove the decision.'},
+ {id:'q2',tag:'Q2 · Who does this hurt?',ask:'Now the second question: who does this hurt? Look past the obvious.',
+  c:[{n:'D.K. herself',re:/d\.?\s?k\b|she\b|her\b|employee|applicant|candidate|the woman/},
+     {n:'Other Deaf or hard-of-hearing people',re:/deaf|hard of hearing|hearing|disab|accessib/},
+     {n:'Indigenous and non-white speakers',re:/indigenous|native|non-?white|accent|dialect|minorit|people of colou?r|bipoc|race|racial|ethnic/},
+     {n:'The employer’s own risk',re:/lawsuit|liab|legal|reputation|trust|complaint|risk|talent/}],
+  more:{0:'Start with the person in front of you. Who was directly harmed in this case?',1:'D.K. isn’t the only one. Which other groups does the research say the speech recognition fails?',2:'Think about the research the complaint cites. Which speakers does automated speech recognition do worse for, beyond deaf speakers?'},
+  model:'D.K. was hurt first, and so is every Deaf, Indigenous or non-white speaker the system scores worse. The employer also takes on legal and reputational risk.'},
+ {id:'q3',tag:'Q3 · How has it already caused harm?',ask:'Third: how has it already caused harm? Look for patterns, warnings and earlier evidence.',
+  c:[{n:'The ignored internal warning',re:/warn|accessibility team|told|flagged|raised|ignored|alert/},
+     {n:'Known error rates in speech recognition',re:/research|stud|error|ten times|10x|10 times|worse|accura|bias|asr|speech recognition|transcri/},
+     {n:'The denied accommodation',re:/caption|accommodat|denied|refus|request/},
+     {n:'The “active listening” feedback',re:/active listening|feedback|communication style/}],
+  more:{0:'Was there a warning before any of this happened? Who raised it, and what happened to it?',1:'Was the problem with speech recognition already known before D.K.’s interview? What does the research say?',2:'What did D.K. ask for before the interview, and how did the company respond?'},
+  model:'The harm was foreseeable. Research showed speech recognition performs far worse for deaf speakers, and D.K. herself warned the Accessibility Team. The denied captioning request and the “active listening” feedback show the pattern playing out.'},
+ {id:'q4',tag:'Q4 · How can we reasonably mitigate that harm?',ask:'Fourth: how can we reasonably mitigate that harm? Reasonable means specific and doable.',
+  c:[{n:'Grant the accommodation',re:/caption|accommodat|interpreter|asl|sign language|cart\b/},
+     {n:'Offer a human alternative',re:/human|person|in-person|live interview|alternative|opt.?out|without (?:the )?ai|manual/},
+     {n:'Re-review the decision',re:/re-?review|reconsider|re-?evaluat|redo|appeal|second look|reopen|another interview|re-?interview/}],
+  more:{0:'What should have happened when D.K. asked for human-generated captioning?',1:'Should a candidate be able to skip the AI interview altogether? What would the alternative look like?',2:'And D.K.’s promotion decision itself: what should happen to it now?'},
+  model:'Grant the captioning accommodation, offer a human-led interview as an alternative, and re-review D.K.’s promotion decision without the AI score. Each step is specific and doable now.'},
+ {id:'q5',tag:'Q5 · How do we prevent it from happening again?',ask:'Fifth: how do we prevent it from happening again? Fixing one incident is repair; prevention changes the system.',
+  c:[{n:'Accessibility testing before buying tools',re:/vet|test|audit|evaluat|assess|procure|before (?:buying|using|adopting|deploy)|validat|pilot/},
+     {n:'A clear accommodation process',re:/accommodat|process|policy|procedure|default|standard|always offer/},
+     {n:'Act on internal warnings',re:/warn|escalat|listen|report|feedback|accessibility team|channel|whistle/},
+     {n:'Monitor outcomes across groups',re:/monitor|track|data|outcome|disparit|subgroup|demograph|regular|ongoing|review/}],
+  more:{0:'How would the company catch an accessibility problem before buying a tool like this?',1:'What should the default be for any candidate who asks for an accommodation in an AI-run process?',2:'D.K.’s warning went nowhere. What would make sure the next one doesn’t?'},
+  model:'Test every AI hiring tool for accessibility before purchase, make accommodations and a human alternative the default, give internal warnings a real escalation path, and monitor outcomes by group over time.'},
+ {id:'q6',tag:'Unit 1 question',ask:'Last one, the Unit 1 question: did Intuit’s documented behavior match its documented commitment to fairness and accountability? Why or why not?',
+  c:[{n:'A clear verdict',re:/\bno\b|didn.?t|did not|doesn.?t|does not|not match|mismatch|gap|fail|contradict|fell short|falls short|hypocri|inconsisten/},
+     {n:'Behavior cited as evidence',re:/caption|accommodat|warn|denied|ignored|vet|accessib|feedback|promotion/},
+     {n:'Commitment named',re:/principle|commitment|fairness|accountab|value|responsible ai|promise|policy|stated/}],
+  more:{0:'Give me a verdict first. Did the behavior match the commitment, yes or no?',1:'Back your verdict with what actually happened. Which behaviors are your evidence?',2:'What exactly had Intuit committed to publicly? Name it.'},
+  model:'No. Intuit’s published principles committed to fairness and accountability, but the documented behavior included a denied accommodation, a tool not vetted for accessibility and an ignored internal warning. Both companies dispute the allegations, and the case is ongoing.'}
+];
+function grade(t,turn){var hits=[];turn.c.forEach(function(c,i){if(c.re.test(t))hits.push(i);});return hits;}
+function band(n,total){var r=n/total;return r>=.66?'s':(r>0?'p':'m');}
+var BANDS={s:'Strong',p:'Partial',m:'Missing'};
+function viewTalk(){
+  var T=S.talk;
+  if(!T||!T.log){T=S.talk={step:0,follow:false,log:[],hits:{},done:false};save();}
+  var h=mobileBar('talk')+'<span class="eyebrow">Unit 1 · Exam practice</span><h2 class="h">Talk it through with the examiner.</h2>'
+   +'<div class="prose"><p>In the Ponder exam, you don’t just pick answers. You explain your reasoning in a short conversation, and the examiner asks follow-up questions when something is missing. Try it on D.K.’s case.</p></div>'
+   +'<div class="chat" aria-label="Exam conversation"><div class="chat-head"><b>Ponder examiner</b><span id="tprog"></span></div><div class="chat-log" id="tlog" role="log" aria-live="polite"></div>'
+   +'<form class="chat-form" id="tform"><label class="sr" for="tin">Your answer</label><textarea id="tin" maxlength="800" placeholder="Type your answer…"></textarea><button class="btn" id="tsend" type="submit">Send</button></form></div>'
+   +'<p class="demo-note">Preview: the examiner’s replies are scripted for this demo and respond to key ideas in what you write. In the course, an AI examiner drafts each score against a rubric, and a person confirms it before it counts.</p>'
+   +'<div id="trub"></div>'+navRow('talk');
+  $('#main').innerHTML=h;
+  var log=$('#tlog');
+  function bubble(m){
+    var d=document.createElement('div');
+    if(m.r==='x'){d.className='msg-x';d.innerHTML='<span class="who">Examiner</span>'+(m.tag?'<span class="qtag">'+esc(m.tag)+'</span><br>':'');d.appendChild(document.createTextNode(m.t));}
+    else{d.className='msg-u';d.textContent=m.t;}
+    log.appendChild(d);log.scrollTop=log.scrollHeight;
+  }
+  function prog(){$('#tprog').textContent=T.done?'Complete':('Question '+Math.min(T.step+1,TALK.length)+' of '+TALK.length);}
+  function push(m){T.log.push(m);save();bubble(m);}
+  function say(m,cb){
+    var ty=document.createElement('div');ty.className='typing';ty.textContent='Examiner is typing…';log.appendChild(ty);log.scrollTop=log.scrollHeight;
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(function(){ty.remove();push(m);if(cb)cb();},reduce?0:700);
+  }
+  function rubric(){
+    var r='<div class="rubric"><span class="eyebrow">Draft rubric score · pending human review</span><h3>How you reasoned</h3><ol>',strong=0;
+    TALK.forEach(function(turn){var hit=T.hits[turn.id]||[],b=band(hit.length,turn.c.length);if(b==='s')strong++;
+      var got=hit.map(function(i){return turn.c[i].n;}),miss=turn.c.filter(function(_,i){return hit.indexOf(i)<0;}).map(function(c){return c.n;});
+      r+='<li><span class="k">'+esc(turn.tag.split(' · ')[0])+'</span><span>'+(got.length?'<strong>Covered:</strong> '+esc(got.join('; '))+'.':'')+(miss.length?(got.length?'<br>':'')+'<span style="color:var(--ink-light)">Consider: '+esc(miss.join('; '))+'.</span>':'')+'</span><span class="v '+b+'">'+BANDS[b]+'</span></li>';});
+    r+='</ol><p class="demo-note">'+strong+' of '+TALK.length+' answers strong. Every rubric score in the real exam goes to a human reviewer, and you can appeal any AI-drafted score.</p>'
+     +'<div class="row" style="margin-top:14px"><button class="btn ghost" type="button" id="tagain">Start the conversation over</button></div></div>';
+    $('#trub').innerHTML=r;
+    $('#tagain').addEventListener('click',function(){S.talk=null;save();viewTalk();});
+  }
+  function ask(){var turn=TALK[T.step];say({r:'x',t:turn.ask,tag:turn.tag},function(){prog();$('#tin').focus();});}
+  function finish(){T.done=true;save();prog();$('#tform').style.display='none';
+    say({r:'x',t:'That’s the full set. Your draft rubric score is below. Next up is the Unit 1 quiz.'},rubric);}
+  // restore
+  T.log.forEach(bubble);prog();
+  if(T.done){$('#tform').style.display='none';rubric();}
+  else if(!T.log.length){ask();}
+  $('#tform').addEventListener('submit',function(e){
+    e.preventDefault();var inp=$('#tin'),v=inp.value.trim();if(!v||T.done)return;
+    inp.value='';push({r:'u',t:v});
+    var turn=TALK[T.step],t=v.toLowerCase(),prev=T.hits[turn.id]||[],now=grade(t,turn);
+    var all=prev.concat(now.filter(function(i){return prev.indexOf(i)<0;}));T.hits[turn.id]=all;save();
+    if(v.split(/\s+/).length<4&&!T.follow){T.follow=true;save();say({r:'x',t:'Say a little more. A full sentence or two helps me see your reasoning.'});return;}
+    var missing=turn.c.map(function(_,i){return i;}).filter(function(i){return all.indexOf(i)<0;});
+    var first=missing.filter(function(i){return turn.more[i];})[0];
+    if(first!==undefined&&!T.follow&&all.length<turn.c.length-1){T.follow=true;save();say({r:'x',t:(all.length?'Good start. ':'')+turn.more[first]});return;}
+    var b=band(all.length,turn.c.length),lead=(b==='s'?'Strong answer. ':(b==='p'?'Partly there. ':'Not quite yet. '))+'Compare with a model answer: ';
+    T.follow=false;T.step++;save();
+    say({r:'x',t:lead+turn.model},function(){if(T.step<TALK.length)ask();else finish();});
+  });
+  $('#tin').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#tform').requestSubmit();}});
+}
+
 function newRun(){
   var order=QUIZ.map(function(q){var a=q.o.map(function(_,i){return i});for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;});
   run={i:0,order:order,ans:[],sel:null,checked:false};
@@ -607,13 +737,14 @@ function viewResults(isDash){
   QUIZ.forEach(function(q,i){var c=last.ans[i]===q.a;h+='<li><span class="m '+(c?'c':'w')+'">'+(c?'✓':'✗')+'</span><span>'+esc(q.q.length>110?q.q.slice(0,107)+'…':q.q)+'</span><span class="sample">Q'+(i+1)+'</span></li>';});
   h+='</ul></div><div class="panel"><h3>Your reflection on the case</h3>'
   +(S.reflect&&S.reflect.trim()?'<div class="record" id="rec"></div><p class="sample" style="margin-top:12px">Written by you. Stored only in this browser.</p>':'<p class="muted">You did not write a reflection. Add one in the case study and it will appear here.</p><div class="row" style="margin-top:12px"><button class="btn ghost" data-go="#/unit-1/case">Go to the case study</button></div>')
+  +(S.talk&&S.talk.done?'<p class="sample" style="margin-top:16px">Examiner conversation: '+TALK.filter(function(t){return band((S.talk.hits[t.id]||[]).length,t.c.length)==='s';}).length+' of '+TALK.length+' answers strong (draft, pending human review).</p>':'')
   +'</div></div>';
   h+='<div class="row">'+(ok?'<a class="btn" href="#waitlist" data-go="#/waitlist">Get Units 2 to 5 when they open</a>':(S.attempts.length<MAXTRIES?'<button class="btn" data-go="#/unit-1/quiz">Try the quiz again</button>':''))+'<button class="btn ghost" data-go="#/unit-1/figure">Review Figure 1.1</button></div>';
   h+=waitlistHTML();
   h+='<p style="margin-top:28px"><button class="link" id="reset">Reset this preview (clears saved progress)</button></p>';
   $('#main').innerHTML=h;
   var r=$('#rec');if(r)r.textContent=S.reflect;
-  $('#reset').addEventListener('click',function(){S={flipped:[],reflect:'',attempts:[],joined:S.joined,visited:{}};save();run=null;go('#/');route();});
+  $('#reset').addEventListener('click',function(){S={flipped:[],reflect:'',attempts:[],joined:S.joined,visited:{},talk:null};save();run=null;go('#/');route();});
   bindWaitlist();
 }
 
@@ -676,7 +807,7 @@ function route(){
   var id=m[1];setShell(false);
   if(id!=='quiz'&&id!=='results'&&id!=='full'&&STEPS.some(function(s){return s.id===id;})){S.visited[id]=true;save();}
   outline(id);setMeter(id);
-  ({gap:viewGap,figure:viewFigure,promise:viewPromise,case:viewCase,quiz:viewQuiz,results:viewResults,full:viewFull}[id]||viewGap)();
+  ({gap:viewGap,figure:viewFigure,promise:viewPromise,case:viewCase,talk:viewTalk,quiz:viewQuiz,results:viewResults,full:viewFull}[id]||viewGap)();
   window.scrollTo(0,0);
   var mn=$('#main');mn.focus({preventScroll:true});
 }
