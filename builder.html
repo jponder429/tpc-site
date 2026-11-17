@@ -11,130 +11,132 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0c1d38;--navy2:#122548;--line:#2a3b5c;--gold:#c9a657;--gold-d:#7f6120;--sun:#f5c542;--cream:#f8f5ef;--cream2:#efe9de;--ink2:#4b5873;--mute:#a9b3c6;--ok:#2f6b4f;--okbg:#e6f1ea;--bad:#9a3b32;--badbg:#f6e6e3}
+:root{--navy:#0c1d38;--navy2:#13264a;--line:#d9d3c7;--cream:#efe9de;--sun:#f5c542;--gold:#b8943f;--gold-d:#7f6120;--mint:#dcebe1;--ink2:#4b5873;--mute:#a9b3c6;--ok:#2e4d3c;--bad:#9a3b32}
 html{-webkit-text-size-adjust:100%}
-body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--cream);color:var(--navy);line-height:1.55;-webkit-font-smoothing:antialiased}
-button,input{font:inherit}
-button{cursor:pointer}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:#fff;color:var(--navy);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{cursor:pointer}
+a{color:var(--navy)}a:hover{color:var(--gold-d)}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.mono{font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
-header{background:var(--navy);color:var(--cream);border-bottom:3px solid var(--sun)}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
-.brand{font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.04em;color:var(--cream);text-decoration:none}
-.brand span{color:var(--sun)}
-header a.back{color:var(--mute);font-size:14px;text-decoration:none}
-header a.back:hover{color:var(--cream)}
-.banner{background:var(--cream2);border-bottom:1px solid #ddd8cc}
-.banner .wrap{padding-top:10px;padding-bottom:10px;font-size:14px;color:var(--ink2)}
-.hero{padding:56px 0 32px}
-.hero h1{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;font-size:clamp(38px,5.4vw,64px);line-height:1;letter-spacing:-.02em;margin:14px 0 18px;max-width:16ch}
-.hero p{max-width:60ch;color:var(--ink2);font-size:18px}
-.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px;padding-bottom:72px;align-items:start}
-.panel{background:#fff;border:1px solid #ddd8cc;padding:28px}
-.panel h2{font-family:'Schibsted Grotesk',sans-serif;font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
-.step{margin-top:22px}
-.step>label,.step>.lab{display:block;margin-bottom:10px;color:var(--gold-d)}
-.field{width:100%;min-height:48px;padding:0 14px;border:1px solid #b9b2a3;background:var(--cream);color:var(--navy);font-size:16px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{min-height:44px;padding:0 18px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-weight:600;font-size:15px}
-.chip[aria-pressed="true"]{background:var(--navy);color:var(--cream)}
-.btn{min-height:52px;padding:0 26px;border:0;background:var(--navy);color:var(--cream);font-weight:600;font-size:16px}
-.btn:hover{background:var(--navy2)}
-.btn[disabled]{opacity:.4;cursor:not-allowed}
-.btn.gold{background:var(--sun);color:var(--navy)}
-.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
-.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:24px}
-.card{margin-top:24px;background:var(--navy);color:var(--cream);padding:24px}
-.card .meta{display:flex;flex-wrap:wrap;gap:8px 16px;color:var(--gold);margin-bottom:14px}
-.card .stem{font-size:18px;line-height:1.5;min-height:3em}
-.card .stem[contenteditable="true"]{outline:1px dashed var(--gold);outline-offset:6px}
-.card ol{list-style:none;margin-top:16px;display:grid;gap:8px}
-.card li{border:1px solid var(--line);padding:10px 12px;font-size:15px;display:flex;gap:10px}
-.card li b{font-family:'DM Mono',monospace;color:var(--gold);font-weight:500}
-.card li.key{border-color:var(--gold)}
-.card .why{margin-top:14px;color:var(--mute);font-size:14px}
-.cursor{display:inline-block;width:.55em;height:1.05em;background:var(--sun);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+.mono{font-family:'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+.pad{padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)}
+.plaid{position:relative;display:flex;height:48px;overflow:hidden;background:#d9d3c7}
+.plaid i{display:block}.plaid .h{position:absolute;left:0;right:0;top:24px;height:1px;background:var(--gold)}.plaid .v{position:absolute;top:0;bottom:0;width:1px;background:var(--gold)}
+header{border-bottom:1px solid var(--line)}
+header .in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding-top:20px;padding-bottom:20px}
+.brand{display:inline-flex;align-items:baseline;gap:14px;text-decoration:none;color:var(--navy);white-space:nowrap}
+.brand b{font-family:'Schibsted Grotesk',sans-serif;font-weight:700;font-size:26px;letter-spacing:-.055em;line-height:1}
+.brand svg{display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible}
+.brand small{font-family:'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--ink2)}
+header nav{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;font-size:16px;font-weight:500}
+header nav a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;border:0;background:var(--navy);color:#f8f5ef;font-weight:600;font-size:17px;text-decoration:none}
+.btn:hover{background:var(--navy2);color:#f8f5ef}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn.sun{background:var(--sun);color:var(--navy)}.btn.sun:hover{background:#f7d065;color:var(--navy)}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}.btn.ghost:hover{background:var(--navy);color:#f8f5ef}
+.btn.nav{min-height:44px;padding:0 22px;font-size:16px}
+.hero{padding-top:64px;padding-bottom:40px;display:flex;flex-direction:column;gap:24px;max-width:1100px}
+.hero h1{font-weight:700;font-size:clamp(44px,5vw,76px);line-height:.98;letter-spacing:-.04em;max-width:15ch}
+.hero p{font-size:clamp(19px,1.6vw,22px);color:var(--ink2);max-width:60ch}
+.demo-flag{background:var(--mint);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.demo-flag .in{padding-top:14px;padding-bottom:14px;font-size:15px}
+.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:48px 64px;padding-top:56px;padding-bottom:104px;align-items:start}
+.col{display:flex;flex-direction:column;gap:32px}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec>.mono{color:var(--ink2)}
+.field{width:100%;min-height:64px;padding:0 20px;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:19px}
+.opts{list-style:none;display:flex;flex-direction:column;gap:12px}
+.opt{display:flex;gap:20px;align-items:center;width:100%;min-height:64px;padding:12px 24px;line-height:1.4;border:1px solid var(--line);background:#fff;color:var(--navy);font-size:19px;text-align:left}
+.opt .t{font-family:'DM Mono',monospace;font-size:13px;flex:0 0 32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--cream);color:var(--navy)}
+.opt:hover{border-color:var(--navy)}
+.opt[aria-pressed="true"]{border-color:var(--navy);background:var(--mint)}
+.opt[aria-pressed="true"] .t{background:var(--navy);color:#fff}
+.opts.row{flex-direction:row;flex-wrap:wrap}.opts.row .opt{flex:1 1 180px}
+.actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;border-top:1px solid var(--line);padding-top:28px}
+.status{font-size:15px;color:var(--ink2)}
+.qcard{display:flex;flex-direction:column;gap:22px;border-top:6px solid var(--sun);padding-top:28px}
+.qmeta{display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--ink2)}
+.qmeta b{font-weight:500;background:var(--navy);color:var(--sun);padding:4px 10px}
+.stem{font-weight:600;font-size:clamp(24px,2.4vw,32px);line-height:1.2;letter-spacing:-.02em;min-height:2.4em}
+.stem[contenteditable="true"]{outline:1px dashed var(--navy);outline-offset:8px}
+.keylist{list-style:none;display:flex;flex-direction:column;gap:12px}
+.keylist li{display:flex;gap:20px;align-items:center;min-height:64px;padding:12px 24px;border:1px solid var(--line);font-size:18px}
+.keylist li .t{font-family:'DM Mono',monospace;font-size:13px;flex:0 0 32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--cream)}
+.keylist li.key{border-color:var(--navy);background:var(--mint)}.keylist li.key .t{background:var(--navy);color:#fff}
+.why{font-size:16px;color:var(--ink2);border-left:3px solid var(--sun);padding-left:16px}
+.cursor{display:inline-block;width:.5em;height:1em;background:var(--sun);vertical-align:-.12em;margin-left:3px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.status{margin-top:12px;font-size:14px;color:var(--ink2);min-height:1.4em}
-.tray .exam-head{background:var(--navy);color:var(--cream);padding:18px 20px;border-bottom:3px solid var(--sun)}
-.tray .exam-head strong{display:block;font-family:'Schibsted Grotesk',sans-serif;font-size:20px;letter-spacing:-.02em}
-.tray .exam-head small{color:var(--mute);font-size:13px}
-.tray ul{list-style:none;margin-top:16px;display:grid;gap:10px}
-.tray li{border:1px solid #ddd8cc;padding:12px 14px;font-size:14px;background:var(--cream)}
-.tray li .mono{font-size:11px;color:var(--gold-d);display:block;margin-bottom:4px}
-.empty{color:var(--ink2);font-size:14px;margin-top:16px}
-.note{margin-top:18px;font-size:13px;color:var(--ink2)}
-dialog{border:0;padding:0;max-height:calc(100dvh - 32px);overflow:auto;max-width:720px;width:calc(100% - 32px);background:var(--cream);color:var(--navy);box-shadow:0 30px 80px rgba(12,29,56,.45)}
-dialog::backdrop{background:rgba(12,29,56,.6)}
-.dl-head{background:var(--navy);color:var(--cream);padding:20px 24px;border-bottom:3px solid var(--sun);display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-.dl-head strong{font-family:'Schibsted Grotesk',sans-serif;font-size:22px;letter-spacing:-.02em;display:block}
-.dl-head small{color:var(--mute)}
-.dl-close{background:none;border:0;color:var(--cream);font-size:28px;line-height:1;min-width:44px;min-height:44px}
-.dl-body{padding:24px}
-.opt{display:flex;gap:12px;width:100%;text-align:left;border:1px solid #b9b2a3;background:#fff;padding:12px 14px;margin-top:8px;font-size:15px;color:var(--navy)}
-.opt[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
-.opt.right{background:var(--okbg);border-color:var(--ok)}
-.opt.wrong{background:var(--badbg);border-color:var(--bad)}
-.fb{margin-top:14px;font-size:15px}
-.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
-footer{background:var(--navy);color:var(--mute);font-size:14px;padding:28px 0}
-footer a{color:var(--cream)}
-@media (max-width:860px){.grid{grid-template-columns:1fr}.hero{padding:40px 0 24px}}
+.tray{display:flex;flex-direction:column;gap:0;border:1px solid var(--line)}
+.tray .head{background:var(--navy);color:#fff;padding:28px;display:flex;flex-direction:column;gap:14px}
+.tray .head .mono{color:var(--mute)}
+.tray .head strong{font-weight:700;font-size:30px;line-height:1.05;letter-spacing:-.03em}
+.tray .count{display:flex;align-items:baseline;gap:12px}
+.tray .count span{font-weight:700;font-size:88px;line-height:.85;letter-spacing:-.05em;color:var(--sun)}
+.tray .count small{font-size:15px;color:var(--mute)}
+.tray ol{list-style:none;padding:8px 28px 0}
+.tray li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-size:16px}
+.tray li .t{font-family:'DM Mono',monospace;font-size:12px;flex:0 0 32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:var(--sun)}
+.tray li small{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:2px}
+.tray .empty{padding:20px 28px 0;font-size:16px;color:var(--ink2)}
+.tray .foot{padding:24px 28px 28px;display:flex;flex-direction:column;gap:16px}
+.tray .foot p{font-size:14px;color:var(--ink2)}
+dialog{border:0;padding:0;max-width:820px;width:calc(100% - 32px);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;color:var(--navy)}
+dialog::backdrop{background:rgba(12,29,56,.72)}
+.dl-head{background:var(--navy);color:#fff;padding:22px 28px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:6px solid var(--sun)}
+.dl-head strong{font-weight:700;font-size:26px;letter-spacing:-.03em;line-height:1.1;display:block}
+.dl-head small{color:var(--mute);font-size:14px}
+.dl-close{background:none;border:0;color:#fff;font-size:30px;line-height:1;min-width:44px;min-height:44px}
+.dl-body{padding:32px 28px;display:flex;flex-direction:column;gap:24px}
+.dots{display:flex;gap:8px}.dots i{flex:1;height:6px;background:var(--cream)}.dots i.on{background:var(--sun)}.dots i.c{background:var(--ok)}.dots i.w{background:var(--bad)}
+.lq{font-weight:600;font-size:clamp(22px,2.4vw,28px);line-height:1.2;letter-spacing:-.02em}
+.opt.right{border-color:var(--ok);background:var(--mint)}.opt.wrong{border-color:var(--bad);background:#f6e6e3}
+.fb{font-size:16px;border-left:3px solid var(--ok);padding-left:16px}.fb.no{border-color:var(--bad)}
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.score div{padding:24px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between}
+.score .n{font-weight:700;font-size:96px;line-height:.85;letter-spacing:-.05em}
+footer{background:var(--navy);color:var(--mute);padding-top:32px;padding-bottom:32px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;font-size:14px}
+footer a{color:#f8f5ef}footer a:hover{color:#d4b26a}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.hero{padding-top:44px}}
+@media (max-width:600px){.opt,.keylist li{gap:14px;padding:12px 16px;font-size:17px}.dl-body{padding:24px 18px}.dl-head{padding:18px}.tray .head,.tray .foot{padding-left:20px;padding-right:20px}.tray ol{padding:8px 20px 0}.tray .empty{padding:16px 20px 0}}
 @media (prefers-reduced-motion:reduce){.cursor{animation:none}}
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="brand" href="/#powered-by-ponder">Powered by Ponder<span>.</span></a><a class="back" href="/#powered-by-ponder">← Back to The Present Company</a></div></header>
-<div class="banner"><div class="wrap">Demo: these are pre-written sample questions. The live exam builder is in development, with partner pilots beginning in early 2027.</div></div>
-
-<main class="wrap">
-  <section class="hero">
-    <span class="mono" style="color:var(--gold-d)">Exam builder · Demo</span>
+<div class="plaid" aria-hidden="true"><i style="flex:3;background:#0C1D38"></i><i style="flex:1;background:#B8943F"></i><i style="flex:2;background:#EFE9DE"></i><i style="flex:2;background:#D9D3C7"></i><i style="flex:1;background:#2E4D3C"></i><i style="flex:4;background:#0C1D38"></i><i style="flex:2;background:#EFE9DE"></i><span class="h"></span><span class="v" style="left:18%"></span><span class="v" style="left:66%"></span></div>
+<header><div class="in pad"><a class="brand" href="/#powered-by-ponder"><b>Powered by Ponder<svg viewBox="-.5 -.5 1 1" aria-hidden="true"><circle r=".24" fill="#B8943F"/><path fill="#B8943F" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"/></svg></b><small>by The Present Company</small></a>
+<nav aria-label="Site"><a href="/ponder">Try Ponder Unit 1</a><a href="/" style="color:var(--ink2)">thepresentco.com ↗</a><a class="btn nav" href="mailto:info@thepresentco.com?subject=Powered%20by%20Ponder%20launch%20partner">Become a launch partner</a></nav></div></header>
+<main>
+  <section class="hero pad">
+    <span class="mono" style="color:var(--gold-d)">Powered by Ponder · Exam builder</span>
     <h1>Build an AI ethics exam under your own name.</h1>
     <p>Pick a field and a level, and the builder drafts a scenario question grounded in the Ponder 5Q framework. You review every question before it goes into your exam.</p>
   </section>
-
-  <div class="grid">
-    <section class="panel" aria-labelledby="b-h">
-      <h2 id="b-h">Draft a question</h2>
-      <div class="step">
-        <label class="mono" for="org">1 · Your organization</label>
-        <input class="field" id="org" type="text" maxlength="40" placeholder="Your Company" autocomplete="organization" />
-      </div>
-      <div class="step">
-        <span class="lab mono" id="f-l">2 · Field</span>
-        <div class="chips" role="group" aria-labelledby="f-l" id="fields"></div>
-      </div>
-      <div class="step">
-        <span class="lab mono" id="l-l">3 · Level</span>
-        <div class="chips" role="group" aria-labelledby="l-l" id="levels"></div>
-      </div>
-      <div class="row"><button class="btn gold" id="gen" disabled>Draft a question</button></div>
-      <p class="status" id="status" role="status" aria-live="polite"></p>
+  <div class="demo-flag"><div class="in pad">Demo: these are pre-written sample questions. The live exam builder is in development, with partner pilots beginning in early 2027.</div></div>
+  <div class="grid pad">
+    <section class="col" aria-labelledby="b-h">
+      <h2 id="b-h" class="mono" style="color:var(--ink2)">Draft a question</h2>
+      <div class="sec"><label class="mono" for="org">01 · Your organization</label><input class="field" id="org" type="text" maxlength="40" placeholder="Your Company" autocomplete="organization" /></div>
+      <div class="sec"><span class="mono" id="f-l">02 · Field</span><div class="opts row" role="group" aria-labelledby="f-l" id="fields"></div></div>
+      <div class="sec"><span class="mono" id="l-l">03 · Level</span><div class="opts row" role="group" aria-labelledby="l-l" id="levels"></div></div>
+      <div class="actions"><button class="btn sun" id="gen" disabled>Draft a question</button><span class="status" id="status" role="status" aria-live="polite">Choose a field and a level.</span></div>
       <div id="out"></div>
     </section>
-
-    <aside class="panel tray" aria-labelledby="t-h">
-      <h2 id="t-h" style="position:absolute;left:-9999px">Your exam</h2>
-      <div class="exam-head"><strong id="t-name">Your Company AI Ethics Exam</strong><small id="t-sub">powered by Ponder · 0 questions approved</small></div>
-      <ul id="tray"></ul>
+    <aside class="tray" aria-labelledby="t-name">
+      <div class="head"><span class="mono">Your exam</span><strong id="t-name">Your Company AI Ethics Exam</strong><div class="count"><span id="t-n">0</span><small>questions approved<br>powered by Ponder</small></div></div>
+      <ol id="tray"></ol>
       <p class="empty" id="empty">Approved questions appear here.</p>
-      <div class="row"><button class="btn" id="preview" disabled>Preview as a learner</button></div>
-      <p class="note">Partner certificates are separate from the full Ponder AI Ethics credential, which only The Present Company issues.</p>
+      <div class="foot"><button class="btn" id="preview" disabled>Preview as a learner</button><p>Partner certificates are separate from the full Ponder AI Ethics credential, which only The Present Company issues.</p></div>
     </aside>
   </div>
 </main>
-
 <dialog id="dlg" aria-labelledby="dl-title">
   <div class="dl-head"><div><strong id="dl-title">Exam</strong><small>powered by Ponder</small></div><button class="dl-close" id="dl-x" aria-label="Close preview">×</button></div>
   <div class="dl-body" id="dl-body"></div>
 </dialog>
-
-<footer><div class="wrap">Powered by Ponder is a product of The Present Company. Interested in becoming a launch partner? <a href="mailto:info@thepresentco.com?subject=Powered%20by%20Ponder%20launch%20partner">Email us</a>.</div></footer>
+<footer class="pad"><div>Powered by Ponder is a product of <a href="/">The Present Company</a>. Interested in becoming a launch partner? <a href="mailto:info@thepresentco.com?subject=Powered%20by%20Ponder%20launch%20partner">Email us</a>.</div><div class="mono">When diligence is due.</div></footer>
 
 <script>
 (function(){
@@ -158,32 +160,28 @@ var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function org(){return ($('#org').value||'').trim()||'Your Company'}
 function chips(el,list,key){
-  el.innerHTML=list.map(function(v){return '<button type="button" class="chip" aria-pressed="false" data-v="'+v+'">'+v+'</button>'}).join('');
-  el.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;
-    el.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false')});
-    state[key]=b.getAttribute('data-v');$('#gen').disabled=!(state.field&&state.level)});
+  el.innerHTML=list.map(function(v,i){return '<button type="button" class="opt" aria-pressed="false" data-v="'+v+'"><span class="t">'+'ABC'[i]+'</span>'+v+'</button>'}).join('');
+  el.addEventListener('click',function(e){var b=e.target.closest('.opt');if(!b)return;
+    el.querySelectorAll('.opt').forEach(function(c){c.setAttribute('aria-pressed',c===b?'true':'false')});
+    state[key]=b.getAttribute('data-v');var ready=state.field&&state.level;$('#gen').disabled=!ready;
+    if(ready&&!state.current)$('#status').textContent='Ready to draft a '+state.level+' question for '+state.field+'.';});
 }
 chips($('#fields'),FIELDS,'field');chips($('#levels'),LEVELS,'level');
 function tray(){
-  $('#t-name').textContent=org()+' AI Ethics Exam';
-  $('#t-sub').textContent='powered by Ponder · '+state.approved.length+' question'+(state.approved.length===1?'':'s')+' approved';
-  $('#tray').innerHTML=state.approved.map(function(it,i){return '<li><span class="mono">'+(i+1)+' · '+esc(it.field)+' · '+esc(it.level)+'</span>'+esc(it.stem)+'</li>'}).join('');
-  $('#empty').style.display=state.approved.length?'none':'';
-  $('#preview').disabled=!state.approved.length;
+  $('#t-name').textContent=org()+' AI Ethics Exam';$('#t-n').textContent=state.approved.length;
+  $('#tray').innerHTML=state.approved.map(function(it,i){return '<li><span class="t">'+String(i+1).padStart(2,'0')+'</span><span><small>'+esc(it.field)+' · '+esc(it.level)+'</small>'+esc(it.stem)+'</span></li>'}).join('');
+  $('#empty').style.display=state.approved.length?'none':'';$('#preview').disabled=!state.approved.length;
 }
 $('#org').addEventListener('input',tray);
 function render(it,typed,done){
-  var h='<div class="card"><div class="meta mono"><span>'+esc(it.field)+' · '+esc(it.level)+'</span><span>5Q '+esc(FIVEQ[it.q-1])+'</span></div>'
+  var h='<div class="qcard"><div class="qmeta mono"><b>'+esc(it.field)+' · '+esc(it.level)+'</b><span>5Q '+esc(FIVEQ[it.q-1])+'</span></div>'
    +'<p class="stem" id="stem">'+esc(typed)+(done?'':'<span class="cursor" aria-hidden="true"></span>')+'</p>';
   if(done){
-    h+='<ol>'+it.opts.map(function(o,i){return '<li'+(i===it.a?' class="key"':'')+'><b>'+'ABCD'[i]+'</b><span>'+esc(o)+(i===it.a?' <span class="mono" style="color:var(--gold);font-size:10px">• key</span>':'')+'</span></li>'}).join('')+'</ol>'
-     +'<p class="why"><strong style="color:var(--cream)">Rationale:</strong> '+esc(it.why)+'</p>';
+    h+='<ul class="keylist">'+it.opts.map(function(o,i){return '<li'+(i===it.a?' class="key"':'')+'><span class="t">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></li>'}).join('')+'</ul>'
+     +'<p class="why"><strong>Answer key: '+'ABCD'[it.a]+'.</strong> '+esc(it.why)+'</p>'
+     +'<div class="actions"><button class="btn" id="approve">Approve</button><button class="btn ghost" id="edit">Edit wording</button></div>';
   }
-  h+='</div>';
-  if(done){
-    h+='<div class="row"><button class="btn gold" id="approve">Approve</button><button class="btn ghost" id="edit">Edit wording</button></div>';
-  }
-  $('#out').innerHTML=h;
+  $('#out').innerHTML=h+'</div>';
   if(done){
     $('#approve').addEventListener('click',approve);
     $('#edit').addEventListener('click',function(){var s=$('#stem');var on=s.getAttribute('contenteditable')==='true';
@@ -192,8 +190,7 @@ function render(it,typed,done){
   }
 }
 function approve(){
-  var it=state.current;if(!it)return;
-  var s=$('#stem');if(s&&s.getAttribute('contenteditable')==='true'){it.stem=s.textContent.trim()}
+  var it=state.current;if(!it)return;var s=$('#stem');if(s&&s.getAttribute('contenteditable')==='true'){it.stem=s.textContent.trim()}
   if(state.approved.some(function(x){return x.key===it.key})){$('#status').textContent='That question is already in your exam.';return}
   state.approved.push(it);state.current=null;$('#out').innerHTML='';
   $('#status').textContent='Approved and added to your exam. Pick another field or level to keep building.';tray();
@@ -201,31 +198,31 @@ function approve(){
 $('#gen').addEventListener('click',function(){
   var key=state.field+'|'+state.level,src=BANK[key];if(!src)return;
   var it={key:key,field:state.field,level:state.level,q:src.q,stem:src.stem,opts:src.opts.slice(),a:src.a,why:src.why};
-  state.current=it;var btn=this;btn.disabled=true;
-  $('#status').textContent='Drafting a '+state.level+' question for '+state.field+'…';
-  if(reduce){render(it,it.stem,true);btn.disabled=false;$('#status').textContent='Draft ready. Review it, edit if needed, then approve.';return}
-  var i=0;(function tick(){i=Math.min(it.stem.length,i+3);render(it,it.stem.slice(0,i),false);
-    if(i<it.stem.length){setTimeout(tick,22)}else{render(it,it.stem,true);btn.disabled=false;$('#status').textContent='Draft ready. Review it, edit if needed, then approve.'}})();
+  state.current=it;var btn=this;btn.disabled=true;$('#status').textContent='Drafting a '+state.level+' question for '+state.field+'…';
+  var fin=function(){render(it,it.stem,true);btn.disabled=false;$('#status').textContent='Draft ready. Review it, edit if needed, then approve.';};
+  if(reduce){fin();return}
+  var i=0;(function tick(){i=Math.min(it.stem.length,i+3);render(it,it.stem.slice(0,i),false);if(i<it.stem.length)setTimeout(tick,22);else fin();})();
 });
-var dlg=$('#dlg'),qi=0,score=0;
+var dlg=$('#dlg'),qi=0,score=0,res=[];
+function dots(){return '<div class="dots" aria-hidden="true">'+state.approved.map(function(_,i){return '<i class="'+(i===qi?'on':(res[i]===undefined?'':(res[i]?'c':'w')))+'"></i>'}).join('')+'</div>'}
 function showQ(){
-  var it=state.approved[qi];
-  if(!it){$('#dl-body').innerHTML='<p class="mono" style="color:var(--gold-d)">Done</p><h3 style="font-family:Schibsted Grotesk,sans-serif;font-size:26px;margin:8px 0">You answered '+score+' of '+state.approved.length+' correctly.</h3><p style="color:var(--ink2)">In the live product, learners who pass receive a '+esc(org())+' certificate, powered by Ponder.</p><div class="row"><button class="btn" id="again">Close</button></div>';
+  var it=state.approved[qi],n=state.approved.length;
+  if(!it){$('#dl-body').innerHTML='<span class="mono" style="color:var(--ink2)">Result</span><div class="score"><div style="background:var(--navy);color:#fff"><span class="mono" style="color:var(--mute)">Correct answers</span><span class="n">'+score+'/'+n+'</span></div><div style="background:var(--sun)"><span class="mono">In the live product</span><span style="font-size:20px;font-weight:600;line-height:1.3">Learners who pass receive a '+esc(org())+' certificate, powered by Ponder.</span></div></div><div class="actions"><button class="btn" id="again">Close preview</button></div>';
     $('#again').addEventListener('click',function(){dlg.close()});return}
-  var h='<p class="mono" style="color:var(--gold-d)">Question '+(qi+1)+' of '+state.approved.length+'</p><p style="font-size:18px;margin:10px 0 6px">'+esc(it.stem)+'</p>';
-  h+=it.opts.map(function(o,i){return '<button type="button" class="opt" data-i="'+i+'" aria-pressed="false"><b class="mono">'+'ABCD'[i]+'</b><span>'+esc(o)+'</span></button>'}).join('');
-  h+='<p class="fb" id="fb" role="status" aria-live="polite"></p><div class="row"><button class="btn" id="chk" disabled>Check answer</button></div>';
-  $('#dl-body').innerHTML=h;var sel=null;
-  $('#dl-body').querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){if($('#chk').dataset.done)return;sel=+b.dataset.i;
+  var h='<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px" class="mono"><span style="color:var(--ink2)">Question '+(qi+1)+' of '+n+'</span><span style="color:var(--ink2)">'+esc(it.field)+' · '+esc(it.level)+'</span></div>'+dots()+'<p class="lq">'+esc(it.stem)+'</p><div class="opts">';
+  h+=it.opts.map(function(o,i){return '<button type="button" class="opt" data-i="'+i+'" aria-pressed="false"><span class="t">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>'}).join('');
+  h+='</div><p class="fb" id="fb" role="status" aria-live="polite" hidden></p><div class="actions"><button class="btn" id="chk" disabled>Check answer</button><span class="status">You can change your answer until you check it.</span></div>';
+  $('#dl-body').innerHTML=h;var sel=null,done=false;
+  $('#dl-body').querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){if(done)return;sel=+b.dataset.i;
     $('#dl-body').querySelectorAll('.opt').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});$('#chk').disabled=false})});
   $('#chk').addEventListener('click',function(){
-    if(this.dataset.done){qi++;showQ();return}
-    var opts=$('#dl-body').querySelectorAll('.opt');opts[it.a].classList.add('right');
-    if(sel===it.a){score++;$('#fb').className='fb ok';$('#fb').textContent='Correct. '+it.why}
-    else{opts[sel].classList.add('wrong');$('#fb').className='fb no';$('#fb').textContent='Not quite. '+it.why}
-    this.dataset.done='1';this.textContent=qi===state.approved.length-1?'See result':'Next question'});
+    if(done){qi++;showQ();return}
+    done=true;var opts=$('#dl-body').querySelectorAll('.opt');opts.forEach(function(x){x.setAttribute('aria-pressed','false')});opts[it.a].classList.add('right');
+    var ok=sel===it.a;res[qi]=ok;if(ok)score++;else opts[sel].classList.add('wrong');
+    var fb=$('#fb');fb.hidden=false;fb.className='fb'+(ok?'':' no');fb.innerHTML='<strong>'+(ok?'That’s right.':'Not quite.')+'</strong> '+esc(it.why);
+    this.textContent=qi===n-1?'See result':'Next question';});
 }
-$('#preview').addEventListener('click',function(){qi=0;score=0;$('#dl-title').textContent=org()+' AI Ethics Exam';showQ();dlg.showModal()});
+$('#preview').addEventListener('click',function(){qi=0;score=0;res=[];$('#dl-title').textContent=org()+' AI Ethics Exam';showQ();dlg.showModal()});
 $('#dl-x').addEventListener('click',function(){dlg.close()});
 tray();
 })();
