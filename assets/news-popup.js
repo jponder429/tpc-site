@@ -36,7 +36,7 @@
     + '.tpc-np-bar{display:flex;height:8px}.tpc-np-bar i{display:block}'
     + '.tpc-np-in{padding:24px 24px 22px;display:flex;flex-direction:column;gap:12px}'
     + '.tpc-np-lab{font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120}'
-    + '.tpc-np h2{margin:0;font-family:"Libre Caslon Display",Georgia,serif;font-weight:400;font-size:30px;line-height:1.05;letter-spacing:-.02em;padding-right:36px}'
+    + '.tpc-np h2{margin:0;font-family:"Instrument Sans",Arial,sans-serif;font-weight:600;font-size:28px;line-height:1.08;letter-spacing:-.03em;padding-right:36px}'
     + '.tpc-np p{margin:0;font-size:16px;line-height:1.5;color:#4B5873}'
     + '.tpc-np form{display:flex;flex-direction:column;gap:8px;margin-top:4px}'
     + '.tpc-np label{font-size:14px;font-weight:500}'
