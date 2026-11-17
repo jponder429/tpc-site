@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -229,7 +229,7 @@ label.f{display:block;font-size:13px;font-weight:500;color:var(--ink-mid);margin
 .cert-note{font-size:13px;color:var(--ink-light);margin-top:12px}
 /* waitlist */
 .wl{background:var(--navy);color:var(--cream);padding:34px 36px;margin-top:36px;border-bottom:3px solid var(--gold);max-width:760px}
-.wl h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--cream);margin-bottom:8px}
+.wl h2{font-family:'Instrument Sans',Arial,sans-serif;font-weight:700;letter-spacing:-.03em;font-size:28px;color:var(--cream);margin-bottom:8px}
 .wl p{color:var(--ink-faint);font-size:15px;max-width:540px}
 .wl label.f{color:#cdd6e2}
 .wl .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
@@ -280,7 +280,6 @@ svg.sun{display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical
 .top{border-bottom:1px solid #2A3B5C}
 h1,h2.h,h3,.unit .num,.bar .fill,.core p,.qtext,.ring div,.cert .ttl,.cert .wm{font-family:'Instrument Sans',Arial,sans-serif}
 h1{font-weight:600;letter-spacing:-.035em;line-height:1.04}
-h1 em{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
 h2.h,h3{font-weight:600;letter-spacing:-.025em;line-height:1.12}
 .unit .num,.bar .fill,.ring div,.cert .ttl{font-weight:600;letter-spacing:-.03em}
 .core p,.qtext{font-weight:600;letter-spacing:-.02em}
@@ -297,15 +296,15 @@ h2.h,h3{font-weight:600;letter-spacing:-.025em;line-height:1.12}
 .btn.ghost:hover{background:var(--navy);color:var(--cream)}
 .unit,.face,.q5,.opt,.panel,.fb,.tag,.pill,.bar .track,.qdots i,.dim .t,.opt .l,textarea,input[type=text],input[type=email],select{border-radius:0}
 .unit.open,.menu{box-shadow:none}
-.record,.cert .nm{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic}
+.record,.cert .nm{font-family:'Instrument Sans',Arial,sans-serif;font-style:normal}
 .record{font-size:18px}
 .back .t h4,.menu .done .n{color:#7FAE92}
 #main:focus,#main:focus-visible{outline:none}
 
-/* Nov 17: headlines match the main site (Caslon Display, upright); no italic or gold accent words */
-h1,h2.h{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;letter-spacing:-.015em;line-height:1.06}
+/* Nov 17: all headlines in Instrument Sans bold, matching the Ponder demo canvas; no serif anywhere */
+h1,h2.h,h3{font-family:'Instrument Sans',Arial,sans-serif;font-weight:700;letter-spacing:-.04em;line-height:1}
+h2.h,h3{letter-spacing:-.03em;line-height:1.05}
 h1 em,h2.h em,h1 i,h2.h i{font-family:inherit;font-style:normal;font-weight:inherit;color:inherit;letter-spacing:inherit}
-.record,.cert .nm{font-style:normal}
 .hero h1 em{color:inherit}
 
 /* ===== On the job (workplace chat simulation): Ponder demo canvas style ===== */
