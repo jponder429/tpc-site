@@ -307,6 +307,67 @@ h1,h2.h{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;letter-
 h1 em,h2.h em,h1 i,h2.h i{font-family:inherit;font-style:normal;font-weight:inherit;color:inherit;letter-spacing:inherit}
 .record,.cert .nm{font-style:normal}
 .hero h1 em{color:inherit}
+
+/* ===== On the job (workplace chat simulation): Ponder demo canvas style ===== */
+.talk-h{margin:0 0 18px;font-family:'Instrument Sans',Arial,sans-serif!important;font-weight:700!important;font-size:clamp(40px,4.6vw,64px)!important;line-height:.98!important;letter-spacing:-.04em!important;color:#0C1D38;max-width:16ch}
+.talk-lede{font-size:clamp(19px,1.6vw,22px);color:#4B5873;max-width:640px;margin-bottom:32px}
+.ws{max-width:960px;display:grid;grid-template-columns:240px minmax(0,1fr);border:1px solid #0C1D38;background:#fff;height:640px}
+.ws-side{background:#0C1D38;color:#A9B3C6;padding:20px 0;font-size:15px;overflow:hidden}
+.ws-name{color:#fff;font-weight:700;font-size:18px;padding:0 20px 18px;border-bottom:1px solid #22324F;margin-bottom:14px}
+.ws-name span{color:#A9B3C6;font-weight:400;font-size:13px}
+.ws-sec{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:14px 20px 6px;color:#7C8AA5}
+.ws-ch{padding:6px 20px;display:flex;align-items:center;gap:10px}
+.ws-ch.on{background:#F5C542;color:#0C1D38;font-weight:600}
+.ws-ch b{margin-left:auto;background:#0C1D38;color:#F5C542;font-family:'DM Mono',monospace;font-size:11px;padding:2px 7px;font-weight:500}
+.dot{width:9px;height:9px;border-radius:50%;background:#3E9B6A;display:inline-block;flex:none}.dot.off{background:transparent;border:1.5px solid #7C8AA5}
+.ws-ch.on .dot{background:#0C1D38}
+.ws-main{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0}
+.ws-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;border-bottom:1px solid #D9D3C7}
+.ws-head strong{display:block;font-size:18px;color:#0C1D38}
+.ws-head div span{font-size:14px;color:#4B5873}
+.ws-prog{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120;white-space:nowrap}
+.chat-bar{height:4px;background:#EFE9DE;flex:none}.chat-bar i{display:block;height:100%;width:0;background:#F5C542;transition:width .4s}
+.ws-log{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:4px}
+.ws-msg{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding-top:14px}
+.ws-msg.cont{padding-top:0}
+.ws-msg .meta{display:flex;gap:10px;align-items:baseline}
+.ws-msg .meta strong{color:#0C1D38;font-size:16px}
+.ws-msg .meta span{font-family:'DM Mono',monospace;font-size:11px;color:#7C8AA5;letter-spacing:.06em}
+.ws-msg p{margin:2px 0 0;font-size:17px;line-height:1.5;color:#0C1D38;white-space:pre-wrap;overflow-wrap:anywhere}
+.av{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;flex:none}
+.av.m{background:#F5C542;color:#0C1D38}.av.u{background:#DCEBE1;color:#0C1D38;border:1px solid #0C1D38}
+.ws-msg.cont .av{height:0}
+.ws-sys{align-self:center;margin:18px 0 4px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:#0C1D38;color:#F5C542;padding:8px 14px;text-align:center}
+.typing{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#4B5873;padding:10px 0 0 52px}
+.ws-form{display:flex;margin:0 24px 20px;border:1px solid #0C1D38}
+.ws-form textarea{flex:1;min-height:60px;border:0;border-radius:0;resize:none;padding:16px 18px;font-size:17px;background:#fff}
+.ws-form textarea:focus{outline:2px solid #F5C542;outline-offset:-2px}
+.ws-form .btn{min-height:60px;padding:0 28px;border-radius:0;background:#0C1D38;color:#F8F5EF;font-size:16px}
+.ws-form textarea:disabled{background:#F8F5EF}.ws-form .btn:disabled{opacity:.5}
+.ws-toast{position:absolute;top:72px;right:24px;left:24px;max-width:420px;margin-left:auto;display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:14px;align-items:center;text-align:left;background:#fff;border:1px solid #0C1D38;border-left:6px solid #F5C542;padding:14px 16px;box-shadow:0 12px 28px rgba(12,29,56,.18);cursor:pointer;font:inherit;color:#0C1D38;opacity:0;transform:translateY(-12px);transition:opacity .35s,transform .35s}
+.ws-toast.in{opacity:1;transform:none}
+.ws-toast strong{display:block;font-size:16px}.ws-toast .t{display:block;font-size:15px;color:#4B5873}
+.ws-toast .go{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:#0C1D38;color:#F5C542;padding:8px 12px}
+.ws-toast:focus-visible{outline:3px solid #F5C542;outline-offset:3px}
+.demo-note{max-width:960px;margin-top:16px;font-size:15px;color:#0C1D38;background:#DCEBE1;padding:14px 18px}
+.rubric{max-width:960px;margin-top:48px;display:flex;flex-direction:column;gap:20px;border-top:1px solid #D9D3C7;padding-top:32px}
+.rubric .lab{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7F6120}
+.rubric h3{margin:0;font-family:'Instrument Sans',Arial,sans-serif;font-weight:700;font-size:clamp(28px,2.8vw,40px);letter-spacing:-.03em;line-height:1.05}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.tiles>div{padding:24px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.tiles .mono,.rubric .mono{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.tiles .n{font-weight:700;font-size:96px;line-height:.85;letter-spacing:-.05em}
+.rubric ol{list-style:none;margin:0;padding:0;border-bottom:1px solid #D9D3C7}
+.rubric li{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:16px;padding:20px 0;border-top:1px solid #D9D3C7;font-size:16px;align-items:start}
+.rubric li>span:nth-child(2){display:flex;flex-direction:column;gap:6px}
+.rubric li .bt{font-size:18px}
+.rubric li .k{font-family:'DM Mono',monospace;font-size:12px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:#EFE9DE}
+.rubric li .v{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;white-space:nowrap;border:1px solid #0C1D38}
+.rubric li .v.s{background:#DCEBE1}.rubric li .v.p{background:#F5C542}.rubric li .v.m{background:#F6E6E3;border-color:#9A3B32;color:#9A3B32}
+.rubric li .c{color:#4B5873}
+.rubric .mdl{margin-top:6px;background:#F8F5EF;padding:14px 16px;color:#0C1D38;line-height:1.5}
+.rubric .mdl .mono{display:block;color:#7F6120;margin-bottom:6px}
+@media(max-width:760px){.ws{grid-template-columns:1fr;height:620px}.ws-side{display:none}.ws-log{padding:16px}.ws-head{padding:12px 16px}.ws-form{margin:0 12px 12px}.ws-form .btn{padding:0 18px}.ws-toast{top:64px;left:12px;right:12px}.rubric li{grid-template-columns:32px minmax(0,1fr)}.rubric li .v{grid-column:2;justify-self:start;grid-row:2}}
 </style>
 </head>
 <body>
@@ -391,7 +452,7 @@ var INDUSTRIES=['Law','Healthcare','Finance','Technology','K-12 Education','Coll
 
 /* ---------- state ---------- */
 var KEY='ponder_aif_u1_v1';
-var S={flipped:[],reflect:'',attempts:[],joined:false,visited:{}};
+var S={flipped:[],reflect:'',attempts:[],joined:false,visited:{},talk:null};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object')S=Object.assign(S,p);}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 var run=null; // in-progress quiz attempt (memory only)
@@ -409,6 +470,7 @@ var STEPS=[
  {id:'figure',t:'Thrive or Jive'},
  {id:'promise',t:'A promise, not proof'},
  {id:'case',t:'Case study'},
+ {id:'talk',t:'On the job'},
  {id:'quiz',t:'Unit 1 quiz'},
  {id:'results',t:'Your results'}
 ];
@@ -452,7 +514,7 @@ function mobileBar(cur){
 function navRow(cur){
   var i=STEPS.findIndex(function(s){return s.id===cur});
   var prev=i>0?STEPS[i-1]:null,next=i<STEPS.length-1?STEPS[i+1]:null;
-  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'On to the quiz':'Continue')+'</button>':'')+'</div>';
+  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'On the job':(cur==='talk'?'Onto the quiz':'Continue'))+'</button>':'')+'</div>';
 }
 
 function viewHome(){
@@ -536,6 +598,117 @@ function viewCase(){
   $$('.q5 button').forEach(function(b){b.addEventListener('click',function(){var p=b.parentNode,o=p.classList.toggle('open');b.setAttribute('aria-expanded',o);});});
 }
 
+
+/* ---------- exam chat (scripted demo) ---------- */
+var SIM=[
+ {id:'m1',tag:'Stop the shortcut',
+  ask:['hey, you still on?','we didn’t finish the Hartwell filing this afternoon, and the document system is down, so the AI assistant is down with it','I’m just going to copy the client files to my personal Drive and run them through the free chatbot on my phone. I’ll send you the link in a sec so you can check the draft'],
+  c:[{n:'Ask him to stop before anything moves',re:/\b(don'?t|do not|stop|wait|hold (on|off|up)|pause|please no|can'?t|cannot|shouldn'?t|should not|not a good idea|bad idea|no way|nope|not sure (that|this|about)|risky|hang on|whoa|uh.?oh|hold up)\b/i},
+     {n:'Name what’s at stake: confidential client information',re:/confiden|client (data|info|files|documents|docs)|privileg|sensitive|private|\bnda\b|personal data|\bpii\b|their data|client'?s/i},
+     {n:'Name why: a personal account and a public AI tool aren’t approved',re:/personal (drive|account)|policy|approved|not allowed|unapproved|authori[sz]|security|outside (the|our)|company (account|system)|free (version|tool|chatbot)|public|train(s|ed|ing)? on|retain|keeps? (the|our) data|third.?party/i},
+     {n:'Offer a safe way forward',re:/\bit[ -](team|help|desk|department|dept|support|ticket|people|folks|guys|staff)|tech team|help ?desk|tech support|ticket|dana|partner|manager|supervisor|extension|deadline|manually|by hand|backup|wait (until|till|for)|in the morning|tomorrow|when (it|the system)'?s? (is )?back/i}],
+  more:{0:'wait, so you’re saying don’t?',1:'it’s just a filing though. why does it matter where the files sit for one night?',2:'it’s my own account and it’s password protected. what’s the actual problem?',3:'ok but then what do we do? it’s due at 9'},
+  end:{s:'ok, fair. I’m not uploading anything.',p:'hmm. ok, I’ll hold off for now.',m:'eh. I’ll think about it.'},
+  model:'Stop before any file moves. Client documents are confidential, and a personal Drive and a free public chatbot sit outside anything the firm approved, so the firm can’t control who sees or keeps that data. Then offer a way forward: call IT, or tell Dana the filing needs a short extension.'},
+ {id:'m2',tag:'Hold the line under pressure',
+  ask:['ugh. Dana wants it on her desk first thing','honestly, everyone does this when the system’s down. nobody’s going to know'],
+  c:[{n:'Hold the line even if no one would find out',re:/still|either way|regardless|even if|doesn'?t matter|not worth|everyone|common|risk|not the point|whether (or not )?(anyone|someone|they)|we would know|i would know/i},
+     {n:'Bring Dana in rather than working around her',re:/dana|partner|\bboss\b|manager|supervisor|tell (her|them)|let (her|them|dana) know|flag|loop (her|in)|email (her|dana)|call (her|dana)|heads.?up/i},
+     {n:'Give a concrete plan for tonight',re:/\bit[ -](team|help|desk|department|dept|support|ticket|people|folks|guys|staff)|tech team|help ?desk|ticket|extension|more time|manually|by hand|backup|approved|offline|in the morning|tomorrow|first thing|tonight/i}],
+  more:{0:'I mean, if nobody finds out, is it really a problem?',1:'should we tell Dana, or just quietly sort it out?',2:'so what do we actually do tonight, then?'},
+  end:{s:'ok. I’ll message Dana now and open an IT ticket.',p:'ok, I hear you.',m:'fine, whatever.'},
+  model:'Hold the line: the risk is the same whether or not anyone notices. Tell Dana now, because a late filing she knows about is better than a data exposure she doesn’t. Then name the plan: an IT ticket tonight, the approved backup if there is one, and a realistic delivery time.'},
+ {id:'m3',tag:'Contain it and report it',
+  ask:['ok… confession','I already uploaded two of the client files before I messaged you. and I pasted part of the contract into the chatbot','what do I do now?'],
+  c:[{n:'Contain it: delete or unshare the copies now',re:/delete|remove|unshare|take (it|them) down|revoke|stop sharing|clear (the|your)|wipe|trash/i},
+     {n:'Report it to the people who handle it',re:/report|security|\bit[ -](team|help|desk|department|dept|support|ticket|people|folks|guys|staff)|tech team|privacy|compliance|incident|dana|partner|manager|legal|general counsel|disclos|tell (her|them|someone)/i},
+     {n:'Be prompt and honest, with a record of what moved',re:/honest|own (it|up)|right (away|now)|immediately|asap|tonight|now\b|don'?t hide|not hide|transparen|document|write (it )?down|note (what|which)|which files|what (was|you) (shared|uploaded|pasted)/i}],
+  more:{0:'the files are still sitting in my Drive. should I just leave them?',1:'ok, deleting them now. we don’t need to tell anyone after that, right?',2:'should I wait until Monday to bring it up?'},
+  end:{s:'ok. deleting them now, and I’ll write down exactly what I uploaded before I message Dana and IT. thanks for not letting me bury this.',p:'ok. I’ll deal with it.',m:'I’ll figure something out.'},
+  model:'Contain it: delete the copies and stop any sharing now. Then report it tonight to Dana and IT or security, with a plain note of which files moved and what went into the chatbot. Hiding it turns a mistake into a cover-up, and the firm may have notice duties it can only meet if it knows.'}
+];
+var SIMDONE='Simulation complete. Your draft score is below.';
+function grade(t,turn){var hits=[];turn.c.forEach(function(c,i){if(c.re.test(t))hits.push(i);});return hits;}
+function band(n,total){var r=n/total;return r>=.66?'s':(r>0?'p':'m');}
+var BANDS={s:'Strong',p:'Partial',m:'Missing'};
+function viewTalk(){
+  var T=S.talk;
+  if(!T||T.v!==2){T=S.talk={v:2,step:0,follow:false,log:[],hits:{},done:false,open:false,clock:0};save();}
+  var h=mobileBar('talk')+'<span class="eyebrow">Unit 1 · On the job</span><h1 class="talk-h">It’s 5:42 p.m. A coworker has an idea.</h1>'
+   +'<p class="talk-lede">In the Ponder exam, you show what you’d actually do at work. A coworker will message you in your team chat. Reply the way you would in real life. There’s no single right script.</p>'
+   +'<div class="ws" aria-label="Workplace chat simulation">'
+   +'<aside class="ws-side" aria-hidden="true"><div class="ws-name">Hollis &amp; Reed <span>▾</span></div>'
+   +'<div class="ws-sec">Channels</div><div class="ws-ch"># general</div><div class="ws-ch"># hartwell-matter</div><div class="ws-ch"># it-help</div>'
+   +'<div class="ws-sec">Direct messages</div><div class="ws-ch"><i class="dot off"></i>Dana Whitfield</div><div class="ws-ch on"><i class="dot"></i>Marcus Reyes<b id="tbadge">3</b></div></aside>'
+   +'<section class="ws-main"><header class="ws-head"><div><strong>Marcus Reyes</strong><span>Operations · Hartwell team</span></div><span class="ws-prog" id="tprog"></span></header>'
+   +'<div class="chat-bar" aria-hidden="true"><i id="tbar"></i></div>'
+   +'<div class="ws-log" id="tlog" role="log" aria-live="polite"></div>'
+   +'<form class="ws-form" id="tform"><label class="sr" for="tin">Message Marcus Reyes</label><textarea id="tin" maxlength="800" placeholder="Message Marcus Reyes"></textarea><button class="btn" id="tsend" type="submit">Send</button></form>'
+   +'<button type="button" class="ws-toast" id="ttoast"><span class="av m" aria-hidden="true">MR</span><span><strong>Marcus Reyes</strong><span class="t">hey, you still on?</span></span><span class="go">Open</span></button>'
+   +'</section></div>'
+   +'<p class="demo-note">Preview: Marcus’s replies are scripted for this demo and respond to key ideas in what you write. In the course, an AI drafts your score against a rubric, and a person confirms it before it counts. Hollis &amp; Reed and everyone in it are fictional.</p>'
+   +'<div id="trub"></div>'+navRow('talk');
+  $('#main').innerHTML=h;
+  var log=$('#tlog');
+  function stamp(){var m=42+T.clock;return (5+Math.floor(m/60))+':'+String(m%60).padStart(2,'0')+' p.m.';}
+  function bubble(m){
+    var d=document.createElement('div');
+    if(m.r==='s'){d.className='ws-sys';d.textContent=m.t;}
+    else{var me=m.r==='u';d.className='ws-msg'+(m.cont?' cont':'');
+      d.innerHTML=(m.cont?'<span class="av" aria-hidden="true"></span>':'<span class="av '+(me?'u':'m')+'" aria-hidden="true">'+(me?'You':'MR')+'</span>')+'<div>'+(m.cont?'':'<div class="meta"><strong>'+(me?'You':'Marcus Reyes')+'</strong><span>'+esc(m.time||'')+'</span></div>')+'<p></p></div>';
+      d.querySelector('p').textContent=m.t;}
+    log.appendChild(d);log.scrollTop=log.scrollHeight;
+  }
+  function prog(){$('#tprog').textContent=T.done?'Complete':('Moment '+Math.min(T.step+1,SIM.length)+' of '+SIM.length);$('#tbar').style.width=Math.round((T.done?SIM.length:T.step)/SIM.length*100)+'%';}
+  function push(m){T.log.push(m);save();bubble(m);}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function say(lines,cb){
+    lines=[].concat(lines);var i=0,first=true;
+    (function next(){
+      if(i>=lines.length){if(cb)cb();return;}
+      var ty=document.createElement('div');ty.className='typing';ty.textContent='Marcus is typing…';log.appendChild(ty);log.scrollTop=log.scrollHeight;
+      setTimeout(function(){ty.remove();var last=T.log[T.log.length-1];T.clock++;
+        push({r:'m',t:lines[i],time:stamp(),cont:!!(last&&last.r==='m')});i++;next();},reduce?0:Math.min(1600,500+lines[i].length*12));
+    })();
+  }
+  function rubric(){
+    var rows='',strong=0;
+    SIM.forEach(function(turn,ix){var hit=T.hits[turn.id]||[],b=band(hit.length,turn.c.length);if(b==='s')strong++;
+      var got=hit.map(function(i){return turn.c[i].n;}),miss=turn.c.filter(function(_,i){return hit.indexOf(i)<0;}).map(function(c){return c.n;});
+      rows+='<li><span class="k">'+(ix+1)+'</span><span><strong class="bt">'+esc(turn.tag)+'</strong>'+(got.length?'<span class="ok">Covered: '+esc(got.join('; '))+'.</span>':'')+(miss.length?'<span class="c">Consider: '+esc(miss.join('; '))+'.</span>':'')+'<span class="mdl"><span class="mono">A strong reply</span>'+esc(turn.model)+'</span></span><span class="v '+b+'">'+BANDS[b]+'</span></li>';});
+    $('#trub').innerHTML='<div class="rubric"><span class="lab">Draft rubric score</span><h3>How you handled it</h3>'
+     +'<div class="tiles"><div style="background:#0C1D38;color:#fff"><span class="mono" style="color:#A9B3C6">Moments handled well</span><span class="n">'+strong+'/'+SIM.length+'</span></div>'
+     +'<div style="background:#F5C542;color:#0C1D38"><span class="mono">Status</span><span style="font-size:22px;font-weight:600;line-height:1.3">Draft. A person reviews every AI-drafted score, and you can appeal it.</span></div></div>'
+     +'<ol>'+rows+'</ol><div class="row" style="margin-top:4px"><button class="btn ghost" type="button" id="tagain">Run the simulation again</button></div></div>';
+    $('#tagain').addEventListener('click',function(){S.talk=null;save();viewTalk();});
+  }
+  function lock(on){$('#tin').disabled=on;$('#tsend').disabled=on;}
+  function ask(){lock(true);say(SIM[T.step].ask,function(){prog();lock(false);$('#tin').focus();});}
+  function finish(){T.done=true;save();prog();$('#tform').style.display='none';push({r:'s',t:SIMDONE});rubric();}
+  function open(){T.open=true;save();$('#ttoast').remove();$('#tbadge').remove();ask();}
+  // restore
+  T.log.forEach(bubble);prog();
+  if(T.open){$('#ttoast').remove();$('#tbadge').remove();}
+  else{lock(true);setTimeout(function(){var t=$('#ttoast');if(t)t.classList.add('in');},reduce?0:900);$('#ttoast').addEventListener('click',open);}
+  if(T.done){$('#tform').style.display='none';rubric();}
+  else if(T.open&&!T.log.length){ask();}
+  $('#tform').addEventListener('submit',function(e){
+    e.preventDefault();var inp=$('#tin'),v=inp.value.trim();if(!v||T.done||inp.disabled)return;
+    inp.value='';var last=T.log[T.log.length-1];T.clock++;push({r:'u',t:v,time:stamp(),cont:!!(last&&last.r==='u')});
+    var turn=SIM[T.step],prev=T.hits[turn.id]||[],now=grade(v,turn);
+    var all=prev.concat(now.filter(function(i){return prev.indexOf(i)<0;}));T.hits[turn.id]=all;save();
+    lock(true);
+    if(v.split(/\s+/).length<3&&!T.follow){T.follow=true;save();say('sorry, what do you mean?',function(){lock(false);$('#tin').focus();});return;}
+    var missing=turn.c.map(function(_,i){return i;}).filter(function(i){return all.indexOf(i)<0;});
+    var first=missing.filter(function(i){return turn.more[i];})[0];
+    if(first!==undefined&&!T.follow&&all.length<turn.c.length){T.follow=true;save();say(turn.more[first],function(){lock(false);$('#tin').focus();});return;}
+    var b=band(all.length,turn.c.length);
+    T.follow=false;T.step++;save();
+    say(turn.end[b],function(){if(T.step<SIM.length)setTimeout(ask,reduce?0:900);else finish();});
+  });
+  $('#tin').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#tform').requestSubmit();}});
+}
+
 function newRun(){
   var order=QUIZ.map(function(q){var a=q.o.map(function(_,i){return i});for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;});
   run={i:0,order:order,ans:[],sel:null,checked:false};
@@ -607,13 +780,14 @@ function viewResults(isDash){
   QUIZ.forEach(function(q,i){var c=last.ans[i]===q.a;h+='<li><span class="m '+(c?'c':'w')+'">'+(c?'✓':'✗')+'</span><span>'+esc(q.q.length>110?q.q.slice(0,107)+'…':q.q)+'</span><span class="sample">Q'+(i+1)+'</span></li>';});
   h+='</ul></div><div class="panel"><h3>Your reflection on the case</h3>'
   +(S.reflect&&S.reflect.trim()?'<div class="record" id="rec"></div><p class="sample" style="margin-top:12px">Written by you. Stored only in this browser.</p>':'<p class="muted">You did not write a reflection. Add one in the case study and it will appear here.</p><div class="row" style="margin-top:12px"><button class="btn ghost" data-go="#/unit-1/case">Go to the case study</button></div>')
+  +(S.talk&&S.talk.done&&S.talk.v===2?'<p class="sample" style="margin-top:16px">On-the-job simulation: '+SIM.filter(function(t){return band((S.talk.hits[t.id]||[]).length,t.c.length)==='s';}).length+' of '+SIM.length+' moments handled well (draft, pending human review).</p>':'')
   +'</div></div>';
   h+='<div class="row">'+(ok?'<a class="btn" href="#waitlist" data-go="#/waitlist">Get Units 2 to 5 when they open</a>':(S.attempts.length<MAXTRIES?'<button class="btn" data-go="#/unit-1/quiz">Try the quiz again</button>':''))+'<button class="btn ghost" data-go="#/unit-1/figure">Review Figure 1.1</button></div>';
   h+=waitlistHTML();
   h+='<p style="margin-top:28px"><button class="link" id="reset">Reset this preview (clears saved progress)</button></p>';
   $('#main').innerHTML=h;
   var r=$('#rec');if(r)r.textContent=S.reflect;
-  $('#reset').addEventListener('click',function(){S={flipped:[],reflect:'',attempts:[],joined:S.joined,visited:{}};save();run=null;go('#/');route();});
+  $('#reset').addEventListener('click',function(){S={flipped:[],reflect:'',attempts:[],joined:S.joined,visited:{},talk:null};save();run=null;go('#/');route();});
   bindWaitlist();
 }
 
@@ -676,7 +850,7 @@ function route(){
   var id=m[1];setShell(false);
   if(id!=='quiz'&&id!=='results'&&id!=='full'&&STEPS.some(function(s){return s.id===id;})){S.visited[id]=true;save();}
   outline(id);setMeter(id);
-  ({gap:viewGap,figure:viewFigure,promise:viewPromise,case:viewCase,quiz:viewQuiz,results:viewResults,full:viewFull}[id]||viewGap)();
+  ({gap:viewGap,figure:viewFigure,promise:viewPromise,case:viewCase,talk:viewTalk,quiz:viewQuiz,results:viewResults,full:viewFull}[id]||viewGap)();
   window.scrollTo(0,0);
   var mn=$('#main');mn.focus({preventScroll:true});
 }
