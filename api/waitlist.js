@@ -26,19 +26,32 @@ async function sendConfirmation(email, name) {
     'You are receiving this because you joined the Ponder waitlist. To unsubscribe, reply with the word unsubscribe and you will be removed.',
     ADDRESS
   ].filter((l) => l !== undefined).join('\n');
-  const html = '<!doctype html><html><body style="margin:0;background:#f8f5ef;font-family:Arial,Helvetica,sans-serif;color:#0c1d38">'
-    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f8f5ef"><tr><td align="center" style="padding:24px 12px">'
-    + '<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border-bottom:3px solid #b8943f">'
-    + '<tr><td style="background:#0c1d38;padding:22px 28px;font-family:Georgia,\'Times New Roman\',serif;font-size:26px;font-weight:bold;color:#f8f5ef">Ponder<span style="color:#b8943f">.</span></td></tr>'
-    + '<tr><td style="padding:30px 28px 8px;font-size:16px;line-height:1.6">'
+  // Email styled to The Present Company design system: navy, cream and gold, Ponder wordmark with the gold sun.
+  const SANS = "'Instrument Sans',Arial,Helvetica,sans-serif";
+  const MONO = "'DM Mono','Courier New',monospace";
+  const plaid = [['#13264A',3],['#091629',1],['#5A8EC4',1],['#13264A',3],['#2E4D3C',2],['#0C1D38',3],['#8A5A86',1],['#13264A',2]]
+    .map(([c, w]) => '<td width="' + (w * 25) + '" height="8" style="background:' + c + ';font-size:0;line-height:0">&nbsp;</td>').join('');
+  const html = '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    + '<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Instrument+Sans:wght@400;600;700&family=Schibsted+Grotesk:wght@700&display=swap" rel="stylesheet"></head>'
+    + '<body style="margin:0;background:#F8F5EF;font-family:' + SANS + ';color:#0C1D38">'
+    + '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F8F5EF"><tr><td align="center" style="padding:28px 12px">'
+    + '<table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#FFFFFF;border:1px solid #D9D3C7">'
+    + '<tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>' + plaid + '</tr></table></td></tr>'
+    + '<tr><td style="background:#0C1D38;padding:24px 32px">'
+    + '<span style="font-family:\'Schibsted Grotesk\',Arial,Helvetica,sans-serif;font-weight:700;font-size:30px;letter-spacing:-1.5px;color:#F8F5EF">Ponder</span>'
+    + '<img src="https://thepresentco.com/assets/email-sun.png" width="13" height="13" alt="" style="display:inline-block;vertical-align:baseline;margin-left:2px;border:0"></td></tr>'
+    + '<tr><td style="padding:32px 32px 8px;font-size:16px;line-height:1.6">'
+    + '<p style="margin:0 0 14px;font-family:' + MONO + ';font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#7F6120">AI Fundamentals &middot; Waitlist</p>'
     + '<p style="margin:0 0 16px">' + esc(hi) + '</p>'
-    + '<p style="margin:0 0 16px;font-family:Georgia,serif;font-size:22px;line-height:1.3;font-weight:bold">You are on the waitlist for Ponder AI Ethics Fundamentals.</p>'
+    + '<p style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-0.5px">You are on the waitlist for Ponder AI Ethics Fundamentals.</p>'
     + '<p style="margin:0 0 16px">Ponder is a free, plain-language AI ethics course built around one question: <em>does the documented behavior match the documented commitment?</em> Unit 1 is open now, and Units 2 to 5 are on the way. We will email you as soon as they open.</p>'
-    + '<p style="margin:24px 0"><a href="https://thepresentco.com/ponder/" style="background:#b8943f;color:#0c1d38;text-decoration:none;font-family:Georgia,serif;font-weight:bold;padding:13px 26px;display:inline-block">Try Unit 1</a></p>'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0"><tr><td style="background:#0C1D38"><a href="https://thepresentco.com/ponder/" style="display:inline-block;padding:14px 28px;font-family:' + SANS + ';font-size:16px;font-weight:600;color:#F8F5EF;text-decoration:none">Try Unit 1 &rarr;</a></td></tr></table>'
     + '<p style="margin:0 0 16px">Questions? Reply to this email and it comes straight to me.</p>'
-    + '<p style="margin:0 0 24px">Jeanette Ponder<br><span style="color:#5a6e84">Founder, The Present Company</span></p>'
+    + '<p style="margin:0 0 28px">Jeanette Ponder<br><span style="color:#4B5873">Founder, The Present Company</span></p>'
     + '</td></tr>'
-    + '<tr><td style="padding:16px 28px 24px;border-top:1px solid #ddd8cc;font-size:12px;line-height:1.5;color:#5a6e84">You are receiving this because you joined the Ponder waitlist. To unsubscribe, reply with the word <strong>unsubscribe</strong> and you will be removed.' + (ADDRESS ? '<br>' + esc(ADDRESS) : '') + '</td></tr>'
+    + '<tr><td style="padding:18px 32px 24px;border-top:2px solid #C9A657;background:#F8F5EF;font-size:12px;line-height:1.6;color:#4B5873">'
+    + '<span style="font-family:' + MONO + ';letter-spacing:2px;text-transform:uppercase;color:#7F6120">When diligence is due.</span><br>'
+    + 'You are receiving this because you joined the Ponder waitlist. To unsubscribe, reply with the word <strong>unsubscribe</strong> and you will be removed.' + (ADDRESS ? '<br>' + esc(ADDRESS) : '') + '</td></tr>'
     + '</table></td></tr></table></body></html>';
   try {
     const r = await fetch('https://api.resend.com/emails', {
