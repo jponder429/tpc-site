@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital@0;1&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@0;1&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -301,6 +301,12 @@ h2.h,h3{font-weight:600;letter-spacing:-.025em;line-height:1.12}
 .record{font-size:18px}
 .back .t h4,.menu .done .n{color:#7FAE92}
 #main:focus,#main:focus-visible{outline:none}
+
+/* Nov 17: headlines match the main site (Caslon Display, upright); no italic or gold accent words */
+h1,h2.h{font-family:'Libre Caslon Display',Georgia,serif;font-weight:400;letter-spacing:-.015em;line-height:1.06}
+h1 em,h2.h em,h1 i,h2.h i{font-family:inherit;font-style:normal;font-weight:inherit;color:inherit;letter-spacing:inherit}
+.record,.cert .nm{font-style:normal}
+.hero h1 em{color:inherit}
 </style>
 </head>
 <body>
