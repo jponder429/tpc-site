@@ -514,7 +514,7 @@ function mobileBar(cur){
 function navRow(cur){
   var i=STEPS.findIndex(function(s){return s.id===cur});
   var prev=i>0?STEPS[i-1]:null,next=i<STEPS.length-1?STEPS[i+1]:null;
-  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'On the job':(cur==='talk'?'On to the quiz':'Continue'))+'</button>':'')+'</div>';
+  return '<div class="row">'+(prev?'<button class="btn ghost" data-go="#/unit-1/'+prev.id+'">Back</button>':'')+(next?'<button class="btn" data-go="#/unit-1/'+next.id+'">'+(cur==='case'?'On the job':(cur==='talk'?'Onto the quiz':'Continue'))+'</button>':'')+'</div>';
 }
 
 function viewHome(){
