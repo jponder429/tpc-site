@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ponder. AI Ethics Fundamentals — Unit 1 Preview</title>
+<title>Ponder | AI Ethics Fundamentals, Unit 1 Preview</title>
 <meta name="description" content="Try Unit 1 of Ponder AI Ethics Fundamentals: why most AI governance policies fail in practice, and the one question that tells you whether yours will. Free, about 5 minutes." />
 <link rel="canonical" href="https://thepresentco.com/ponder" />
 <meta property="og:type" content="website" />
@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital@0;1&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -270,12 +270,43 @@ footer a{color:var(--gold-light)}
   .hero{margin:-20px -16px 32px;padding:44px 16px 40px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== TPC design system refresh (Nov 2026): Instrument Sans, Schibsted wordmark with gold sun, square corners, no shadows or gradients ===== */
+:root{--navy:#0C1D38;--navy-mid:#13264A;--navy-light:#2A3B5C;--navy-faint:#2A3B5C;--gold:#C9A657;--gold-light:#D4B26A;--gold-dark:#7F6120;--gold-faint:#EFE9DE;--cream:#F8F5EF;--cream-alt:#EFE9DE;--ink:#0C1D38;--ink-mid:#0C1D38;--ink-light:#4B5873;--ink-faint:#A9B3C6;--border:#D9D3C7;--ok:#2E4D3C;--ok-bg:#E3EDE6;--shadow:none}
+body,textarea,input,select,button{font-family:'Instrument Sans',Arial,sans-serif}
+svg.sun{display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible}
+
+.brand b{font-family:'Schibsted Grotesk',Arial,sans-serif;font-weight:700;font-size:25px;letter-spacing:-.055em}
+.top{border-bottom:1px solid #2A3B5C}
+h1,h2.h,h3,.unit .num,.bar .fill,.core p,.qtext,.ring div,.cert .ttl,.cert .wm{font-family:'Instrument Sans',Arial,sans-serif}
+h1{font-weight:600;letter-spacing:-.035em;line-height:1.04}
+h1 em{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
+h2.h,h3{font-weight:600;letter-spacing:-.025em;line-height:1.12}
+.unit .num,.bar .fill,.ring div,.cert .ttl{font-weight:600;letter-spacing:-.03em}
+.core p,.qtext{font-weight:600;letter-spacing:-.02em}
+.cert .wm{font-weight:700}
+.lede{font-family:'Instrument Sans',Arial,sans-serif;font-size:clamp(18px,1.8vw,21px);line-height:1.55;color:var(--ink-light)}
+.hero .lede{color:#A9B3C6}
+.hero::before{display:none}
+.eyebrow{letter-spacing:.14em}
+.btn{background:var(--navy);color:var(--cream);font-family:'Instrument Sans',Arial,sans-serif;font-weight:600;font-size:16px;border-radius:0;min-height:48px;padding:13px 28px}
+.btn:hover{background:#13264A}
+.hero .btn,.core .btn,.menu .btn{background:var(--cream);color:var(--navy)}
+.hero .btn:hover,.core .btn:hover,.menu .btn:hover{background:#fff}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:var(--cream)}
+.unit,.face,.q5,.opt,.panel,.fb,.tag,.pill,.bar .track,.qdots i,.dim .t,.opt .l,textarea,input[type=text],input[type=email],select{border-radius:0}
+.unit.open,.menu{box-shadow:none}
+.record,.cert .nm{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic}
+.record{font-size:18px}
+.back .t h4,.menu .done .n{color:#7FAE92}
+#main:focus,#main:focus-visible{outline:none}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="top-in">
-    <a class="brand" href="#/" aria-label="Ponder home"><b>Ponder<span>.</span></b><small>by The Present Company</small></a>
+    <a class="brand" href="#/" aria-label="Ponder home"><b>Ponder<svg class="sun" viewBox="-.5 -.5 1 1" aria-hidden="true"><circle r=".24" fill="#C9A657"/><path fill="#C9A657" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"/></svg></b><small>by The Present Company</small></a>
     <div class="top-r"><a href="https://thepresentco.com">thepresentco.com</a><a class="dl" href="#/dashboard" data-go="#/dashboard">My dashboard</a><span class="pill">Unit 1 Preview</span><button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div>
   </div>
   <div class="meter" aria-hidden="true"><i id="meter"></i></div>

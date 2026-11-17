@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Libre+Caslon+Text:ital@0;1&family=Schibsted+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--navy:#0c1d38;--navy-light:#1e3a5f;--gold:#b8943f;--gold-light:#d4ae6a;--cream:#f8f5ef;--ink-faint:#8a9db0;--ok:#8fd1ae;--err:#f0b3aa}
@@ -61,11 +61,24 @@ button.go[disabled]{opacity:.55}
 body.show-done form,body.show-done .intro{display:none}
 body.show-done .done{display:block}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== TPC design system refresh (Nov 2026): Instrument Sans, Schibsted wordmark with gold sun, square corners, no shadows or gradients ===== */
+:root{--navy:#0C1D38;--navy-mid:#13264A;--navy-light:#2A3B5C;--navy-faint:#2A3B5C;--gold:#C9A657;--gold-light:#D4B26A;--gold-dark:#7F6120;--gold-faint:#EFE9DE;--cream:#F8F5EF;--cream-alt:#EFE9DE;--ink:#0C1D38;--ink-mid:#0C1D38;--ink-light:#4B5873;--ink-faint:#A9B3C6;--border:#D9D3C7;--ok:#2E4D3C;--ok-bg:#E3EDE6;--shadow:none}
+body,textarea,input,select,button{font-family:'Instrument Sans',Arial,sans-serif}
+svg.sun{display:inline-block;width:.42em;height:.42em;margin-left:.03em;vertical-align:-.05em;overflow:visible}
+
+.mark{font-family:'Schibsted Grotesk',Arial,sans-serif;font-weight:700;font-size:38px;letter-spacing:-.055em}
+h1,.done h2{font-family:'Instrument Sans',Arial,sans-serif;font-weight:600;letter-spacing:-.035em;line-height:1.06}
+.sub,.done p{font-family:'Instrument Sans',Arial,sans-serif;font-size:18px;line-height:1.5;color:#A9B3C6}
+button.go{font-family:'Instrument Sans',Arial,sans-serif;font-weight:600;font-size:18px;border-radius:0;background:var(--cream);color:var(--navy)}
+button.go:hover{background:#fff}
+input,select{border-radius:0}
+h1 em{font-family:'Libre Caslon Text',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em}
 </style>
 </head>
 <body>
 <main>
-  <div class="mark">Ponder<span>.</span></div>
+  <div class="mark">Ponder<svg class="sun" viewBox="-.5 -.5 1 1" aria-hidden="true"><circle r=".24" fill="#C9A657"/><path fill="#C9A657" d="M0.278 0.037L0.462 0.191L0.222 0.170ZM0.170 0.222L0.191 0.462L0.037 0.278ZM-0.037 0.278L-0.191 0.462L-0.170 0.222ZM-0.222 0.170L-0.462 0.191L-0.278 0.037ZM-0.278 -0.037L-0.462 -0.191L-0.222 -0.170ZM-0.170 -0.222L-0.191 -0.462L-0.037 -0.278ZM0.037 -0.278L0.191 -0.462L0.170 -0.222ZM0.222 -0.170L0.462 -0.191L0.278 -0.037Z"/></svg></div>
   <div class="by">by The Present Company</div>
 
   <div class="intro">
