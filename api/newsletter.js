@@ -75,6 +75,7 @@ module.exports = async (req, res) => {
   const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
   if (!EMAIL_RE.test(email)) return res.status(400).json({ ok: false, error: 'invalid' });
   const lang = b.lang === 'es' ? 'es' : 'en';
+  console.log('newsletter_request', lang);
   const m = build(lang);
 
   try {
@@ -87,6 +88,8 @@ module.exports = async (req, res) => {
       })
     });
     if (!r.ok) { console.error('newsletter_resend_error', r.status, await r.text()); return res.status(502).json({ ok: false, error: 'upstream' }); }
+    const sent = await r.json().catch(() => ({}));
+    console.log('newsletter_sent', lang, 'resend_id=' + (sent.id || 'none'), 'domain=' + email.split('@')[1]);
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('newsletter_exception', e && e.message);
