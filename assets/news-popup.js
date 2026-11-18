@@ -93,7 +93,7 @@
       var btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.style.opacity = '.6';
       var fd = new FormData(form);
       if (fd.get('website')) return; // bot
-      fetch('/api/newsletter', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      fetch('/api/hello', { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: fd.get('email') || '', lang: es ? 'es' : 'en' }) }).catch(function () {});
       fetch(window.TPC_FORM_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(fd) }).then(function () {
         write({ subscribed: true });
