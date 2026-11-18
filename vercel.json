@@ -1,3 +1,11 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/ponder", "destination": "https://www.thisisponder.com/demo/", "permanent": true },
+    { "source": "/ponder/join", "destination": "https://www.thisisponder.com/join/", "permanent": true },
+    { "source": "/ponder/join/:path*", "destination": "https://www.thisisponder.com/join/:path*", "permanent": true },
+    { "source": "/ponder/:path*", "destination": "https://www.thisisponder.com/demo/:path*", "permanent": true },
+    { "source": "/builder", "destination": "https://www.thisisponder.com/builder", "permanent": true },
+    { "source": "/builder.html", "destination": "https://www.thisisponder.com/builder", "permanent": true }
+  ]
 }

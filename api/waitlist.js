@@ -20,7 +20,7 @@ async function sendConfirmation(email, name) {
     hi, '',
     'You are on the waitlist for Ponder AI Ethics Fundamentals. Thank you.', '',
     'Ponder is a free, plain-language AI ethics course built around one question: does the documented behavior match the documented commitment? Unit 1 is open now, and Units 2 to 5 are on the way. We will email you as soon as they open.', '',
-    'Try Unit 1 any time: https://thepresentco.com/ponder/', '',
+    'Try Unit 1 any time: https://www.thisisponder.com/demo/', '',
     'Questions? Reply to this email and it comes straight to me.', '',
     'Jeanette Ponder', 'Founder, The Present Company', '',
     'You are receiving this because you joined the Ponder waitlist. To unsubscribe, reply with the word unsubscribe and you will be removed.',
@@ -45,7 +45,7 @@ async function sendConfirmation(email, name) {
     + '<p style="margin:0 0 16px">' + esc(hi) + '</p>'
     + '<p style="margin:0 0 16px;font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-0.5px">You are on the waitlist for Ponder AI Ethics Fundamentals.</p>'
     + '<p style="margin:0 0 16px">Ponder is a free, plain-language AI ethics course built around one question: <em>does the documented behavior match the documented commitment?</em> Unit 1 is open now, and Units 2 to 5 are on the way. We will email you as soon as they open.</p>'
-    + '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0"><tr><td style="background:#0C1D38"><a href="https://thepresentco.com/ponder/" style="display:inline-block;padding:14px 28px;font-family:' + SANS + ';font-size:16px;font-weight:600;color:#F8F5EF;text-decoration:none">Try Unit 1 &rarr;</a></td></tr></table>'
+    + '<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0"><tr><td style="background:#0C1D38"><a href="https://www.thisisponder.com/demo/" style="display:inline-block;padding:14px 28px;font-family:' + SANS + ';font-size:16px;font-weight:600;color:#F8F5EF;text-decoration:none">Try Unit 1 &rarr;</a></td></tr></table>'
     + '<p style="margin:0 0 16px">Questions? Reply to this email and it comes straight to me.</p>'
     + '<p style="margin:0 0 28px">Jeanette Ponder<br><span style="color:#4B5873">Founder, The Present Company</span></p>'
     + '</td></tr>'
