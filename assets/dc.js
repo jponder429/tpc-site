@@ -54,6 +54,14 @@
           src: document.documentElement.lang === 'es' ? 'tpc-home-es' : 'tpc-home' })
       }).catch(function () {}));
     }
+    // Newsletter sign-ups also trigger the welcome email (/api/newsletter). Best effort.
+    if (form.getAttribute('data-form') === 'newsletter' && !fd.get('website')) {
+      jobs.push(fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: fd.get('email') || '', lang: fd.get('lang') || document.documentElement.lang })
+      }).catch(function () {}));
+    }
     return Promise.all(jobs);
   }
 

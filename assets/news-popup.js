@@ -11,12 +11,12 @@
     lab: 'Boletín', h: 'IA y gobernanza, en lenguaje claro.',
     p: 'Nuevas reglas, casos reales y notas prácticas para quienes usan IA en el trabajo.',
     email: 'Correo electrónico', btn: 'Suscribirme', fine: 'Puedes darte de baja cuando quieras. Nunca compartimos tu correo.',
-    close: 'Cerrar', done: 'Gracias. Revisa tu correo para confirmar.', err: 'No pudimos enviarlo. Inténtalo de nuevo.'
+    close: 'Cerrar', done: '¡Gracias! Revisa tu correo: te enviamos un mensaje de confirmación desde hello@thepresentco.com. Si no llega, revisa tu carpeta de correo no deseado o spam.', err: 'No pudimos enviarlo. Inténtalo de nuevo.'
   } : {
     lab: 'Newsletter', h: 'AI governance, in plain language.',
     p: 'New rules, real cases and practical notes for people who use AI at work.',
     email: 'Email', btn: 'Subscribe', fine: 'Unsubscribe anytime. We never share your address.',
-    close: 'Close', done: 'Thank you. Check your inbox to confirm.', err: 'We couldn’t send that. Please try again.'
+    close: 'Close', done: 'Thank you! Please check your email for a confirmation message from hello@thepresentco.com. If it doesn’t arrive, please check your junk or spam folders.', err: 'We couldn’t send that. Please try again.'
   };
 
   function read() { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } }
@@ -93,10 +93,12 @@
       var btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.style.opacity = '.6';
       var fd = new FormData(form);
       if (fd.get('website')) return; // bot
+      fetch('/api/newsletter', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: fd.get('email') || '', lang: es ? 'es' : 'en' }) }).catch(function () {});
       fetch(window.TPC_FORM_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(fd) }).then(function () {
         write({ subscribed: true });
         form.outerHTML = '<div class="done" role="status">' + T.done + '</div>';
-        setTimeout(function () { if (box) { box.classList.remove('in'); setTimeout(function () { box && box.remove(); }, 400); } }, 4000);
+        setTimeout(function () { if (box) { box.classList.remove('in'); setTimeout(function () { box && box.remove(); }, 400); } }, 8000);
       }).catch(function () {
         btn.disabled = false; btn.style.opacity = ''; alert(T.err);
       });
